@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
 <?import javafx.scene.layout.BorderPane?>
-
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <BorderPane fx:controller="controller.Controller" xmlns:fx="http://javafx.com/fxml"
             prefHeight="500" prefWidth="700">
     <left>
         <ListView fx:id="listManageTraineeProgram">
-        <Label fx:id="manageTrainees" text = "Manage Trainees"></Label>
-        <Label fx:id="manageCourses" text = "Manage Courses"></Label>
-        <Label fx:id="enrolledTrainees" text = "Enrolled Trainees"></Label>
-    </ListView>
+            <Label fx:id="manageTrainees" text = "Manage Trainees" onMouseClicked="#traineeManage"></Label>
+
+            <Label fx:id="manageCourses" text = "Manage Courses"></Label>
+
+            <Label fx:id="enrolledTrainees" text = "Enrolled Trainees"></Label>
+        </ListView>
 </left>
         <center>
-
+            <TextArea/>
         </center>
 </BorderPane>
