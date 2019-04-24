@@ -1,4 +1,4 @@
 package model.trainee;
 
-public class TraineeDao {
+public interface TraineeDao {
 }
