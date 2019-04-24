@@ -5,7 +5,7 @@ use trainee_programm_db;
 
 CREATE TABLE Skala (
     SkalaId int NOT NULL AUTO_INCREMENT,
-    SkalaName varchar(255) NOT NULL,
+    SkalaName enum('Beginner','Intermediate','Advanced','Expert') NOT NULL,
     PRIMARY KEY (SkalaId)
 );
 
@@ -19,20 +19,22 @@ CREATE TABLE Trainee (
 	TraineeID int NOT NULL AUTO_INCREMENT,
     LastName varchar(255) NOT NULL,
     FirstName varchar(255) NOT NULL,
+    Birthday Date not null,
     Address varchar(255) NOT NULL,
     School varchar(255) NOT NULL,
 	Email varchar(255) NOT NULL,
 	LocationId int NOT NULL,
     PRIMARY KEY (TraineeID),
-	FOREIGN KEY ( LocationId) REFERENCES Location( LocationId)
+	FOREIGN KEY ( LocationId) REFERENCES Location( LocationId),
+    check ((Today.year-Birthday.year) >18)
 ); 
 
 
 CREATE TABLE Courses (
     CourseID int NOT NULL AUTO_INCREMENT,
-    CourseName varchar(255) NOT NULL,
-    CourseYear varchar(255) NOT NULL,
-    CourseRoom varchar(255) NOT NULL, #optional
+    CourseName enum('1','2') not null,
+    CourseYear year NOT NULL,
+    CourseRoom    enum('EG01','EG02','OG01','OG02') NOT NULL,
 	CourseDescription varchar(255) NULL, #optional
     PRIMARY KEY (CourseId)
 );
@@ -47,3 +49,6 @@ CREATE TABLE Enrolled_Trainees (
     PRIMARY KEY (TraineeID,CourseId, SkalaId)
     
 );
+
+alter table Trainee
+ADD CONSTRAINT check_email  CHECK(Email LIKE '%___@___%') 
