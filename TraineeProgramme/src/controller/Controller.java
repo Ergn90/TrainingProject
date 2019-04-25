@@ -187,7 +187,7 @@ Label firstNameTraineeForm;
     @FXML
     TextField scaleTrainee;
 
-    
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
