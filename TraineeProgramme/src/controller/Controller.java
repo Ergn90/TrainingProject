@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -86,7 +87,7 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         TraineeDao traineeDao=new TraineeDaoImpl();
         Set<Trainee> trainees=traineeDao.getAllTrainee();
-      //  listViewTrainees.setItems((ObservableList) trainees);
+        tableTrainees.setItems(FXCollections.observableArrayList(trainees));
 //        listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
     }
 

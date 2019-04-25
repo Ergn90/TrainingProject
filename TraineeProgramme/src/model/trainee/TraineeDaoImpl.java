@@ -1,6 +1,8 @@
 package model.trainee;
+
 import model.ConnectionFactory;
 import model.location.Location;
+
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -89,9 +91,9 @@ public class TraineeDaoImpl implements TraineeDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
 
-            PreparedStatement ps = connection.prepareStatement( "UPDATE trainee SET lastName=?, firstName=?, " +
-                                                                    "birthday=?, address=?, school=?, email=?, locationId=?" +
-                                                                    " WHERE traineeId=?");
+            PreparedStatement ps = connection.prepareStatement("UPDATE trainee SET lastName=?, firstName=?, " +
+                    "birthday=?, address=?, school=?, email=?, locationId=?" +
+                    " WHERE traineeId=?");
 
             ps.setString(1, trainee.getLastName());
             ps.setString(2, trainee.getFirstName());
@@ -103,7 +105,7 @@ public class TraineeDaoImpl implements TraineeDao {
             ps.setInt(8, trainee.getTraineeID());
 
             int i = ps.executeUpdate();
-            if(i == 1) {
+            if (i == 1) {
                 return true;
             }
 
@@ -122,7 +124,7 @@ public class TraineeDaoImpl implements TraineeDao {
         try {
             Statement stmt = connection.createStatement();
             int i = stmt.executeUpdate("DELETE FROM trainee WHERE traineeID=" + id);
-            if(i == 1) {
+            if (i == 1) {
                 return true;
             }
         } catch (SQLException ex) {
