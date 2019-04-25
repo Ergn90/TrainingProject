@@ -32,9 +32,9 @@
     <top>
         <HBox prefHeight="22.0" prefWidth="421.0" BorderPane.alignment="CENTER">
             <children>
-                <Label prefHeight="96.0" prefWidth="602.0" text="Add Course Form" textAlignment="CENTER">
+                <Label prefHeight="96.0" prefWidth="602.0" text="Course Form" textAlignment="CENTER">
                     <padding>
-                        <Insets bottom="15.0" left="210.0" right="90.0" top="50.0" />
+                        <Insets bottom="15.0" left="190.0" right="90.0" top="50.0" />
                     </padding>
                     <font>
                         <Font size="21.0" />

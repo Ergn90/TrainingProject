@@ -47,9 +47,9 @@
       <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="traineeID" prefWidth="43.0" text="ID" />
-          <TableColumn fx:id="courseName" prefWidth="123.0" text="Course Name" />
-            <TableColumn fx:id="courseÝear" minWidth="8.0" prefWidth="70.0" text="Course Year" />
-            <TableColumn fx:id="courseRoom" prefWidth="77.0" text="Course Room" />
+          <TableColumn fx:id="courseName" prefWidth="64.0" text="Course Name" />
+            <TableColumn fx:id="courseÝear" minWidth="8.0" prefWidth="90.0" text="Course Year" />
+            <TableColumn fx:id="courseRoom" prefWidth="116.0" text="Course Room" />
             <TableColumn fx:id="courseDescription" prefWidth="232.0" text="Course Description" />
             <TableColumn id="modifyCourse" fx:id="location1" prefWidth="134.0" text="Update/Delete" />
         </columns>
