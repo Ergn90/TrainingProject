@@ -1,7 +1,7 @@
 package model.enrolledTrainees;
 
 import model.ConnectionFactory;
-import model.courses.Courses;
+import model.course.Course;
 import model.location.Location;
 import model.skala.Skala;
 import model.trainee.Trainee;
@@ -44,13 +44,13 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
         return skala;
     }
 
-    private Courses extractCourseFromResult(ResultSet resultSet) throws SQLException {
-        Courses courses = new Courses();
-        courses.setCourseID(resultSet.getInt("CourseID"));
-        courses.setCourseName(resultSet.getString("CourseName"));
-        courses.setStartDate(resultSet.getDate("CourseDate"));
-        courses.setCourseDescription(resultSet.getString("CourseDescription"));
-        return courses;
+    private Course extractCourseFromResult(ResultSet resultSet) throws SQLException {
+        Course course = new Course();
+        course.setCourseID(resultSet.getInt("CourseID"));
+        course.setCourseName(resultSet.getString("CourseName"));
+        course.setStartDate(resultSet.getDate("CourseDate"));
+        course.setCourseDescription(resultSet.getString("CourseDescription"));
+        return course;
 
     }
 
@@ -70,16 +70,16 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public List<Courses> getAllCoursesByTrainees(Trainee trainee) {
+    public List<Course> getAllCoursesByTrainee(Trainee trainee) {
         Connection connection = ConnectionFactory.getConnection();
 
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECTCOURSESBYTRAINEESID + trainee.getTraineeID());
-            List<Courses> coursesList = new ArrayList<>();
+            List<Course> coursesList = new ArrayList<>();
             while (resultSet.next()) {
-                Courses courses = extractCourseFromResult(resultSet);
-                coursesList.add(courses);
+                Course course = extractCourseFromResult(resultSet);
+                coursesList.add(course);
             }
             return coursesList;
         } catch (SQLException e) {
@@ -90,7 +90,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
 
 
     @Override
-    public List<Skala> getAllSkalaByTraines(Trainee trainee) {
+    public List<Skala> getAllSkalaByTrainee(Trainee trainee) {
 
         Connection connection = ConnectionFactory.getConnection();
 
@@ -111,11 +111,11 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
 
 
     @Override
-    public List<Trainee> getAllTraineesByCourses(Courses courses) {
+    public List<Trainee> getAllTraineesByCourse(Course course) {
         Connection connection = ConnectionFactory.getConnection();
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SELECTTRAINEEBYCOURSEID + courses.getCourseID());
+            ResultSet resultSet = statement.executeQuery(SELECTTRAINEEBYCOURSEID + course.getCourseID());
             List<Trainee> traineeList = new ArrayList<>();
             while (resultSet.next()) {
                 Trainee trainee = extractTraineeFromResult(resultSet);
@@ -130,12 +130,12 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
 
 
     @Override
-    public List<Skala> getAllSkalaByCourses(Courses courses) {
+    public List<Skala> getAllSkalaByCourse(Course course) {
         Connection connection = ConnectionFactory.getConnection();
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SELECTSKALABYCOURSEID + courses.getCourseID());
+            ResultSet resultSet = statement.executeQuery(SELECTSKALABYCOURSEID + course.getCourseID());
             List<Skala> skalaList = new ArrayList<>();
             while (resultSet.next()) {
                 Skala skala = extractSkalaFromResult(resultSet);
@@ -167,16 +167,16 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public List<Courses> getAllCoursesBySkala(Skala skala) {
+    public List<Course> getAllCoursesBySkala(Skala skala) {
         Connection connection = ConnectionFactory.getConnection();
 
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECTCOURSESBYSKALAID + skala.getSkalaId());
-            List<Courses> coursesList = new ArrayList<>();
+            List<Course> coursesList = new ArrayList<>();
             while (resultSet.next()) {
-                Courses courses = extractCourseFromResult(resultSet);
-                coursesList.add(courses);
+                Course course = extractCourseFromResult(resultSet);
+                coursesList.add(course);
             }
             return coursesList;
         } catch (SQLException e) {
@@ -211,7 +211,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public Courses getCourse(int traineeID, int skalaID) {
+    public Course getCourse(int traineeID, int skalaID) {
         Connection connection = ConnectionFactory.getConnection();
 
         try {
@@ -259,7 +259,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public boolean insertEnrolledTraines(Courses courses, Skala skala, Trainee trainee) {
+    public boolean insertEnrolledTraines(Course course, Skala skala, Trainee trainee) {
 
 
         Connection connection = ConnectionFactory.getConnection();
@@ -270,7 +270,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
 
             ps.setInt(1, trainee.getTraineeID());
 
-            ps.setInt(2, courses.getCourseID());
+            ps.setInt(2, course.getCourseID());
 
             ps.setInt(3, skala.getSkalaId());
 
