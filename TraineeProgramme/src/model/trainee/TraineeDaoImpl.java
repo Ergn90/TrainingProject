@@ -46,7 +46,7 @@ public class TraineeDaoImpl implements TraineeDao {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM trainee");
-            Set trainees = new HashSet();
+            Set<Trainee> trainees = new HashSet();
             while (rs.next()) {
                 Trainee trainee = extractTraineeFromResultSet(rs);
                 trainees.add(trainee);
