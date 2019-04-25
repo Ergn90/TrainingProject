@@ -209,7 +209,7 @@ public class Controller implements Initializable {
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
         school.setCellValueFactory(new PropertyValueFactory<>("school"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
-        locationTrainees.setCellValueFactory(new PropertyValueFactory<>("locationName"));
+        locationTrainees.setCellValueFactory(new PropertyValueFactory<>("location"));
 
 //        listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
     }
