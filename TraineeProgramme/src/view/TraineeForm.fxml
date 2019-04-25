@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.Controller"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="362.0" prefWidth="150.0" spacing="23.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lastName" prefHeight="17.0" prefWidth="72.0" text="Last Name">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Label>
+            <Label fx:id="firstName" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="75.0" text="First Name" />
+            <Label fx:id="birthdaz" layoutX="10.0" layoutY="27.0" prefHeight="17.0" prefWidth="57.0" text="Birthday" />
+            <Label fx:id="address" layoutX="10.0" layoutY="44.0" prefHeight="17.0" prefWidth="52.0" text="Address" />
+            <Label fx:id="school" layoutX="10.0" layoutY="61.0" prefHeight="17.0" prefWidth="52.0" text="School" />
+            <Label fx:id="email" layoutX="10.0" layoutY="78.0" prefHeight="17.0" prefWidth="52.0" text="Email" />
+            <Label fx:id="location" layoutX="10.0" layoutY="95.0" prefHeight="17.0" prefWidth="52.0" text="Location" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="190.0" left="75.0" top="180.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="70.0" left="15.0" right="50.0" top="35.0" />
+         </padding>
+      </VBox>
+   </left>
+   <top>
+      <HBox prefHeight="22.0" prefWidth="421.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="53.0" prefWidth="421.0" text="Trainee Form">
+               <padding>
+                  <Insets bottom="15.0" left="150.0" right="90.0" top="50.0" />
+               </padding>
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox prefHeight="19.0" prefWidth="421.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <VBox prefHeight="355.0" prefWidth="191.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets right="15.0" top="5.0" />
+         </BorderPane.margin>
+         <children>
+            <TextField fx:id="lastNameTrainee" promptText="Last Name" />
+            <TextField fx:id="firstameTrainee" layoutX="10.0" layoutY="10.0" promptText="First Name" />
+            <TextField fx:id="birthdayTrainee" layoutX="10.0" layoutY="35.0" promptText="Birthday" />
+            <TextField fx:id="addressTrainee" layoutX="10.0" layoutY="60.0" promptText="Address" />
+            <TextField fx:id="schoolTrainee" layoutX="10.0" layoutY="85.0" promptText="School" />
+            <TextField fx:id="lastNameTrainee11111" layoutX="10.0" layoutY="110.0" promptText="Last Name" />
+            <TextField fx:id="emailTrainee" layoutX="10.0" layoutY="135.0" promptText="Email" />
+            <TextField fx:id="locationTrainee" layoutX="10.0" layoutY="160.0" promptText="Location" />
+         </children>
+         <padding>
+            <Insets bottom="70.0" right="50.0" top="15.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </center>
+</BorderPane>
