@@ -10,7 +10,7 @@ public class LocationDaoImpl implements LocationDao {
 
 
 
-    //TODO anderer select?
+
     @Override
     public Location getLocation(int id) {
 
@@ -70,7 +70,6 @@ public class LocationDaoImpl implements LocationDao {
     }
 
 
-    //TODO evtl prüfung ob Location bereits vorhanden
 
     @Override
     public boolean insertLocation(Location location) {
