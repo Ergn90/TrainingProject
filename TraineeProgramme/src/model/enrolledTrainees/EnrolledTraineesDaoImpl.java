@@ -48,7 +48,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
         Courses courses = new Courses();
         courses.setCourseID(resultSet.getInt("CourseID"));
         courses.setCourseName(resultSet.getString("CourseName"));
-        courses.setCourseDate(resultSet.getDate("CourseDate"));
+        courses.setStartDate(resultSet.getDate("CourseDate"));
         courses.setCourseDescription(resultSet.getString("CourseDescription"));
         return courses;
 
