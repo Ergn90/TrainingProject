@@ -46,14 +46,14 @@
     <center>
         <TableView fx:id="tableTrainees" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="traineeID" prefWidth="30.0" text="ID" />
+                <TableColumn fx:id="traineeID"  prefWidth="30.0" text="ID" />
                 <TableColumn fx:id="lastName" prefWidth="78.0" text="Last Name" />
                 <TableColumn fx:id="firstName" prefWidth="72.0" text="First Name" />
                 <TableColumn fx:id="birthday" prefWidth="62.0" text="Birthday" />
                 <TableColumn fx:id="address" prefWidth="100.0" text="Address" />
                 <TableColumn fx:id="school" prefWidth="65.0" text="School" />
                 <TableColumn fx:id="email" prefWidth="60.0" text="Email" />
-                <TableColumn fx:id="location" prefWidth="66.0" text="Location" />
+                <TableColumn fx:id="locationTrainees" prefWidth="66.0" text="Location" />
                 <TableColumn fx:id="skalaTrainee" prefWidth="58.0" text="Skala" />
                 <TableColumn fx:id="traineeCurentCourse" prefWidth="112.0" text="Current Course" />
                 <TableColumn fx:id="modifyTrainee" prefWidth="161.0" text="Update/Delete" />

@@ -41,11 +41,10 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public Set<Course> getAllCourses() {
         Connection connection = ConnectionFactory.getConnection();
-
+        Set<Course> coursesList = new HashSet<>();
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Courses");
-            Set<Course> coursesList = new HashSet<>();
             while (resultSet.next()) {
                 Course course = extractCoursesFromResult(resultSet);
                 coursesList.add(course);
@@ -54,7 +53,7 @@ public class CourseDaoImpl implements CourseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return coursesList;
     }
 
 

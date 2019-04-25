@@ -1,9 +1,18 @@
 package controller;
+
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.location.Location;
+import model.trainee.Trainee;
+import model.trainee.TraineeDao;
+import model.trainee.TraineeDaoImpl;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class Controller implements Initializable {
 
@@ -21,7 +30,7 @@ public class Controller implements Initializable {
     Label enrolledTrainees;
     /////////////////////////////////////////////////////////
     @FXML
-    TableView tableTrainees;
+    TableView<Trainee> tableTrainees;
 
     @FXML
     TableColumn traineeID;
@@ -45,7 +54,7 @@ public class Controller implements Initializable {
     TableColumn email;
 
     @FXML
-    TableColumn location;
+    TableColumn locationTrainees;
 
     @FXML
     TableColumn skalaTrainee;
@@ -56,7 +65,7 @@ public class Controller implements Initializable {
     @FXML
     TableColumn modifyTrainee;
 
-///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
     @FXML
     Button addTrainee;
 
@@ -65,7 +74,7 @@ public class Controller implements Initializable {
 
     @FXML
     Button enrollTrainee;
-///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
     @FXML
     TextField searchFieldTrainees;
 
@@ -137,11 +146,11 @@ public class Controller implements Initializable {
     Button enrollTraineeC;
     /////////////////////////Trainee Form
 
-@FXML
-Label lastNameTraineeForm;
+    @FXML
+    Label lastNameTraineeForm;
 
-@FXML
-Label firstNameTraineeForm;
+    @FXML
+    Label firstNameTraineeForm;
 
     @FXML
     Label birthdayTraineeForm;
@@ -188,9 +197,20 @@ Label firstNameTraineeForm;
     TextField scaleTrainee;
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        TraineeDao traineeDao = new TraineeDaoImpl();
+        Set<Trainee> trainees = traineeDao.getAllTrainee();
+        tableTrainees.setItems(FXCollections.observableArrayList(trainees));
+        traineeID.setCellValueFactory(new PropertyValueFactory<>("traineeID"));
+        lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        birthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
+        address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        school.setCellValueFactory(new PropertyValueFactory<>("school"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        locationTrainees.setCellValueFactory(new PropertyValueFactory<>("locationName"));
+
 //        listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
     }
 
