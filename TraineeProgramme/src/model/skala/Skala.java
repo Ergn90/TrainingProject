@@ -27,4 +27,12 @@ public class Skala {
     public void setSkalaName(String skalaName) {
         this.skalaName = skalaName;
     }
+
+    @Override
+    public String toString() {
+        return "Skala{" +
+                "skalaId=" + skalaId +
+                ", skalaName='" + skalaName + '\'' +
+                '}';
+    }
 }

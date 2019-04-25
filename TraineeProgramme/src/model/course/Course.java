@@ -61,4 +61,15 @@ public class Course {
     public void setCourseDescription(String courseDescription) {
         this.courseDescription = courseDescription;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseID=" + courseID +
+                ", startDate=" + startDate +
+                ", courseName='" + courseName + '\'' +
+                ", courseRoom='" + courseRoom + '\'' +
+                ", courseDescription='" + courseDescription + '\'' +
+                '}';
+    }
 }

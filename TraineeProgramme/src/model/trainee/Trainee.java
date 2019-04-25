@@ -91,5 +91,19 @@ public class Trainee {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return "Trainee{" +
+                "traineeID=" + traineeID +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", birthday=" + birthday +
+                ", address='" + address + '\'' +
+                ", school='" + school + '\'' +
+                ", email='" + email + '\'' +
+                ", location=" + location +
+                '}';
+    }
 }
 

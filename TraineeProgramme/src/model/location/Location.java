@@ -29,5 +29,13 @@ public class Location {
         this.locationName = locationName;
     }
 
+    @Override
+    public String toString() {
+        return "Location{" +
+                "locationId=" + locationId +
+                ", locationName='" + locationName + '\'' +
+                '}';
+    }
+
 
 }
