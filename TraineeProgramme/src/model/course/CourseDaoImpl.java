@@ -1,4 +1,4 @@
-package model.courses;
+package model.course;
 
 import model.ConnectionFactory;
 
@@ -6,10 +6,10 @@ import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CoursesDaoImpl implements CoursesDao {
+public class CourseDaoImpl implements CourseDao {
 
-    private Courses extractCoursesFromResult(ResultSet rs) throws SQLException {
-        return new Courses(rs.getInt("CourseID"),
+    private Course extractCoursesFromResult(ResultSet rs) throws SQLException {
+        return new Course(rs.getInt("CourseID"),
                 rs.getDate("CourseDate"),
                 rs.getString("CourseName"),
                 rs.getString("CourseRoom"),
@@ -17,7 +17,7 @@ public class CoursesDaoImpl implements CoursesDao {
     }
 
     @Override
-    public Courses getCourses(int id) {
+    public Course getCourse(int id) {
         Connection connection = ConnectionFactory.getConnection();
 
         try {
@@ -39,16 +39,16 @@ public class CoursesDaoImpl implements CoursesDao {
     }
 
     @Override
-    public Set<Courses> getAllCourses() {
+    public Set<Course> getAllCourses() {
         Connection connection = ConnectionFactory.getConnection();
 
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Courses");
-            Set<Courses> coursesList = new HashSet<>();
+            Set<Course> coursesList = new HashSet<>();
             while (resultSet.next()) {
-                Courses courses = extractCoursesFromResult(resultSet);
-                coursesList.add(courses);
+                Course course = extractCoursesFromResult(resultSet);
+                coursesList.add(course);
             }
             return coursesList;
         } catch (SQLException e) {
@@ -59,17 +59,17 @@ public class CoursesDaoImpl implements CoursesDao {
 
 
     @Override
-    public Set<Courses> getCoursesByNameAndDate(String name, java.util.Date date) {
+    public Set<Course> getCoursesByNameAndDate(String name, java.util.Date date) {
         Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Courses where CourseName =" + name + " and CourseDate=" + new java.sql.Date(date.getTime()));
-            Set<Courses> courses = new HashSet();
+            Set<Course> coursesSet = new HashSet();
             while (rs.next()) {
-                Courses course = extractCoursesFromResult(rs);
-                courses.add(course);
+                Course course = extractCoursesFromResult(rs);
+                coursesSet.add(course);
             }
-            return courses;
+            return coursesSet;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -78,14 +78,14 @@ public class CoursesDaoImpl implements CoursesDao {
     }
 
     @Override
-    public boolean insertCourses(Courses courses) {
+    public boolean insertCourse(Course course) {
         Connection conn = ConnectionFactory.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement("INSERT INTO Courses VALUES (NULL,?, ?, ?, ?)");
-            ps.setDate(1, new java.sql.Date(courses.getStartDate().getTime()));
-            ps.setString(2, courses.getCourseName());
-            ps.setString(3, courses.getCourseDescription());
-            ps.setString(4, courses.getCourseRoom());
+            ps.setDate(1, new java.sql.Date(course.getStartDate().getTime()));
+            ps.setString(2, course.getCourseName());
+            ps.setString(3, course.getCourseDescription());
+            ps.setString(4, course.getCourseRoom());
             int i = ps.executeUpdate();
             if (i == 1) {
                 return true;
@@ -97,15 +97,15 @@ public class CoursesDaoImpl implements CoursesDao {
     }
 
     @Override
-    public boolean updateCourses(Courses courses) {
+    public boolean updateCourse(Course course) {
         try {
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement ps = conn.prepareStatement("UPDATE Courses SET CourseDate=?, CourseName=?, CourseDescription=? , CourseRoom=? WHERE CourseID=?");
 
-            ps.setDate(2, new java.sql.Date(courses.getStartDate().getTime()));
-            ps.setString(3, courses.getCourseName());
-            ps.setString(4, courses.getCourseDescription());
-            ps.setString(5, courses.getCourseRoom());
+            ps.setDate(2, new java.sql.Date(course.getStartDate().getTime()));
+            ps.setString(3, course.getCourseName());
+            ps.setString(4, course.getCourseDescription());
+            ps.setString(5, course.getCourseRoom());
             int i = ps.executeUpdate();
             if (i == 1) {
                 return true;
@@ -117,7 +117,7 @@ public class CoursesDaoImpl implements CoursesDao {
     }
 
     @Override
-    public boolean deleteCourses(int id) {
+    public boolean deleteCourse(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
             Statement stmt = conn.createStatement();

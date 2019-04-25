@@ -1,15 +1,15 @@
-package model.courses;
+package model.course;
 
 import java.util.Date;
 
-public class Courses {
+public class Course {
     private int courseID;
     private Date startDate;
     private String courseName;
     private String courseRoom;
     private String courseDescription;
 
-    public Courses(int courseID, Date startDate, String courseName, String courseRoom, String courseDescription) {
+    public Course(int courseID, Date startDate, String courseName, String courseRoom, String courseDescription) {
         this.courseID = courseID;
         this.startDate = startDate;
         this.courseName = courseName;
@@ -17,7 +17,7 @@ public class Courses {
         this.courseDescription = courseDescription;
     }
 
-    public Courses() {
+    public Course() {
     }
 
     public int getCourseID() {
