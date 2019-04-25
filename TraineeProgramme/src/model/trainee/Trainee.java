@@ -1,5 +1,7 @@
 package model.trainee;
 
+import model.location.Location;
+
 import java.util.Date;
 
 public class Trainee {
@@ -10,12 +12,12 @@ public class Trainee {
     private String address;
     private String school;
     private String email;
-    private int locationId;
+    private Location location;
 
-    Trainee() {
+    public Trainee() {
     }
 
-    Trainee(int traineeID, String lastName, String firstName, Date birthday, String address, String school, String email, int locationId) {
+    public Trainee(int traineeID, String lastName, String firstName, Date birthday, String address, String school, String email, Location location) {
         this.traineeID = traineeID;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -23,7 +25,7 @@ public class Trainee {
         this.address = address;
         this.school = school;
         this.email = email;
-        this.locationId = locationId;
+        this.location = location;
     }
 
     public Integer getTraineeID() {
@@ -82,12 +84,12 @@ public class Trainee {
         this.email = email;
     }
 
-    public Integer getLocationId() {
-        return locationId;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
 
