@@ -3,42 +3,89 @@ package model.courses;
 import model.ConnectionFactory;
 
 import java.sql.*;
-import java.time.Year;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class CoursesDaoImpl implements CoursesDao {
 
+    private Courses extractCoursesFromResult(ResultSet rs) throws SQLException {
+        return new Courses(rs.getInt("CourseID"),
+                rs.getDate("CourseDate"),
+                rs.getString("CourseName"),
+                rs.getString("CourseRoom"),
+                rs.getString("CourseDescription"));
+    }
+
     @Override
     public Courses getCourses(int id) {
-        Courses courses = null;
-        Iterator it = getSetOfCourses("SELECT * FROM Courses where CourseID = " + id).iterator();
-        while (it.hasNext()) {
-            courses = (Courses) it.next();
+        Connection connection = ConnectionFactory.getConnection();
+
+        try {
+
+            Statement stmt = connection.createStatement();
+
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Courses where CourseID =" + id);
+
+            if (rs.next()) {
+                return extractCoursesFromResult(rs);
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
         }
-        return courses;
+        return null;
     }
 
     @Override
     public Set<Courses> getAllCourses() {
-        return getSetOfCourses("SELECT * FROM Courses;");
+        Connection connection = ConnectionFactory.getConnection();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Courses");
+            Set<Courses> coursesList = new HashSet<>();
+            while (resultSet.next()) {
+                Courses courses = extractCoursesFromResult(resultSet);
+                coursesList.add(courses);
+            }
+            return coursesList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    @Override
+    public Set<Courses> getCoursesByNameAndDate(String name, java.util.Date date) {
+        Connection connection = ConnectionFactory.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Courses where CourseName =" + name + " and CourseDate=" + new java.sql.Date(date.getTime()));
+            Set<Courses> courses = new HashSet();
+            while (rs.next()) {
+                Courses course = extractCoursesFromResult(rs);
+                courses.add(course);
+            }
+            return courses;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 
     @Override
-    public Set<Courses> getCoursesByNameAndYear(String name, Year year) {
-        return getSetOfCourses("SELECT * FROM Courses where CourseName = '" + name + "' and CourseDate = '" + year + "';");
-    }
-
-    @Override
-    public boolean insertCourses(Courses courses){
-        /*Connection conn = ConnectionFactory.getConnection();
+    public boolean insertCourses(Courses courses) {
+        Connection conn = ConnectionFactory.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement("INSERT INTO Courses VALUES (NULL,?, ?, ?, ?)");
-            ps.setDate(2, new java.sql.Date(courses.getCourseYear().getTime()));
-            ps.setInt(3, courses.getCourseName());
-            ps.setString(4, courses.getCourseDescription());
-            ps.setString(5, courses.getCourseRoom());
+            ps.setDate(1, new java.sql.Date(courses.getStartDate().getTime()));
+            ps.setString(2, courses.getCourseName());
+            ps.setString(3, courses.getCourseDescription());
+            ps.setString(4, courses.getCourseRoom());
             int i = ps.executeUpdate();
             if (i == 1) {
                 return true;
@@ -46,18 +93,17 @@ public class CoursesDaoImpl implements CoursesDao {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return false;*/
-        return  isCourseChanged(courses,"INSERT INTO Courses VALUES (NULL,?, ?, ?, ?)");
+        return false;
     }
 
     @Override
     public boolean updateCourses(Courses courses) {
-        /*try {
+        try {
             Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement ps = conn.prepareStatement("UPDATE Courses SET CourseYear=?, CourseName=?, CourseDescription=? , CourseRoom=? WHERE CourseID=?");
+            PreparedStatement ps = conn.prepareStatement("UPDATE Courses SET CourseDate=?, CourseName=?, CourseDescription=? , CourseRoom=? WHERE CourseID=?");
 
-            ps.setDate(2, new java.sql.Date(courses.getCourseYear().getTime()));
-            ps.setInt(3, courses.getCourseName());
+            ps.setDate(2, new java.sql.Date(courses.getStartDate().getTime()));
+            ps.setString(3, courses.getCourseName());
             ps.setString(4, courses.getCourseDescription());
             ps.setString(5, courses.getCourseRoom());
             int i = ps.executeUpdate();
@@ -67,8 +113,7 @@ public class CoursesDaoImpl implements CoursesDao {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return false;*/
-        return isCourseChanged(courses,"UPDATE Courses SET CourseDate=?, CourseName=?, CourseDescription=? , CourseRoom=? WHERE CourseID=?");
+        return false;
     }
 
     @Override
@@ -86,43 +131,8 @@ public class CoursesDaoImpl implements CoursesDao {
         return false;
 
     }
-    public Set<Courses> getSetOfCourses(String sqlStatement) {
-        Connection conn = ConnectionFactory.getConnection();
-        Set<Courses> coursesSet = new HashSet<>();
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sqlStatement);
-            Courses courses;
-            while (rs.next()) {
-                courses = new Courses(rs.getInt("CourseID"),
-                        rs.getDate("CourseDate"),
-                        rs.getString("CourseName"),
-                        rs.getString("CourseRoom"),
-                        rs.getString("CourseDescription"));
-                coursesSet.add(courses);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return coursesSet;
-    }
-    public boolean isCourseChanged(Courses courses, String sqlStatement){
-        try {
-            Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sqlStatement);
-            ps.setDate(2, new java.sql.Date(courses.getStartDate().getTime()));
-            ps.setString(3, courses.getCourseName());
-            ps.setString(4, courses.getCourseDescription());
-            ps.setString(5, courses.getCourseRoom());
-            int i = ps.executeUpdate();
-            if (i == 1) {
-                return true;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return false;
-    }
+
+
 }
 
 
