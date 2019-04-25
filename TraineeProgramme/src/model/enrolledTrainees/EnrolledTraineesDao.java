@@ -17,6 +17,5 @@ public interface EnrolledTraineesDao {
     Courses getCourse(int traineeID,int skalaID);
     Trainee getTrainee(int coursesID,int skalaID);
     boolean insertEnrolledTraines(Courses courses,Skala skala,Trainee trainee);
-    boolean updateEnrolledTraines(Courses courses,Skala skala,Trainee trainee);
-    boolean updateEnrolledTraines(int traineeID,int skalaID,int coursesID);
+    boolean deletEnrolledTraines(int traineeID,int skalaID,int coursesID);
 }
