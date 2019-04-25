@@ -1,4 +1,5 @@
 drop database  trainee_programm_db;
+
 CREATE DATABASE trainee_programm_db;
 
 use trainee_programm_db;
@@ -32,8 +33,8 @@ CREATE TABLE Trainee (
 
 CREATE TABLE Courses (
     CourseID int NOT NULL AUTO_INCREMENT,
-    CourseName enum('1','2') not null,
-    CourseYear year NOT NULL,
+    CourseName varchar(255) not null,
+    CourseDate date NOT NULL,
     CourseRoom    enum('EG01','EG02','OG01','OG02') NOT NULL,
 	CourseDescription varchar(255) NULL, #optional
     PRIMARY KEY (CourseId)
@@ -49,6 +50,5 @@ CREATE TABLE Enrolled_Trainees (
     PRIMARY KEY (TraineeID,CourseId, SkalaId)
     
 );
-
 alter table Trainee
 ADD CONSTRAINT check_email  CHECK(Email LIKE '%___@___%') 

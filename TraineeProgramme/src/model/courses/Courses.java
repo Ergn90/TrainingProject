@@ -6,15 +6,17 @@ public class Courses {
     private int courseID;
     private Date courseYear;
     private int courseName;
-    private String courseRoom;
 
-    public Courses(int courseID, Date courseYear, int courseName, String courseRoom) {
+    private String courseRoom;
+    private String courseDescription;
+
+    public Courses(int courseID, Date courseYear, int courseName, String courseRoom, String courseDescription) {
         this.courseID = courseID;
         this.courseYear = courseYear;
         this.courseName = courseName;
         this.courseRoom = courseRoom;
+        this.courseDescription = courseDescription;
     }
-
     public Courses() {
     }
 
@@ -40,5 +42,21 @@ public class Courses {
 
     public void setCourseYear(Date courseYear) {
         this.courseYear = courseYear;
+    }
+
+    public String getCourseRoom() {
+        return courseRoom;
+    }
+
+    public void setCourseRoom(String courseRoom) {
+        this.courseRoom = courseRoom;
+    }
+
+    public String getCourseDescription() {
+        return courseDescription;
+    }
+
+    public void setCourseDescription(String courseDescription) {
+        this.courseDescription = courseDescription;
     }
 }

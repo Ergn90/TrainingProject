@@ -1,13 +1,14 @@
 package model.courses;
 
+import java.sql.SQLException;
 import java.time.Year;
 import java.util.Set;
 
 public interface CoursesDao {
     Courses getCourses(int id);
     Set<Courses> getAllCourses();
-    Courses getCoursesByNameAndYear(String name, Year year);
-    boolean insertCourses(Courses courses);
+    Set<Courses> getCoursesByNameAndYear(String name, Year year);
+    boolean insertCourses(Courses courses) throws SQLException;
     boolean updateCourses(Courses courses);
     boolean deleteCourses(int id);
 }

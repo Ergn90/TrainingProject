@@ -8,8 +8,6 @@ values ('Advanced');
 INSERT INTO skala (SkalaName)
 values ('Expert');
 
-
-
 ##############################
 #insert scripts for location
 ##############################
@@ -64,31 +62,23 @@ values ('Zuerich');
 insert into Location (LocationName)
 values ('Extern');
 
-
 ##############################
 #insert scripts for courses
 ##############################
 
-;
+insert into Courses (coursename,CourseDate,CourseRoom)
+values ('Java Trainee','2018-04-01','EG01');
 
+insert into Courses (coursename,CourseDate,CourseRoom)
+values ('Java Trainee','2018-10-01','EG02');
+insert into Courses (coursename,CourseDate,CourseRoom)
+values ('Java Trainee','2019-04-01','EG01');
 
-insert into Courses (coursename,courseyear,CourseRoom)
-values ('1','2018','EG01');
+insert into Courses (coursename,CourseDate,CourseRoom)
+values ('Java Trainee','2019-10-01','EG02');
 
-insert into Courses (coursename,courseyear,CourseRoom)
-values ('2','2018','EG01');
-
-insert into Courses (coursename,courseyear,CourseRoom)
-values ('1','2019','EG01');
-
-insert into Courses (coursename,courseyear,CourseRoom)
-values ('2','2019','EG02');
-
-insert into Courses (coursename,courseyear,CourseRoom)
-values ('1','2020','EG01');
-
-insert into Courses (coursename,courseyear,CourseRoom)
-values ('2','2020','EG02');
+insert into Courses (coursename,CourseDate,CourseRoom,CourseDescription)
+values ('Java Trainee','2020-04-01','EG01',"next course");
 
 ##############################
 #insert scripts for trainee
