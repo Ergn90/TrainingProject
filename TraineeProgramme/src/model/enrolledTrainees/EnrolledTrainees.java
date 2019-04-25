@@ -41,4 +41,13 @@ public class EnrolledTrainees {
     public void setSkala(Skala skala) {
         this.skala = skala;
     }
+
+    @Override
+    public String toString() {
+        return "EnrolledTrainees{" +
+                "course=" + course +
+                ", trainee=" + trainee +
+                ", skala=" + skala +
+                '}';
+    }
 }
