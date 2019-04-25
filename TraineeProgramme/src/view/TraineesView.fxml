@@ -56,7 +56,7 @@
                 <TableColumn fx:id="location" prefWidth="66.0" text="Location" />
                 <TableColumn fx:id="skalaTrainee" prefWidth="58.0" text="Skala" />
                 <TableColumn fx:id="traineeCurentCourse" prefWidth="112.0" text="Current Course" />
-                <TableColumn id="modifyTrainee" fx:id="location1" prefWidth="161.0" text="Update/Delete" />
+                <TableColumn fx:id="modifyTrainee" prefWidth="161.0" text="Update/Delete" />
 
             </columns>
             <padding>
