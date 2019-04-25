@@ -28,7 +28,7 @@ public class TraineeDaoImpl implements TraineeDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM trainee WHERE traineeID=" + id);
+            ResultSet rs = stmt.executeQuery("SELECT * from trainee inner join location on trainee.LocationId=location.LocationIdWHERE traineeID=" + id);
 
             if (rs.next()) {
                 return extractTraineeFromResultSet(rs);
@@ -45,7 +45,7 @@ public class TraineeDaoImpl implements TraineeDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM trainee");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM trainee inner join location on trainee.LocationId=location.LocationId");
             Set trainees = new HashSet();
             while (rs.next()) {
                 Trainee trainee = extractTraineeFromResultSet(rs);

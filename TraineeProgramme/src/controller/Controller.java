@@ -1,12 +1,17 @@
 package controller;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import model.trainee.Trainee;
+import model.trainee.TraineeDao;
+import model.trainee.TraineeDaoImpl;
 
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class Controller implements Initializable {
 
@@ -76,8 +81,12 @@ public class Controller implements Initializable {
     Button searchButtonTrainees;
 
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        TraineeDao traineeDao=new TraineeDaoImpl();
+        Set<Trainee> trainees=traineeDao.getAllTrainee();
+      //  listViewTrainees.setItems((ObservableList) trainees);
 //        listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
     }
 
