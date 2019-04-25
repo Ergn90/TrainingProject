@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface EnrolledTraineesDao {
     List<Courses> getAllCoursesByTrainees(Trainee trainee);
-    List<Skala> getAllSkalaByTrainnes(Trainee trainee);
+    List<Skala> getAllSkalaByTraines(Trainee trainee);
     List<Trainee> getAllTraineesByCourses(Courses courses);
     List<Skala> getAllSkalaByCourses(Courses courses);
     List<Trainee> getAllTraineesBySkala(Skala skala);

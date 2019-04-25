@@ -17,11 +17,11 @@
          <children>
             <HBox spacing="18.0">
                <children>
-                  <TextField fx:id="searchFielTrainee" prefHeight="39.0" prefWidth="177.0" promptText="Search for Trainee">
+                  <TextField fx:id="searchFielCourses" prefHeight="39.0" prefWidth="177.0" promptText="Search for Trainee">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets></TextField>
-                  <Button fx:id="searchButtonTrainee" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="Search">
+                  <Button fx:id="searchButtonCourses" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="Search">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Button>
@@ -46,10 +46,10 @@
    <center>
       <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="traineeID" prefWidth="43.0" text="ID" />
-          <TableColumn fx:id="courseName" prefWidth="123.0" text="Course Name" />
-            <TableColumn fx:id="courseÝear" minWidth="8.0" prefWidth="70.0" text="Course Year" />
-            <TableColumn fx:id="courseRoom" prefWidth="77.0" text="Course Room" />
+          <TableColumn fx:id="courseID" prefWidth="43.0" text="ID" />
+          <TableColumn fx:id="courseName" prefWidth="64.0" text="Course Name" />
+            <TableColumn fx:id="courseÝear" minWidth="8.0" prefWidth="90.0" text="Course Year" />
+            <TableColumn fx:id="courseRoom" prefWidth="116.0" text="Course Room" />
             <TableColumn fx:id="courseDescription" prefWidth="232.0" text="Course Description" />
             <TableColumn id="modifyCourse" fx:id="location1" prefWidth="134.0" text="Update/Delete" />
         </columns>
