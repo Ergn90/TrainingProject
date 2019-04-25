@@ -42,11 +42,10 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     private Courses extractCourseFromTrainees(ResultSet resultSet) throws SQLException {
         Courses courses=new Courses();
         courses.setCourseID(resultSet.getInt("CourseID"));
-        courses.setCourseName(resultSet.getInt("CourseName"));
-        courses.setCourseYear(resultSet.getDate("CourseYear"));
+        courses.setCourseName(resultSet.getString("CourseName"));
+        courses.setStartDate(resultSet.getDate("CourseYear"));
         //courses.setCourseDescription(resultSet.getString("CourseDescription"));
         return  courses;
-
     }
 
     @Override

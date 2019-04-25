@@ -27,7 +27,7 @@ public class CoursesDaoImpl implements CoursesDao {
 
     @Override
     public Set<Courses> getCoursesByNameAndYear(String name, Year year) {
-        return getSetOfCourses("SELECT * FROM Courses where CourseName = '" + name + "' and CourseYear = '" + year + "';");
+        return getSetOfCourses("SELECT * FROM Courses where CourseName = '" + name + "' and CourseDate = '" + year + "';");
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CoursesDaoImpl implements CoursesDao {
             ex.printStackTrace();
         }
         return false;*/
-        return isCourseChanged(courses,"UPDATE Courses SET CourseYear=?, CourseName=?, CourseDescription=? , CourseRoom=? WHERE CourseID=?");
+        return isCourseChanged(courses,"UPDATE Courses SET CourseDate=?, CourseName=?, CourseDescription=? , CourseRoom=? WHERE CourseID=?");
     }
 
     @Override
@@ -95,8 +95,8 @@ public class CoursesDaoImpl implements CoursesDao {
             Courses courses;
             while (rs.next()) {
                 courses = new Courses(rs.getInt("CourseID"),
-                        rs.getDate("CourseYear"),
-                        rs.getInt("CourseName"),
+                        rs.getDate("CourseDate"),
+                        rs.getString("CourseName"),
                         rs.getString("CourseRoom"),
                         rs.getString("CourseDescription"));
                 coursesSet.add(courses);
@@ -110,8 +110,8 @@ public class CoursesDaoImpl implements CoursesDao {
         try {
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement ps = conn.prepareStatement(sqlStatement);
-            ps.setDate(2, new java.sql.Date(courses.getCourseYear().getTime()));
-            ps.setInt(3, courses.getCourseName());
+            ps.setDate(2, new java.sql.Date(courses.getStartDate().getTime()));
+            ps.setString(3, courses.getCourseName());
             ps.setString(4, courses.getCourseDescription());
             ps.setString(5, courses.getCourseRoom());
             int i = ps.executeUpdate();
@@ -121,8 +121,6 @@ public class CoursesDaoImpl implements CoursesDao {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
-
         return false;
     }
 }
