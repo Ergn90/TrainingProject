@@ -47,14 +47,17 @@
         <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="courseID" prefWidth="30.0" text="ID" />
-                <TableColumn fx:id="lastName" prefWidth="70.0" text="Last Name" />
-                <TableColumn fx:id="firstName" prefWidth="74.0" text="First Name" />
-                <TableColumn fx:id="birthday" prefWidth="66.0" text="Birthday" />
-                <TableColumn fx:id="address" prefWidth="135.0" text="Address" />
-                <TableColumn fx:id="school" prefWidth="61.0" text="School" />
-                <TableColumn fx:id="email" prefWidth="89.0" text="Email" />
-                <TableColumn fx:id="location" prefWidth="45.0" text="Location" />
-                <TableColumn id="modifyTrainee" fx:id="location1" prefWidth="105.0" text="Update/Delete" />
+                <TableColumn fx:id="lastName" prefWidth="49.0" text="Last Name" />
+                <TableColumn fx:id="firstName" prefWidth="72.0" text="First Name" />
+                <TableColumn fx:id="birthday" prefWidth="36.0" text="Birthday" />
+                <TableColumn fx:id="address" prefWidth="101.0" text="Address" />
+                <TableColumn fx:id="school" prefWidth="71.0" text="School" />
+                <TableColumn fx:id="email" prefWidth="85.0" text="Email" />
+                <TableColumn fx:id="location" text="Location" />
+                <TableColumn fx:id="skalaTrainee" prefWidth="46.0" text="Skala" />
+                <TableColumn fx:id="traineeActualCourse" prefWidth="46.0" text="Current Course" />
+                <TableColumn id="modifyTrainee" fx:id="location1" prefWidth="151.0" text="Update/Delete" />
+
             </columns>
             <padding>
                 <Insets bottom="5.0" />
