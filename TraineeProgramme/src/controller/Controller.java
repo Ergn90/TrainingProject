@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.location.Location;
+import model.location.LocationDao;
+import model.location.LocationDaoImpl;
 import model.trainee.Trainee;
 import model.trainee.TraineeDao;
 import model.trainee.TraineeDaoImpl;
@@ -160,7 +163,6 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getTraineeInfo();
 
 //       listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
     }
@@ -185,7 +187,4 @@ public class Controller implements Initializable {
         locationTrainees.setCellValueFactory(new PropertyValueFactory<>("location"));
         return traineeDao;
     }
-
-
-
 }

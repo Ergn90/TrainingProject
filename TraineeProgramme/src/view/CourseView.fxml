@@ -26,7 +26,7 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Button>
-                  <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="45.0" text="Back">
+                  <Button fx:id="backFromCourseViewToTraineeView" mnemonicParsing="false"  prefHeight="39.0" prefWidth="45.0" text="Back">
                      <HBox.margin>
                         <Insets left="510.0" />
                      </HBox.margin>
