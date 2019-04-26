@@ -1,5 +1,6 @@
 package view;
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,14 +13,15 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("TraineesView.fxml"));
         primaryStage.setTitle("TraineeProgram");
-        primaryStage.setScene(new Scene(root, 900, 500 ));
+
+        primaryStage.setScene(new Scene(root, 1100, 700 ));
         primaryStage.show();
+
+
     }
 
-
+    //TODO Verbindung allen Controllers hier
     public static void main(String[] args) {
         launch(args);
-
-
     }
 }

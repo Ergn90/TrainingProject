@@ -308,10 +308,58 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
             ps.setInt(3, skalaID);
 
             int i = ps.executeUpdate();
-            if(i == 1) {
+            if (i == 1) {
 
                 return true;
 
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean deletEnrolledTrainesByTrainee(int traineeID) {
+        Connection connection = ConnectionFactory.getConnection();
+
+        try {
+
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM enrolled_trainees WHERE traineeID=?");
+
+            ps.setInt(1, traineeID);
+
+            int i = ps.executeUpdate();
+            if (i == 1) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean deletEnrolledTrainesByCourse(int coursesID) {
+        Connection connection = ConnectionFactory.getConnection();
+
+        try {
+
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM enrolled_trainees WHERE CourseID=?");
+
+            ps.setInt(1, coursesID);
+
+            int i = ps.executeUpdate();
+            if (i == 1) {
+                return true;
             }
 
         } catch (SQLException ex) {
