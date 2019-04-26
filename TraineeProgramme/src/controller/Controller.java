@@ -2,17 +2,10 @@ package controller;
 
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
-import jdk.nashorn.internal.codegen.CompilerConstants;
-import model.enrolledTrainees.EnrolledTrainees;
-import model.enrolledTrainees.EnrolledTraineesDao;
-import model.enrolledTrainees.EnrolledTraineesDaoImpl;
-import model.location.Location;
 import model.trainee.Trainee;
 import model.trainee.TraineeDao;
 import model.trainee.TraineeDaoImpl;
@@ -23,18 +16,8 @@ import java.util.Set;
 
 public class Controller implements Initializable {
 
-    ////////TraineesView//////////////////
-    @FXML
-    ListView listViewTrainees;
-
-    @FXML
-    Label manageTrainee;
-
-    @FXML
-    Label manageCourses;
 
 
-    /////////////////////////////////////////////////////////
     @FXML
     TableView<Trainee> tableTrainees;
 
@@ -63,29 +46,6 @@ public class Controller implements Initializable {
     TableColumn locationTrainees;
 
     @FXML
-    TableColumn updateTrainee1;
-
-    @FXML
-    TableColumn deleteTrainee1;
-
-    ///////////////////////////////////////////////////////////
-    @FXML
-    Button addTrainee;
-
-    @FXML
-    Button deleteTrainee;
-
-    @FXML
-    Button updateTrainee;
-    ///////////////////////////////////////////////////////////
-    @FXML
-    TextField searchFieldTrainees;
-
-    @FXML
-    Button searchButtonTrainees;
-
-    //////////////////////////////////////CourseForm Annotations
-    @FXML
     Label lastNameCourseForm;
 
     @FXML
@@ -106,7 +66,7 @@ public class Controller implements Initializable {
     @FXML
     TextArea courseDescription;
 
-    ///////////////////////////////CourseView
+
     @FXML
     TextField searchFielCourses;
     @FXML
@@ -120,8 +80,6 @@ public class Controller implements Initializable {
     @FXML
     Label manageCoursesC;
 
-    @FXML
-    Label enrolledTraineesC;
 
     @FXML
     TableColumn courseID;
@@ -147,7 +105,7 @@ public class Controller implements Initializable {
     Button addCourseC;
     @FXML
     Button enrollTraineeC;
-    /////////////////////////Trainee Form
+
 
     @FXML
     Label lastNameTraineeForm;
@@ -209,8 +167,6 @@ public class Controller implements Initializable {
 
     public void getTraineeInfo() {
         TraineeDao traineeDao = refreshTraineeInfo();
-        addDeleteButtonToTable(traineeDao);
-        addUpdateButtonToTable(traineeDao);
 
     }
 
@@ -231,82 +187,5 @@ public class Controller implements Initializable {
     }
 
 
-    private void addDeleteButtonToTable(TraineeDao traineeDao) {
-        TableColumn<Trainee, Void> colBtn = new TableColumn("Delete Trainee");
 
-        Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>> cellFactory = new Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>>() {
-            @Override
-            public TableCell<Trainee, Void> call(final TableColumn<Trainee, Void> param) {
-                final TableCell<Trainee, Void> cell = new TableCell<Trainee, Void>() {
-
-                    private final Button btn = new Button("Delete");
-
-                    {
-                        btn.setOnAction((ActionEvent event) -> {
-                            EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
-                            Trainee trainee = tableTrainees.getItems().get(getIndex());
-                            //TODO enrolledTraineesDao make delete with Trainee and delete  with Course
-                            boolean deleteTrainee = traineeDao.deleteTrainee(trainee.getTraineeID());
-                            System.out.println("delete: " + deleteTrainee);
-                            refreshTraineeInfo();
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-
-        colBtn.setCellFactory(cellFactory);
-
-        tableTrainees.getColumns().add(colBtn);
-    }
-    private void addUpdateButtonToTable(TraineeDao traineeDao) {
-        TableColumn<Trainee, Void> colBtn = new TableColumn("Update Trainee");
-
-        Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>> cellFactory = new Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>>() {
-            @Override
-            public TableCell<Trainee, Void> call(final TableColumn<Trainee, Void> param) {
-                final TableCell<Trainee, Void> cell = new TableCell<Trainee, Void>() {
-
-                    private final Button btn = new Button("Update");
-
-                    {
-                        //TODO call DIna forumlar
-                        btn.setOnAction((ActionEvent event) -> {
-//                            EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
-//                            Trainee trainee = tableTrainees.getItems().get(getIndex());
-//                            boolean updateTrainee = traineeDao.updateTrainee(trainee);
-//                            System.out.println("update Trainee " + updateTrainee);
-//                            refreshTraineeInfo();
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-
-        colBtn.setCellFactory(cellFactory);
-
-        tableTrainees.getColumns().add(colBtn);
-    }
 }
