@@ -26,7 +26,7 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Button>
-                  <Button fx:id="backFromCourseViewToTraineeView" mnemonicParsing="false"  prefHeight="39.0" prefWidth="45.0" text="Back">
+                  <Button fx:id="backFromCourseViewToTraineeView" mnemonicParsing="false" onAction="#backToTrainee" prefHeight="39.0" prefWidth="45.0" text="Back">
                      <HBox.margin>
                         <Insets left="510.0" />
                      </HBox.margin>
@@ -40,7 +40,7 @@
       </VBox>
    </top>
    <center>
-      <TableView prefHeight="396.0" prefWidth="833.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="coursesTable" prefHeight="396.0" prefWidth="833.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="courseID" prefWidth="43.0" text="ID" />
           <TableColumn fx:id="courseName" prefWidth="104.0" text="Course Name" />
@@ -60,9 +60,9 @@
       </TableView>
    </center>
     <bottom>
-        <HBox prefHeight="52.0" prefWidth="752.0" spacing="18.0" BorderPane.alignment="CENTER">
+        <HBox prefHeight="52.0" prefWidth="982.0" spacing="18.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="addCourseC" layoutX="45.0" layoutY="19.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="102.0" text="Add Course">
+                <Button fx:id="addCourseC" layoutX="45.0" layoutY="19.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="102.0" text="Add Course" onAction="#addCourse">
                     <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </padding>
@@ -70,7 +70,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="enrollTraineeC" layoutX="150.0" layoutY="18.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="106.0" text="Manage Course">
+                <Button fx:id="courseManage" layoutX="150.0" layoutY="18.0" mnemonicParsing="false" onAction="#manageCourse" prefHeight="33.0" prefWidth="106.0" text="Manage Course">
                     <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </padding>

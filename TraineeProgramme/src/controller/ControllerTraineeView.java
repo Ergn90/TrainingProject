@@ -1,4 +1,5 @@
 package controller;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.enrolledTrainees.EnrolledTraineesDao;
@@ -66,13 +68,19 @@ public class ControllerTraineeView implements Initializable {
     Button deleteTrainee;
 
     @FXML
-    Button updateTrainee;
+    Button manaageTrainee;
 
     @FXML
     TextField searchFieldTrainees;
 
     @FXML
     Button searchButtonTrainees;
+
+    @FXML
+    BorderPane mainBorderPane;
+
+    @FXML
+    Button courseView;
 
 
     @Override
@@ -81,7 +89,6 @@ public class ControllerTraineeView implements Initializable {
 
 //       listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
     }
-
 
 
     public void getTraineeInfo() {
@@ -122,7 +129,7 @@ public class ControllerTraineeView implements Initializable {
                         btn.setOnAction((ActionEvent event) -> {
                             EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
                             Trainee trainee = tableTrainees.getItems().get(getIndex());
-                            boolean deleteEnrolled=enrolledTraineesDao.deletEnrolledTrainesByTrainee(trainee.getTraineeID());
+                            boolean deleteEnrolled = enrolledTraineesDao.deletEnrolledTrainesByTrainee(trainee.getTraineeID());
                             boolean deleteTrainee = traineeDao.deleteTrainee(trainee.getTraineeID());
                             refreshTraineeInfo();
                         });
@@ -146,6 +153,7 @@ public class ControllerTraineeView implements Initializable {
 
         tableTrainees.getColumns().add(colBtn);
     }
+
     private void addUpdateButtonToTable(TraineeDao traineeDao) {
         TableColumn<Trainee, Void> colBtn = new TableColumn("Update Trainee");
 
@@ -186,4 +194,40 @@ public class ControllerTraineeView implements Initializable {
         tableTrainees.getColumns().add(colBtn);
     }
 
+    @FXML
+    public void showCoursesDialog(ActionEvent actionEvent) throws IOException {
+        try {
+            Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseView.fxml"));
+
+            courseView.getScene().setRoot(loader);
+        }
+        catch (NullPointerException npe){
+            System.out.println(npe.getMessage());
+        }
+    }
+
+    @FXML
+    public void showManageTrainee(ActionEvent actionEvent) throws IOException {
+        try {
+            Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineeManager.fxml"));
+
+            manaageTrainee.getScene().setRoot(loader);
+        }
+        catch (NullPointerException npe){
+            System.out.println(npe.getMessage());
+        }
+    }
+
+
+    @FXML
+    public void showTraineeForm(ActionEvent actionEvent) throws IOException {
+        try {
+            Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineeForm.fxml"));
+
+            addTrainee.getScene().setRoot(loader);
+        }
+        catch (NullPointerException npe){
+            System.out.println(npe.getMessage());
+        }
+    }
 }
