@@ -9,6 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import jdk.nashorn.internal.codegen.CompilerConstants;
+import model.enrolledTrainees.EnrolledTrainees;
+import model.enrolledTrainees.EnrolledTraineesDao;
+import model.enrolledTrainees.EnrolledTraineesDaoImpl;
 import model.location.Location;
 import model.trainee.Trainee;
 import model.trainee.TraineeDao;
@@ -239,7 +242,10 @@ public class Controller implements Initializable {
 
                 {
                     btn.setOnAction((ActionEvent event) -> {
-                        boolean deleteTrainee = traineeDao.deleteTrainee(tableTrainees.getItems().get(getIndex()).getTraineeID());
+                        EnrolledTraineesDao enrolledTraineesDao=new EnrolledTraineesDaoImpl();
+                        Trainee trainee=tableTrainees.getItems().get(getIndex());
+                        //TODO enrolledTraineesDao make delete with Trainee and delete  with Course
+                        boolean deleteTrainee = traineeDao.deleteTrainee(trainee.getTraineeID());
                         System.out.println("delete: " + deleteTrainee );
                         refreshTraineeInfo();
                     });
