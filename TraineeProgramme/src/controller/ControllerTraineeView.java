@@ -114,9 +114,8 @@ public class ControllerTraineeView implements Initializable {
                         btn.setOnAction((ActionEvent event) -> {
                             EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
                             Trainee trainee = tableTrainees.getItems().get(getIndex());
-                            //TODO enrolledTraineesDao make delete with Trainee and delete  with Course
+                            boolean deleteEnrolled=enrolledTraineesDao.deletEnrolledTrainesByTrainee(trainee.getTraineeID());
                             boolean deleteTrainee = traineeDao.deleteTrainee(trainee.getTraineeID());
-                            System.out.println("delete: " + deleteTrainee);
                             refreshTraineeInfo();
                         });
                     }
