@@ -34,5 +34,4 @@ public class Location {
         return  locationName;
     }
 
-
 }
