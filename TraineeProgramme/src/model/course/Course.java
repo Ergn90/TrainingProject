@@ -5,23 +5,21 @@ import java.util.Date;
 public class Course {
     private int courseID;
     private Date startDate;
+    private Date endDate;
     private String courseName;
     private String courseRoom;
     private String courseDescription;
 
-    public Course(int courseID, Date startDate, String courseName, String courseRoom, String courseDescription) {
+    public Course(int courseID, Date startDate, Date endDate, String courseName, String courseRoom, String courseDescription) {
         this.courseID = courseID;
         this.startDate = startDate;
+        this.endDate = endDate;
         this.courseName = courseName;
         this.courseRoom = courseRoom;
         this.courseDescription = courseDescription;
     }
 
     public Course() {
-    }
-
-    public int getCourseID() {
-        return courseID;
     }
 
     public void setCourseID(int courseID) {
@@ -62,11 +60,24 @@ public class Course {
         this.courseDescription = courseDescription;
     }
 
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
                 "courseID=" + courseID +
                 ", startDate=" + startDate +
+                ", endDate=" + endDate +
                 ", courseName='" + courseName + '\'' +
                 ", courseRoom='" + courseRoom + '\'' +
                 ", courseDescription='" + courseDescription + '\'' +
