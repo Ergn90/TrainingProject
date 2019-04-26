@@ -1,10 +1,17 @@
 package controller;
 
+
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import jdk.nashorn.internal.codegen.CompilerConstants;
+import model.enrolledTrainees.EnrolledTrainees;
+import model.enrolledTrainees.EnrolledTraineesDao;
+import model.enrolledTrainees.EnrolledTraineesDaoImpl;
 import model.location.Location;
 import model.trainee.Trainee;
 import model.trainee.TraineeDao;
@@ -56,13 +63,10 @@ public class Controller implements Initializable {
     TableColumn locationTrainees;
 
     @FXML
-    TableColumn skalaTrainee;
+    TableColumn updateTrainee1;
 
     @FXML
-    TableColumn traineeCurentCourse;
-
-    @FXML
-    TableColumn modifyTrainee;
+    TableColumn deleteTrainee1;
 
     ///////////////////////////////////////////////////////////
     @FXML
@@ -198,15 +202,21 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        TraineeDao traineeDao = new TraineeDaoImpl();
-        Set<Trainee> trainees = traineeDao.getAllTrainee();
-        tableTrainees.setItems(FXCollections.observableArrayList(trainees));
-        getTraineeInfo();
+                getTraineeInfo();
 
 //       listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
     }
 
     public void getTraineeInfo() {
+        TraineeDao traineeDao = refreshTraineeInfo();
+        addButtonToTable(traineeDao);
+
+    }
+
+    public TraineeDao refreshTraineeInfo() {
+        TraineeDao traineeDao = new TraineeDaoImpl();
+        Set<Trainee> trainees = traineeDao.getAllTrainee();
+        tableTrainees.setItems(FXCollections.observableArrayList(trainees));
 
         traineeID.setCellValueFactory(new PropertyValueFactory<>("traineeID"));
         lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -216,5 +226,46 @@ public class Controller implements Initializable {
         school.setCellValueFactory(new PropertyValueFactory<>("school"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         locationTrainees.setCellValueFactory(new PropertyValueFactory<>("location"));
+        return traineeDao;
     }
+
+
+    private void addButtonToTable(TraineeDao traineeDao) {
+    TableColumn<Trainee, Void> colBtn = new TableColumn("Delete Trainee");
+
+    Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>> cellFactory = new Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>>() {
+        @Override
+        public TableCell<Trainee, Void> call(final TableColumn<Trainee, Void> param) {
+            final TableCell<Trainee, Void> cell = new TableCell<Trainee, Void>() {
+
+                private final Button btn = new Button("Delete Trainee");
+
+                {
+                    btn.setOnAction((ActionEvent event) -> {
+                        EnrolledTraineesDao enrolledTraineesDao=new EnrolledTraineesDaoImpl();
+                        Trainee trainee=tableTrainees.getItems().get(getIndex());
+                        //TODO enrolledTraineesDao make delete with Trainee and delete  with Course
+                        boolean deleteTrainee = traineeDao.deleteTrainee(trainee.getTraineeID());
+                        System.out.println("delete: " + deleteTrainee );
+                        refreshTraineeInfo();
+                    });
+                }
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(btn);
+                    }
+                }
+            };
+            return cell;
+        }
+    };
+
+    colBtn.setCellFactory(cellFactory);
+
+    tableTrainees.getColumns().add(colBtn);
+}
 }

@@ -34,10 +34,12 @@ CREATE TABLE Trainee (
 CREATE TABLE Courses (
     CourseID int NOT NULL AUTO_INCREMENT,
     CourseName varchar(255) not null,
-    CourseDate date NOT NULL,
+    CourseStartDate date NOT NULL,
+	CourseEndDate date NOT NULL,
     CourseRoom    enum('EG01','EG02','OG01','OG02') NOT NULL,
 	CourseDescription varchar(255) NULL, #optional
-    PRIMARY KEY (CourseId)
+    PRIMARY KEY (CourseId),
+    check (CourseEndDate>CourseStartDate)
 );
 
 CREATE TABLE Enrolled_Trainees (
