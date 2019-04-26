@@ -9,10 +9,11 @@ values ('City'),('Stadt'),('Ville'),('Ciudad'),('Città'),('Cidade'),('Extern');
 ##############################
 #insert scripts for courses
 ##############################
-insert into Courses (CourseName,CourseDate,CourseRoom,CourseDescription)
-values ('Java Trainee','2018-04-01','EG01',''),
-('Java Trainee','2018-10-01','EG02',''),('Java Trainee','2019-04-01','EG01', 'current course'),
-('Java Trainee','2019-10-01','EG02','next course'),('Java Trainee','2020-04-01','EG01',"next course");
+
+insert into Courses (CourseName,CourseStartDate,CourseEndDate,CourseRoom,CourseDescription)
+values ('Java Trainee','2018-04-01','2018-10-01','EG01',''),
+('Java Trainee','2018-10-01','2019-04-01','EG02',''),('Java Trainee','2019-04-01','2019-10-01','EG01', 'current course'),
+('Java Trainee','2019-10-01','2020-04-01','EG02','next course'),('Java Trainee','2020-04-01','2020-10-01','EG01',"next course");
 ##############################
 #insert scripts for trainee
 ##############################
