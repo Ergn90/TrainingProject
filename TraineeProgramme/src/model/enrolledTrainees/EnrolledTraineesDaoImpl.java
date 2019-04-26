@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
-    private static final String SELECTCOURSESBYTRAINEESID = "SELECT courses.CourseID,CourseName,CourseDate,CourseRoom,CourseDescription from courses " +
+    private static final String SELECTCOURSESBYTRAINEESID = "SELECT courses.CourseID,CourseName,CourseStartDate,CourseEndDate,CourseRoom,CourseDescription from courses " +
             "inner join enrolled_trainees on  enrolled_trainees.CourseID=courses.CourseID " +
             "where enrolled_trainees.TraineeID=";
     private static final String SELECTSKALABYTRAINEESID = "SELECT skala.SkalaId,SkalaName " +
@@ -29,7 +29,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
             "from trainee inner join enrolled_trainees on enrolled_trainees.TraineeID=trainee.TraineeID " +
             "inner join location on trainee.LocationId=location.LocationId " +
             "where  enrolled_trainees.SkalaID=";
-    private static final String SELECTCOURSESBYSKALAID = "SELECT courses.CourseID,CourseName,CourseDate,CourseRoom,CourseDescription from courses " +
+    private static final String SELECTCOURSESBYSKALAID = "SELECT courses.CourseID,CourseName,CourseStartDate,CourseEndDate,CourseRoom,CourseDescription from courses " +
             "inner join enrolled_trainees on  enrolled_trainees.CourseID=courses.CourseID " +
             "where enrolled_trainees.SkalaID=";
     private static final String ANDTRAINEEID = " and enrolled_trainees.TraineeID=";
@@ -48,7 +48,9 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
         Course course = new Course();
         course.setCourseID(resultSet.getInt("CourseID"));
         course.setCourseName(resultSet.getString("CourseName"));
-        course.setStartDate(resultSet.getDate("CourseDate"));
+        course.setStartDate(resultSet.getDate("CourseStartDate"));
+        course.setEndDate(resultSet.getDate("CourseEndDate"));
+        course.setCourseRoom(resultSet.getString("CourseRoom"));
         course.setCourseDescription(resultSet.getString("CourseDescription"));
         return course;
 
