@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.control.ComboBox?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="566.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="566.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControlleTraineeForm">
    <top>
       <HBox prefHeight="30.0" prefWidth="420.0" BorderPane.alignment="CENTER">
          <children>
@@ -43,11 +43,7 @@
             <TextField fx:id="addressTrainee" promptText="Address" />
             <TextField fx:id="schoolTrainee" promptText="School" />
             <TextField fx:id="emailTrainee" promptText="Email" />
-            <ComboBox fx:id="locationTrainee" promptText ="choose location" >
-                    <items>
-
-                    </items>
-             </ComboBox>
+            <ComboBox fx:id="locationTraineeCombo" promptText ="choose location" />
          </children>
       </VBox>
    </center>

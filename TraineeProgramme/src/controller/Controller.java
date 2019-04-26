@@ -147,57 +147,7 @@ public class Controller implements Initializable {
     Button addCourseC;
     @FXML
     Button enrollTraineeC;
-    /////////////////////////Trainee Form
 
-    @FXML
-    Label lastNameTraineeForm;
-
-    @FXML
-    Label firstNameTraineeForm;
-
-    @FXML
-    Label birthdayTraineeForm;
-
-    @FXML
-    Label addressTraineeForm;
-
-    @FXML
-    Label schoolTraineeForm;
-
-    @FXML
-    Label emailTraineeForm;
-
-
-    @FXML
-    Label locationTraineeForm;
-
-    @FXML
-    Label scaleTraineeId;
-
-
-    @FXML
-    TextField firstNameTrainee;
-
-    @FXML
-    TextField lastNameTrainee;
-
-    @FXML
-    TextField birthdayTrainee;
-
-    @FXML
-    TextField addressTrainee;
-
-    @FXML
-    TextField schoolTrainee;
-
-    @FXML
-    TextField emailTrainee;
-
-    @FXML
-    TextField locationTrainee;
-
-    @FXML
-    TextField scaleTrainee;
 
 
     @Override
