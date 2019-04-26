@@ -202,14 +202,15 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-                getTraineeInfo();
+        getTraineeInfo();
 
 //       listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
     }
 
     public void getTraineeInfo() {
         TraineeDao traineeDao = refreshTraineeInfo();
-        addButtonToTable(traineeDao);
+        addDeleteButtonToTable(traineeDao);
+        addUpdateButtonToTable(traineeDao);
 
     }
 
@@ -230,42 +231,82 @@ public class Controller implements Initializable {
     }
 
 
-    private void addButtonToTable(TraineeDao traineeDao) {
-    TableColumn<Trainee, Void> colBtn = new TableColumn("Delete Trainee");
+    private void addDeleteButtonToTable(TraineeDao traineeDao) {
+        TableColumn<Trainee, Void> colBtn = new TableColumn("Delete Trainee");
 
-    Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>> cellFactory = new Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>>() {
-        @Override
-        public TableCell<Trainee, Void> call(final TableColumn<Trainee, Void> param) {
-            final TableCell<Trainee, Void> cell = new TableCell<Trainee, Void>() {
+        Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>> cellFactory = new Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>>() {
+            @Override
+            public TableCell<Trainee, Void> call(final TableColumn<Trainee, Void> param) {
+                final TableCell<Trainee, Void> cell = new TableCell<Trainee, Void>() {
 
-                private final Button btn = new Button("Delete Trainee");
+                    private final Button btn = new Button("Delete");
 
-                {
-                    btn.setOnAction((ActionEvent event) -> {
-                        EnrolledTraineesDao enrolledTraineesDao=new EnrolledTraineesDaoImpl();
-                        Trainee trainee=tableTrainees.getItems().get(getIndex());
-                        //TODO enrolledTraineesDao make delete with Trainee and delete  with Course
-                        boolean deleteTrainee = traineeDao.deleteTrainee(trainee.getTraineeID());
-                        System.out.println("delete: " + deleteTrainee );
-                        refreshTraineeInfo();
-                    });
-                }
-                @Override
-                public void updateItem(Void item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(btn);
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
+                            Trainee trainee = tableTrainees.getItems().get(getIndex());
+                            //TODO enrolledTraineesDao make delete with Trainee and delete  with Course
+                            boolean deleteTrainee = traineeDao.deleteTrainee(trainee.getTraineeID());
+                            System.out.println("delete: " + deleteTrainee);
+                            refreshTraineeInfo();
+                        });
                     }
-                }
-            };
-            return cell;
-        }
-    };
 
-    colBtn.setCellFactory(cellFactory);
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
 
-    tableTrainees.getColumns().add(colBtn);
-}
+        colBtn.setCellFactory(cellFactory);
+
+        tableTrainees.getColumns().add(colBtn);
+    }
+    private void addUpdateButtonToTable(TraineeDao traineeDao) {
+        TableColumn<Trainee, Void> colBtn = new TableColumn("Update Trainee");
+
+        Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>> cellFactory = new Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>>() {
+            @Override
+            public TableCell<Trainee, Void> call(final TableColumn<Trainee, Void> param) {
+                final TableCell<Trainee, Void> cell = new TableCell<Trainee, Void>() {
+
+                    private final Button btn = new Button("Update");
+
+                    {
+                        //TODO call DIna forumlar
+                        btn.setOnAction((ActionEvent event) -> {
+//                            EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
+//                            Trainee trainee = tableTrainees.getItems().get(getIndex());
+//                            boolean updateTrainee = traineeDao.updateTrainee(trainee);
+//                            System.out.println("update Trainee " + updateTrainee);
+//                            refreshTraineeInfo();
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        colBtn.setCellFactory(cellFactory);
+
+        tableTrainees.getColumns().add(colBtn);
+    }
 }
