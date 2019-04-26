@@ -26,8 +26,7 @@ public class Controller implements Initializable {
     @FXML
     Label manageCourses;
 
-    @FXML
-    Label enrolledTrainees;
+
     /////////////////////////////////////////////////////////
     @FXML
     TableView<Trainee> tableTrainees;
@@ -70,10 +69,10 @@ public class Controller implements Initializable {
     Button addTrainee;
 
     @FXML
-    Button addCourse1;
+    Button deleteTrainee;
 
     @FXML
-    Button enrollTrainee;
+    Button updateTrainee;
     ///////////////////////////////////////////////////////////
     @FXML
     TextField searchFieldTrainees;
@@ -202,6 +201,13 @@ public class Controller implements Initializable {
         TraineeDao traineeDao = new TraineeDaoImpl();
         Set<Trainee> trainees = traineeDao.getAllTrainee();
         tableTrainees.setItems(FXCollections.observableArrayList(trainees));
+        getTraineeInfo();
+
+//       listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
+    }
+
+    public void getTraineeInfo() {
+
         traineeID.setCellValueFactory(new PropertyValueFactory<>("traineeID"));
         lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -210,9 +216,5 @@ public class Controller implements Initializable {
         school.setCellValueFactory(new PropertyValueFactory<>("school"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         locationTrainees.setCellValueFactory(new PropertyValueFactory<>("location"));
-
-//        listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
     }
-
-
 }

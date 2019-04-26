@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:controller="controller.Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
                 <HBox spacing="18.0">
                     <children>
-                        <TextField fx:id="searchFieldTrainees" prefHeight="39.0" prefWidth="177.0" promptText="Search for Courses ">
+                        <TextField fx:id="searchFieldTrainees" prefHeight="39.0" prefWidth="177.0" promptText="Search for Trainees ">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets></TextField>
@@ -40,13 +40,12 @@
             </padding>
             <Label fx:id="manageTrainee" text="Manage Trainee" />
             <Label fx:id="manageCourses" text="Manage Courses" />
-            <Label fx:id="enrolledTrainees" text="Enrolled Trainees" />
         </ListView>
     </left>
     <center>
         <TableView fx:id="tableTrainees" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="traineeID"  prefWidth="30.0" text="ID" />
+                <TableColumn fx:id="traineeID" prefWidth="30.0" text="ID" />
                 <TableColumn fx:id="lastName" prefWidth="78.0" text="Last Name" />
                 <TableColumn fx:id="firstName" prefWidth="72.0" text="First Name" />
                 <TableColumn fx:id="birthday" prefWidth="62.0" text="Birthday" />
@@ -75,7 +74,7 @@
                   <Insets bottom="5.0" left="375.0" right="5.0" top="9.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="addCourse1" layoutX="45.0" layoutY="19.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="92.0" text="Add Course">
+            <Button fx:id="deleteTrainee" layoutX="45.0" layoutY="19.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="102.0" text="Delete Trainee">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
@@ -83,7 +82,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="enrollTrainee" layoutX="150.0" layoutY="18.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="92.0" text="Enroll Trainee">
+            <Button fx:id="updateTrainee" layoutX="150.0" layoutY="18.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" text="Update Trainee">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
