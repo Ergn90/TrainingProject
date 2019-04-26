@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane  fx:controller="controller.Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -40,18 +40,18 @@
          </padding>
           <Label fx:id="manageTraineesC" text="Manage Trainee" />
           <Label fx:id="manageCoursesC" text="Manage Courses" />
-          <Label fx:id="enrolledTraineesC" text="Enrolled Trainees" />
       </ListView>
    </left>
    <center>
       <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="courseID" prefWidth="43.0" text="ID" />
-          <TableColumn fx:id="courseName" prefWidth="64.0" text="Course Name" />
-            <TableColumn fx:id="courseyear" minWidth="8.0" prefWidth="90.0" text="Course Year" />
-            <TableColumn fx:id="courseRoomC" prefWidth="116.0" text="Course Room" />
-            <TableColumn fx:id="courseDescriptionC" prefWidth="232.0" text="Course Description" />
-            <TableColumn fx:id="modifyCourse" prefWidth="134.0" text="Update/Delete" />
+          <TableColumn fx:id="courseName" prefWidth="104.0" text="Course Name" />
+            <TableColumn fx:id="courseyear" minWidth="8.0" prefWidth="84.0" text="Course Year" />
+            <TableColumn fx:id="courseRoomC" prefWidth="117.0" text="Course Room" />
+            <TableColumn fx:id="courseDescriptionC" minWidth="3.0" prefWidth="66.0" text="Course Description" />
+            <TableColumn fx:id="modifyCourse" prefWidth="139.0" text="Update" />
+            <TableColumn fx:id="courseDescriptionC1" prefWidth="171.0" text="Delete" />
         </columns>
          <padding>
             <Insets bottom="5.0" />
@@ -61,14 +61,6 @@
     <bottom>
         <HBox prefHeight="52.0" prefWidth="752.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="addTraineeC" mnemonicParsing="false" prefHeight="33.0" prefWidth="92.0" text="Add Trainee">
-                    <padding>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                    </padding>
-                    <HBox.margin>
-                        <Insets bottom="5.0" left="375.0" right="5.0" top="9.0" />
-                    </HBox.margin>
-                </Button>
                 <Button fx:id="addCourseC" layoutX="45.0" layoutY="19.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="92.0" text="Add Course">
                     <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -77,7 +69,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="enrollTraineeC" layoutX="150.0" layoutY="18.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="92.0" text="Enroll Trainee">
+                <Button fx:id="enrollTraineeC" layoutX="150.0" layoutY="18.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="92.0" text="Manage Course">
                     <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </padding>
