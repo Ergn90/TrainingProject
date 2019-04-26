@@ -118,11 +118,10 @@ public class LocationDaoImpl implements LocationDao {
     @Override
     public boolean deleteLocation(int id) {
         Connection connection = ConnectionFactory.getConnection();
-        Statement stmt = null;
 
         try {
 
-            stmt = connection.createStatement();
+            Statement stmt = connection.createStatement();
             int i = stmt.executeUpdate("delete from location where locationid ="+id);
 
             if(i == 1){
