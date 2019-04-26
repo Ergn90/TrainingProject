@@ -11,7 +11,7 @@ public class ConnectionFactory {
 
     private static final String URL = "jdbc:mysql://localhost/trainee_programm_db?";
     private static final String USER = "root";
-    private static final String PWD = "root";
+    private static final String PWD = "password";
 
     public static Connection getConnection() {
         try {
