@@ -1,15 +1,15 @@
 package model.enrolledTrainees;
 
-import model.courses.Courses;
+import model.course.Course;
 import model.skala.Skala;
 import model.trainee.Trainee;
 
 public class EnrolledTrainees {
-    private Courses course;
+    private Course course;
     private Trainee trainee;
     private Skala skala;
 
-    public EnrolledTrainees(Courses course, Trainee trainee, Skala skala) {
+    public EnrolledTrainees(Course course, Trainee trainee, Skala skala) {
         this.course = course;
         this.trainee = trainee;
         this.skala = skala;
@@ -18,11 +18,11 @@ public class EnrolledTrainees {
     public EnrolledTrainees() {
     }
 
-    public Courses getCourse() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourse(Courses course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 
@@ -40,5 +40,14 @@ public class EnrolledTrainees {
 
     public void setSkala(Skala skala) {
         this.skala = skala;
+    }
+
+    @Override
+    public String toString() {
+        return "EnrolledTrainees{" +
+                "course=" + course +
+                ", trainee=" + trainee +
+                ", skala=" + skala +
+                '}';
     }
 }

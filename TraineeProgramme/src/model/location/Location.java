@@ -29,5 +29,10 @@ public class Location {
         this.locationName = locationName;
     }
 
+    @Override
+    public String toString() {
+        return  locationName;
+    }
+
 
 }

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="controller.Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -46,17 +46,17 @@
     <center>
         <TableView fx:id="tableTrainees" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="traineeID" prefWidth="30.0" text="ID" />
+                <TableColumn fx:id="traineeID"  prefWidth="30.0" text="ID" />
                 <TableColumn fx:id="lastName" prefWidth="78.0" text="Last Name" />
                 <TableColumn fx:id="firstName" prefWidth="72.0" text="First Name" />
                 <TableColumn fx:id="birthday" prefWidth="62.0" text="Birthday" />
                 <TableColumn fx:id="address" prefWidth="100.0" text="Address" />
                 <TableColumn fx:id="school" prefWidth="65.0" text="School" />
                 <TableColumn fx:id="email" prefWidth="60.0" text="Email" />
-                <TableColumn fx:id="location" prefWidth="66.0" text="Location" />
+                <TableColumn fx:id="locationTrainees" prefWidth="66.0" text="Location" />
                 <TableColumn fx:id="skalaTrainee" prefWidth="58.0" text="Skala" />
                 <TableColumn fx:id="traineeCurentCourse" prefWidth="112.0" text="Current Course" />
-                <TableColumn id="modifyTrainee" fx:id="location1" prefWidth="161.0" text="Update/Delete" />
+                <TableColumn fx:id="modifyTrainee" prefWidth="161.0" text="Update/Delete" />
 
             </columns>
             <padding>

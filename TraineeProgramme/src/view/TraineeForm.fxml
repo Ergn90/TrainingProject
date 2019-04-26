@@ -8,20 +8,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="controller.Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox prefHeight="362.0" prefWidth="150.0" spacing="23.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lastName" prefHeight="17.0" prefWidth="72.0" text="Last Name">
+            <Label fx:id="lastNameTraineeForm" prefHeight="17.0" prefWidth="72.0" text="Last Name">
                <VBox.margin>
                   <Insets />
                </VBox.margin></Label>
-            <Label fx:id="firstName" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="75.0" text="First Name" />
-            <Label fx:id="birthday" layoutX="10.0" layoutY="27.0" prefHeight="17.0" prefWidth="57.0" text="Birthday" />
-            <Label fx:id="address" layoutX="10.0" layoutY="44.0" prefHeight="17.0" prefWidth="52.0" text="Address" />
-            <Label fx:id="school" layoutX="10.0" layoutY="61.0" prefHeight="17.0" prefWidth="52.0" text="School" />
-            <Label fx:id="email" layoutX="10.0" layoutY="78.0" prefHeight="17.0" prefWidth="52.0" text="Email" />
-            <Label fx:id="location" layoutX="10.0" layoutY="95.0" prefHeight="17.0" prefWidth="52.0" text="Location" />
+            <Label fx:id="firstNameTraineeForm" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="75.0" text="First Name" />
+            <Label fx:id="birthdayTraineeForm" layoutX="10.0" layoutY="27.0" prefHeight="17.0" prefWidth="57.0" text="Birthday" />
+            <Label fx:id="addressTraineeForm" layoutX="10.0" layoutY="44.0" prefHeight="17.0" prefWidth="52.0" text="Address" />
+            <Label fx:id="schoolTraineeForm" layoutX="10.0" layoutY="61.0" prefHeight="17.0" prefWidth="52.0" text="School" />
+            <Label fx:id="emailTraineeForm" layoutX="10.0" layoutY="78.0" prefHeight="17.0" prefWidth="52.0" text="Email" />
+            <Label fx:id="locationTraineeForm" layoutX="10.0" layoutY="95.0" prefHeight="17.0" prefWidth="52.0" text="Location" />
             <Label fx:id="scaleTraineeId" layoutX="10.0" layoutY="95.0" prefHeight="17.0" prefWidth="52.0" text="Scale" />
          </children>
          <BorderPane.margin>
@@ -56,7 +56,7 @@
          </BorderPane.margin>
          <children>
             <TextField fx:id="lastNameTrainee" promptText="Last Name" />
-            <TextField fx:id="firstameTrainee" layoutX="10.0" layoutY="10.0" promptText="First Name" />
+            <TextField fx:id="firstNameTrainee" layoutX="10.0" layoutY="10.0" promptText="First Name" />
             <TextField fx:id="birthdayTrainee" layoutX="10.0" layoutY="35.0" promptText="Birthday" />
             <TextField fx:id="addressTrainee" layoutX="10.0" layoutY="60.0" promptText="Address" />
             <TextField fx:id="schoolTrainee" layoutX="10.0" layoutY="85.0" promptText="School" />

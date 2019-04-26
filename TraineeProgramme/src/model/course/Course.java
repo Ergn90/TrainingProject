@@ -1,23 +1,23 @@
-package model.courses;
+package model.course;
 
 import java.util.Date;
 
-public class Courses {
+public class Course {
     private int courseID;
-    private Date courseYear;
-    private int courseName;
-
+    private Date startDate;
+    private String courseName;
     private String courseRoom;
     private String courseDescription;
 
-    public Courses(int courseID, Date courseYear, int courseName, String courseRoom, String courseDescription) {
+    public Course(int courseID, Date startDate, String courseName, String courseRoom, String courseDescription) {
         this.courseID = courseID;
-        this.courseYear = courseYear;
+        this.startDate = startDate;
         this.courseName = courseName;
         this.courseRoom = courseRoom;
         this.courseDescription = courseDescription;
     }
-    public Courses() {
+
+    public Course() {
     }
 
     public int getCourseID() {
@@ -28,21 +28,23 @@ public class Courses {
         this.courseID = courseID;
     }
 
-    public int getCourseName() {
+    public String getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(int courseName) {
+    public void setCourseName(String courseName) {
+
         this.courseName = courseName;
     }
 
-    public Date getCourseYear() {
-        return courseYear;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setCourseYear(Date courseYear) {
-        this.courseYear = courseYear;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
+
 
     public String getCourseRoom() {
         return courseRoom;
@@ -58,5 +60,16 @@ public class Courses {
 
     public void setCourseDescription(String courseDescription) {
         this.courseDescription = courseDescription;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseID=" + courseID +
+                ", startDate=" + startDate +
+                ", courseName='" + courseName + '\'' +
+                ", courseRoom='" + courseRoom + '\'' +
+                ", courseDescription='" + courseDescription + '\'' +
+                '}';
     }
 }

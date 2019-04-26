@@ -1,22 +1,21 @@
 package model.enrolledTrainees;
 
-import model.courses.Courses;
+import model.course.Course;
 import model.skala.Skala;
 import model.trainee.Trainee;
 
 import java.util.List;
 
 public interface EnrolledTraineesDao {
-    List<Courses> getAllCoursesByTrainees(Trainee trainee);
-    List<Skala> getAllSkalaByTraines(Trainee trainee);
-    List<Trainee> getAllTraineesByCourses(Courses courses);
-    List<Skala> getAllSkalaByCourses(Courses courses);
+    List<Course> getAllCoursesByTrainee(Trainee trainee);
+    List<Skala> getAllSkalaByTrainee(Trainee trainee);
+    List<Trainee> getAllTraineesByCourse(Course course);
+    List<Skala> getAllSkalaByCourse(Course course);
     List<Trainee> getAllTraineesBySkala(Skala skala);
-    List<Courses> getAllCoursesBySkala(Skala skala);
+    List<Course> getAllCoursesBySkala(Skala skala);
     Skala getSkala(int traineeID,int coursesID);
-    Courses getCourse(int traineeID,int skalaID);
+    Course getCourse(int traineeID, int skalaID);
     Trainee getTrainee(int coursesID,int skalaID);
-    boolean insertEnrolledTraines(Courses courses,Skala skala,Trainee trainee);
-    boolean updateEnrolledTraines(Courses courses,Skala skala,Trainee trainee);
-    boolean updateEnrolledTraines(int traineeID,int skalaID,int coursesID);
+    boolean insertEnrolledTraines(Course course, Skala skala, Trainee trainee);
+    boolean deletEnrolledTraines(int traineeID,int skalaID,int coursesID);
 }

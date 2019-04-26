@@ -1,103 +1,32 @@
 
 INSERT INTO skala (SkalaName)
-values ('Beginner');
-INSERT INTO skala (SkalaName)
-values ('Intermediate');
-INSERT INTO skala (SkalaName)
-values ('Advanced');
-INSERT INTO skala (SkalaName)
-values ('Expert');
-
+values ('Beginner'),('Intermediate'),('Advanced'),('Expert');
 ##############################
 #insert scripts for location
 ##############################
 insert into Location (LocationName)
-values ('Basel');
-
-insert into Location (LocationName)
-values ('Bern');
-
-insert into Location (LocationName)
-values ('Brugg');
-
-insert into Location (LocationName)
-values ('Bukarest');
-
-insert into Location (LocationName)
-values ('Duesseldorf');
-
-insert into Location (LocationName)
-values ('Frankfurt A. M.');
-
-insert into Location (LocationName)
-values ('Freiburg');
-
-insert into Location (LocationName)
-values ('Genf');
-
-insert into Location (LocationName)
-values ('Hamburg');
-
-insert into Location (LocationName)
-values ('Lausanne');
-
-insert into Location (LocationName)
-values ('Freiburg');
-
-insert into Location (LocationName)
-values ('Mannheim');
-
-insert into Location (LocationName)
-values ('Muenchen');
-
-insert into Location (LocationName)
-values ('Stuttgart');
-
-insert into Location (LocationName)
-values ('Wien');
-
-insert into Location (LocationName)
-values ('Zuerich');
-
-insert into Location (LocationName)
-values ('Extern');
-
+values ('City'),('Stadt'),('Ville'),('Ciudad'),('Città'),('Cidade'),('Extern');
 ##############################
 #insert scripts for courses
 ##############################
-
-insert into Courses (coursename,CourseDate,CourseRoom)
-values ('Java Trainee','2018-04-01','EG01');
-
-insert into Courses (coursename,CourseDate,CourseRoom)
-values ('Java Trainee','2018-10-01','EG02');
-insert into Courses (coursename,CourseDate,CourseRoom)
-values ('Java Trainee','2019-04-01','EG01');
-
-insert into Courses (coursename,CourseDate,CourseRoom)
-values ('Java Trainee','2019-10-01','EG02');
-
-insert into Courses (coursename,CourseDate,CourseRoom,CourseDescription)
-values ('Java Trainee','2020-04-01','EG01',"next course");
-
+insert into Courses (CourseName,CourseDate,CourseRoom,CourseDescription)
+values ('Java Trainee','2018-04-01','EG01',''),
+('Java Trainee','2018-10-01','EG02',''),('Java Trainee','2019-04-01','EG01', 'current course'),
+('Java Trainee','2019-10-01','EG02','next course'),('Java Trainee','2020-04-01','EG01',"next course");
 ##############################
 #insert scripts for trainee
 ##############################
-
-insert into Trainee (lastname, firstname,birthday, address, school, email, LocationId)
-values ('Serban','Andrada','1995-06-03', 'Adr1', 'Bachelor Engineering', 'ersteemail@oio.com', 1);
-
-insert into Trainee (lastname, firstname,birthday, address, school, email, LocationId)
-values ('Tolstorukova','Dina','1980-02-10', 'Adr2', 'Mate', 'zweiteemail@oio.com', 2);
-
-insert into Trainee (lastname, firstname,birthday, address, school, email, LocationId)
-values ('Guillaume','Michel','1990-03-27', 'Adr3', 'Info', 'dritteemail@oio.com', 3);
-
-insert into Trainee (lastname, firstname,birthday, address, school, email, LocationId)
-values ('Rico','R', '1996-12-14', 'Adr4','Info','vierteemail@oio.com', 17);
-
-
-
+insert into Trainee (LastName, FirstName, Birthday, Address, School, Email, LocationId)
+values
+('LastName1','FirstName1','1990-01-01', 'address1', 'Info','firstName1.lLastName1@mail.com',1),
+('LastName2','FirstName2','1991-02-02', 'address2', 'Info','firstName2.lLastName2@mail.com',2),
+('LastName3','FirstName3','1992-03-10', 'address3', 'Info','firstName3.lLastName3@mail.com',3),
+('LastName4','FirstName4', '1993-04-10', 'address4','Info','firstName4.lLastName4@mail.com',4),
+('LastName5','FirstName5', '1993-04-10', 'address5','Info','firstName5.lLastName5@mail.com',5),
+('LastName6','FirstName6', '1994-05-05', 'address5','Info','firstName6.lLastName6@mail.com',6),
+('LastName7','FirstName7', '1995-07-07', 'address6','Info','firstName7.lLastName7@mail.com',7),
+('LastName8','FirstName8', '1996-08-08', 'address7','Info','firstName8.lLastName8.@mail.com',2),
+('LastName9','FirstName9', '1997-09-09', 'address8','Info','firstName9.lLastName9.@mail.com',3);
 
 ##############################
 #insert scripts for enrolled trainees

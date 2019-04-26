@@ -1,6 +1,8 @@
 package model.trainee;
+
 import model.ConnectionFactory;
 import model.location.Location;
+
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +30,7 @@ public class TraineeDaoImpl implements TraineeDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM trainee WHERE traineeID=" + id);
+            ResultSet rs = stmt.executeQuery("SELECT * from trainee inner join location on trainee.LocationId=location.LocationIdWHERE traineeID=" + id);
 
             if (rs.next()) {
                 return extractTraineeFromResultSet(rs);
@@ -45,7 +47,7 @@ public class TraineeDaoImpl implements TraineeDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM trainee");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM trainee inner join location on trainee.LocationId=location.LocationId");
             Set trainees = new HashSet();
             while (rs.next()) {
                 Trainee trainee = extractTraineeFromResultSet(rs);
@@ -89,9 +91,9 @@ public class TraineeDaoImpl implements TraineeDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
 
-            PreparedStatement ps = connection.prepareStatement( "UPDATE trainee SET lastName=?, firstName=?, " +
-                                                                    "birthday=?, address=?, school=?, email=?, locationId=?" +
-                                                                    " WHERE traineeId=?");
+            PreparedStatement ps = connection.prepareStatement("UPDATE trainee SET lastName=?, firstName=?, " +
+                    "birthday=?, address=?, school=?, email=?, locationId=?" +
+                    " WHERE traineeId=?");
 
             ps.setString(1, trainee.getLastName());
             ps.setString(2, trainee.getFirstName());
@@ -103,7 +105,7 @@ public class TraineeDaoImpl implements TraineeDao {
             ps.setInt(8, trainee.getTraineeID());
 
             int i = ps.executeUpdate();
-            if(i == 1) {
+            if (i == 1) {
                 return true;
             }
 
@@ -122,7 +124,7 @@ public class TraineeDaoImpl implements TraineeDao {
         try {
             Statement stmt = connection.createStatement();
             int i = stmt.executeUpdate("DELETE FROM trainee WHERE traineeID=" + id);
-            if(i == 1) {
+            if (i == 1) {
                 return true;
             }
         } catch (SQLException ex) {
