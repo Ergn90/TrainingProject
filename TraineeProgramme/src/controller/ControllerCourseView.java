@@ -20,6 +20,7 @@ import model.trainee.TraineeDaoImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -53,19 +54,20 @@ public class ControllerCourseView implements Initializable {
 
         //     onBtnClick(backFromCourseViewToTraineeView);
 
-      //  getCourseInfo();
+        getCourseInfo();
     }
 
 
-/*    public void getCourseInfo() {
-        CourseDao courseDao = refreshCourseInfo();
+    public void getCourseInfo() {
+       CourseDao courseDao = refreshCourseInfo();
     }
-
 
     public CourseDao refreshCourseInfo() {
-        CourseDao courseeDao = new CourseDaoImpl();
-        Set<Course> courses = courseeDao.getAllCourses();
+
+        CourseDao courseDao = new CourseDaoImpl();
+        Set<Course> courses = courseDao.getAllCourses();
         coursesTable.setItems(FXCollections.observableArrayList(courses));
+
 
         courseID.setCellValueFactory(new PropertyValueFactory<>("CourseID"));
         courseName.setCellValueFactory(new PropertyValueFactory<>("CourseName"));
@@ -73,8 +75,9 @@ public class ControllerCourseView implements Initializable {
         courseRoom.setCellValueFactory(new PropertyValueFactory<>("CourseRoom"));
         courseDescriptionC.setCellValueFactory(new PropertyValueFactory<>("CourseDescription"));
 
-        return courseeDao;
-    }*/
+        return  courseDao;
+    }
+
 
     @FXML
     public void backToTrainee(ActionEvent actionEvent) throws IOException {
@@ -91,7 +94,7 @@ public class ControllerCourseView implements Initializable {
     @FXML
     public void manageCourse(ActionEvent actionEvent) throws IOException {
         try {
-            Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseManager"));
+            Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseManager.fxml"));
 
             courseManage.getScene().setRoot(loader);
         }
@@ -103,7 +106,7 @@ public class ControllerCourseView implements Initializable {
     @FXML
     public void addCourse(ActionEvent actionEvent) throws IOException {
         try {
-            Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseForm"));
+            Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseForm.fxml"));
 
             addCourseC.getScene().setRoot(loader);
         }
