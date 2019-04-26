@@ -30,9 +30,6 @@ public class Skala {
 
     @Override
     public String toString() {
-        return "Skala{" +
-                "skalaId=" + skalaId +
-                ", skalaName='" + skalaName + '\'' +
-                '}';
+        return skalaName;
     }
 }
