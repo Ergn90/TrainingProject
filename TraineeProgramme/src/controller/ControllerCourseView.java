@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import model.course.Course;
 import model.course.CourseDao;
@@ -161,6 +163,9 @@ public class ControllerCourseView implements Initializable {
     public void backToTrainee(ActionEvent actionEvent) throws IOException {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineesView.fxml"));
+
+
+            backFromCourseViewToTraineeView.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/back.png"))));
             backFromCourseViewToTraineeView.getScene().setRoot(loader);
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());

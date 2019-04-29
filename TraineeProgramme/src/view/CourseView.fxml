@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCourseView">
    <top>
       <VBox BorderPane.alignment="CENTER">
@@ -22,8 +24,8 @@
                      <HBox.margin>
                         <Insets left="23.0" />
                      </HBox.margin></TextField>
-                  <Button fx:id="backFromCourseViewToTraineeView" mnemonicParsing="false" onAction="#backToTrainee" prefHeight="39.0" prefWidth="45.0" text="Back">
-                     <HBox.margin>
+                  <Button fx:id="backFromCourseViewToTraineeView" mnemonicParsing="false" onAction="#backToTrainee" prefHeight="39.0" prefWidth="45.0" textOverrun="CLIP">
+                      <HBox.margin>
                         <Insets left="510.0" />
                      </HBox.margin>
                   </Button>
