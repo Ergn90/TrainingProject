@@ -1,12 +1,12 @@
 package controller;
 
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import model.course.Course;
 import model.course.CourseDaoImpl;
@@ -22,6 +22,8 @@ import java.util.Set;
 
 
 public class ControllerTraineeManager implements Initializable {
+
+
 
     //TODO Controller registrieren und auch noch den Trainee in Controller übergeben
     @FXML
@@ -87,6 +89,7 @@ public class ControllerTraineeManager implements Initializable {
         this.trainee = trainee;
     }
 
+    @FXML
     public void setLabels() {
         traineeID.setText("TraineeID : " + trainee.getTraineeID());
         firstNameTraineeForm.setText("Firstname: " + trainee.getFirstName());
@@ -97,23 +100,31 @@ public class ControllerTraineeManager implements Initializable {
         locationTraineeForm.setText("Location: " + trainee.getLocation());
     }
 
-//TODO Überarbeiten mit Guillomes Methoden
-
+    @FXML
     public void setCourseTableView() {
         EnrolledTraineesDaoImpl enrolledTrainees = new EnrolledTraineesDaoImpl();
-        List<EnrolledTrainees> enrTr = enrolledTrainees.getEnrolledTraineesByTraineeID(trainee.getTraineeID());
+        List<EnrolledTrainees> enrolledTraineeList = enrolledTrainees.getEnrolledTraineesByTraineeID(trainee.getTraineeID());
 
-        courseEntered.setCellValueFactory(new Callback<TableColumn.CellDataFeatures, ObservableValue>() {
+        //TODO Lambdas verwenden wenn funktioniert!
+
+        courseEntered.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<EnrolledTrainees, String>, String>() {
             @Override
-            public ObservableValue call(TableColumn.CellDataFeatures param) {
-                return null;
+            public String call(TableColumn.CellDataFeatures<EnrolledTrainees, String> enrolledTraineeList) {
+                return (enrolledTraineeList.getValue().getCourse().getCourseName());
             }
         });
-        skalaInCorrespondingCourse.setCellValueFactory(new PropertyValueFactory<>("SkalaName"));
+
+
+        skalaInCorrespondingCourse.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<EnrolledTrainees, String>, String>() {
+            @Override
+            public String call(TableColumn.CellDataFeatures<EnrolledTrainees, String> enrolledTraineeList) {
+                return enrolledTraineeList.getValue().getSkala().getSkalaName();
+            }
+        });
 
     }
 
-
+    @FXML
     private void setComboboxCourseList() {
         CourseDaoImpl courses = new CourseDaoImpl();
         Set<Course> courseSet = courses.getAllCourses();
@@ -138,6 +149,7 @@ public class ControllerTraineeManager implements Initializable {
         });
     }
 
+    @FXML
     private void setComboboxSkalaList() {
         SkalaDaoImpl skala = new SkalaDaoImpl();
         Set<Skala> skalaSet = skala.getAllSkala();
