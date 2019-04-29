@@ -23,14 +23,6 @@ import java.util.Set;
 
 public class ControllerTraineeManager implements Initializable {
 
-//    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/TraineeManager.fxml"));
-//    //                            loader = FXMLLoader.load(getClass().getResource("../view/TraineeForm.fxml"));
-//    Parent root = (Parent) fxmlLoader.load();
-//
-//    ControlleTraineeForm controller = fxmlLoader.getController();
-//     controller.setTrainee(tableTrainees.getItems().get(getIndex()));
-//     controller.addNewTrainee.setOnAction(event1 -> controller.updateTrainee());
-//     btn.getScene().setRoot(root);
 
 
     //TODO Controller registrieren und auch noch den Trainee in Controller übergeben
