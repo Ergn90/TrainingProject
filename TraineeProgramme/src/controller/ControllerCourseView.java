@@ -218,12 +218,31 @@ public class ControllerCourseView implements Initializable {
 
     @FXML
     public void manageCourse(ActionEvent actionEvent) throws IOException {
+
         try {
-            Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseManager.fxml"));
-            courseManage.getScene().setRoot(loader);
-        } catch (NullPointerException npe) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CourseManager.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+
+            ControllerCourseManager controller = fxmlLoader.getController();
+            if (isCourseSelected()) {
+                Course course = coursesTable.getSelectionModel().getSelectedItem();
+                controller.setCourse(course);
+                courseManage.getScene().setRoot(root);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setContentText("Please select a course in the list ");
+                alert.show();
+            }
+        } catch (
+                NullPointerException npe) {
             System.out.println(npe.getMessage());
         }
+
+    }
+
+    private boolean isCourseSelected() {
+        return coursesTable.getSelectionModel().getSelectedItem() != null;
     }
 
     @FXML
@@ -234,6 +253,8 @@ public class ControllerCourseView implements Initializable {
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
         }
+
+
     }
 }
 
