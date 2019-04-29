@@ -2,13 +2,8 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import model.location.Location;
 import model.location.LocationDao;
@@ -17,10 +12,11 @@ import model.trainee.Trainee;
 import model.trainee.TraineeDao;
 import model.trainee.TraineeDaoImpl;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -74,6 +70,32 @@ public class ControlleTraineeForm implements Initializable {
 
     @FXML
     Button cancelTrainee;
+    private int currentTraineeID;
+
+
+    public void setTrainee(Trainee trainee){
+        currentTraineeID=trainee.getTraineeID();
+        lastNameTrainee.setText(trainee.getLastName());
+        firstNameTrainee.setText(trainee.getFirstName());
+
+        birthdayTrainee.setValue(convertToLocalDateViaMilisecond(trainee.getBirthday()));
+        addressTrainee.setText(trainee.getAddress());
+        schoolTrainee.setText(trainee.getSchool());
+        emailTrainee.setText(trainee.getEmail());
+        locationTraineeCombo.getSelectionModel().select(trainee.getLocation());
+
+    }
+
+    public LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
+        return Instant.ofEpochMilli(dateToConvert.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+    public Date convertToDateViaInstant(LocalDate dateToConvert) {
+        return java.util.Date.from(dateToConvert.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+    }
 
 
     @Override
@@ -97,7 +119,7 @@ public class ControlleTraineeForm implements Initializable {
 
             tr.setLastName(lastNameTrainee.getText());
             tr.setFirstName(firstNameTrainee.getText());
-            tr.setBirthday(Date.from(birthdayTrainee.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            tr.setBirthday(convertToDateViaInstant(birthdayTrainee.getValue()));
             tr.setAddress(addressTrainee.getText());
             tr.setSchool(schoolTrainee.getText());
             tr.setEmail(emailTrainee.getText());
@@ -113,31 +135,22 @@ public class ControlleTraineeForm implements Initializable {
         }
 
     @FXML
-    public void updateTrainee(Trainee trainee) {
-
-        lastNameTrainee.setText(trainee.getLastName());
-        firstNameTrainee.setText(trainee.getFirstName());
-        birthdayTrainee.setValue(LocalDate.from(trainee.getBirthday().toInstant()));
-        addressTrainee.setText(trainee.getAddress());
-        schoolTrainee.setText(trainee.getSchool());
-        emailTrainee.setText(trainee.getEmail());
-
-        LocationDao loc = new LocationDaoImpl();
-        locationTraineeCombo.setSelectionModel((SingleSelectionModel<Location>) loc.getAllLocation());
-        locationTraineeCombo.getSelectionModel().select(trainee.getLocation());
-
-
+    public void updateTrainee() {
+        
         TraineeDao updatedTrainee = new TraineeDaoImpl();
         Trainee tr = new Trainee();
 
-
+        tr.setTraineeID(currentTraineeID);
         tr.setLastName(lastNameTrainee.getText());
         tr.setFirstName(firstNameTrainee.getText());
-        tr.setBirthday(Date.from(birthdayTrainee.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        tr.setBirthday(convertToDateViaInstant(birthdayTrainee.getValue()));
         tr.setAddress(addressTrainee.getText());
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
-        tr.setLocation(loc.getLocation(locationTraineeCombo.getSelectionModel().getSelectedItem().getLocationId()));
+        Location location=new Location();
+        location.setLocationId((locationTraineeCombo.getSelectionModel().getSelectedItem().getLocationId()));
+        location.setLocationName((locationTraineeCombo.getSelectionModel().getSelectedItem().getLocationName()));
+        tr.setLocation(location);
 
         updatedTrainee.updateTrainee(tr);
         Platform.exit();
