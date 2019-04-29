@@ -10,12 +10,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import model.course.Course;
 import model.course.CourseDaoImpl;
+import model.enrolledTrainees.EnrolledTrainees;
 import model.enrolledTrainees.EnrolledTraineesDaoImpl;
 import model.skala.Skala;
 import model.skala.SkalaDaoImpl;
 import model.trainee.Trainee;
-
-import java.beans.EventHandler;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -80,6 +79,7 @@ public class ControllerTraineeManager implements Initializable {
         setLabels();
         setComboboxCourseList();
         setComboboxSkalaList();
+        handletraineeAddToCourse();
     }
 
     //TODO Muss in haupt controller übergeben werden
@@ -100,10 +100,8 @@ public class ControllerTraineeManager implements Initializable {
 //TODO Überarbeiten mit Guillomes Methoden
 
     public void setCourseTableView() {
-        EnrolledTraineesDaoImpl enrolledTrainee = new EnrolledTraineesDaoImpl();
-        List<Course> coursesForTrainee = enrolledTrainee.getAllCoursesByTrainee(trainee);
-        List<Skala> scaleForCourses = enrolledTrainee.getAllSkalaByTrainee(trainee);
-        //coursesEntered.setItems(FXCollections.observableArrayList(coursesForTrainee));
+        EnrolledTraineesDaoImpl enrolledTrainees = new EnrolledTraineesDaoImpl();
+        List<EnrolledTrainees> enrTr = enrolledTrainees.getEnrolledTraineesByTraineeID(trainee.getTraineeID());
 
         courseEntered.setCellValueFactory(new Callback<TableColumn.CellDataFeatures, ObservableValue>() {
             @Override
@@ -171,7 +169,7 @@ public class ControllerTraineeManager implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 EnrolledTraineesDaoImpl enr = new EnrolledTraineesDaoImpl();
-                enr.insertEnrolledTraines((Course) courseList.getValue(), (Skala) skalaList.getValue(), trainee);
+                enr.insertEnrolledTrainees((Course) courseList.getValue(), (Skala) skalaList.getValue(), trainee); //TODO Funktion überprüfen. Casten ist hier sehr ungünstig
             }
         });
 
