@@ -35,9 +35,9 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     private static final String SELECTALLINFO = "SELECT trainee.TraineeID,LastName,FirstName,Birthday,Address,School,Email,trainee.LocationId,LocationName," +
             "skala.SkalaId,SkalaName," +
             "courses.CourseID,CourseName,CourseStartDate,CourseEndDate,CourseRoom,CourseDescription FROM trainee_programm_db.enrolled_trainees " +
-            "inner join trainee on trainee.TraineeID=enrolled_trainees.TraineeID" +
-            "inner join location on location.LocationId=trainee.TraineeID" +
-            "inner join skala on skala.SkalaId=enrolled_trainees.SkalaID" +
+            "inner join trainee on trainee.TraineeID=enrolled_trainees.TraineeID " +
+            "inner join location on location.LocationId=trainee.TraineeID " +
+            "inner join skala on skala.SkalaId=enrolled_trainees.SkalaID " +
             "inner join courses on courses.CourseID=enrolled_trainees.CourseID";
     private static final String WHERECOURSEID = " where enrolled_trainees.CourseID=";
     private static final String WHERETRAINEEID = " where enrolled_trainees.TraineeID=";
@@ -344,7 +344,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
 
         try {
 
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM enrolled_trainees WHERE traineeID=?, CourseID=?, SkalaId=?");
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM enrolled_trainees WHERE traineeID=? and  CourseID=? and  SkalaId=?");
 
             ps.setInt(1, traineeID);
             ps.setInt(2, coursesID);
