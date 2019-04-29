@@ -70,25 +70,34 @@ public class ControlleTraineeForm implements Initializable {
 
     @FXML
     Button cancelTrainee;
+    private int currentTraineeID;
 
 
     public void setTrainee(Trainee trainee){
-
+        currentTraineeID=trainee.getTraineeID();
         lastNameTrainee.setText(trainee.getLastName());
         firstNameTrainee.setText(trainee.getFirstName());
-        Date birthday=trainee.getBirthday();
-        long localDate = birthday.getTime();
-        //birthdayTrainee.setValue(LocalDate.(localDate));
-        //birthdayTrainee.setValue(LocalDate.from(trainee.getBirthday().toInstant()));
+
+        birthdayTrainee.setValue(convertToLocalDateViaMilisecond(trainee.getBirthday()));
         addressTrainee.setText(trainee.getAddress());
         schoolTrainee.setText(trainee.getSchool());
         emailTrainee.setText(trainee.getEmail());
-
-        LocationDao loc = new LocationDaoImpl();
-        //locationTraineeCombo.setSelectionModel((SingleSelectionModel<Location>) loc.getAllLocation());
         locationTraineeCombo.getSelectionModel().select(trainee.getLocation());
 
     }
+
+    public LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
+        return Instant.ofEpochMilli(dateToConvert.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+    public Date convertToDateViaInstant(LocalDate dateToConvert) {
+        return java.util.Date.from(dateToConvert.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getLocationComboBox();
@@ -110,7 +119,7 @@ public class ControlleTraineeForm implements Initializable {
 
             tr.setLastName(lastNameTrainee.getText());
             tr.setFirstName(firstNameTrainee.getText());
-            tr.setBirthday(Date.from(birthdayTrainee.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            tr.setBirthday(convertToDateViaInstant(birthdayTrainee.getValue()));
             tr.setAddress(addressTrainee.getText());
             tr.setSchool(schoolTrainee.getText());
             tr.setEmail(emailTrainee.getText());
@@ -127,26 +136,14 @@ public class ControlleTraineeForm implements Initializable {
 
     @FXML
     public void updateTrainee() {
-
-//        lastNameTrainee.setText(trainee.getLastName());
-//        firstNameTrainee.setText(trainee.getFirstName());
-//        birthdayTrainee.setValue(LocalDate.from(trainee.getBirthday().toInstant()));
-//        addressTrainee.setText(trainee.getAddress());
-//        schoolTrainee.setText(trainee.getSchool());
-//        emailTrainee.setText(trainee.getEmail());
-//
-//        LocationDao loc = new LocationDaoImpl();
-//        locationTraineeCombo.setSelectionModel((SingleSelectionModel<Location>) loc.getAllLocation());
-//        locationTraineeCombo.getSelectionModel().select(trainee.getLocation());
-
-
+        
         TraineeDao updatedTrainee = new TraineeDaoImpl();
         Trainee tr = new Trainee();
 
-
+        tr.setTraineeID(currentTraineeID);
         tr.setLastName(lastNameTrainee.getText());
         tr.setFirstName(firstNameTrainee.getText());
-        tr.setBirthday(Date.from(birthdayTrainee.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        tr.setBirthday(convertToDateViaInstant(birthdayTrainee.getValue()));
         tr.setAddress(addressTrainee.getText());
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
