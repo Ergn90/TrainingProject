@@ -1,7 +1,9 @@
 package controller;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
+import model.course.Course;
 import model.enrolledTrainees.EnrolledTraineesDao;
 import model.enrolledTrainees.EnrolledTraineesDaoImpl;
 import model.trainee.Trainee;
@@ -80,7 +83,7 @@ public class ControllerTraineeView implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getTraineeInfo();
-
+        searchForTrainee();
         tableTrainees.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         // FilteredList<Trainee> filteredListTrainee = new FilteredList<>(trainees, e-> true);
@@ -204,6 +207,41 @@ public class ControllerTraineeView implements Initializable {
         colBtn.setCellFactory(cellFactory);
 
         tableTrainees.getColumns().add(colBtn);
+    }
+
+    private void searchForTrainee() {
+        TraineeDao traineeDao = new TraineeDaoImpl();
+        Set<Trainee> trainees = traineeDao.getAllTrainee();
+        ObservableList<Trainee> traineeList = FXCollections.observableArrayList(trainees);
+        FilteredList<Trainee> filteredData = new FilteredList<>(traineeList, c -> true);
+
+        searchFieldTrainees.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(trainee -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (trainee.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (trainee.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Trainee> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(tableTrainees.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tableTrainees.setItems(sortedData);
     }
 
     @FXML

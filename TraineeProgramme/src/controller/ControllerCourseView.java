@@ -17,6 +17,9 @@ import model.course.CourseDao;
 import model.course.CourseDaoImpl;
 import model.enrolledTrainees.EnrolledTraineesDao;
 import model.enrolledTrainees.EnrolledTraineesDaoImpl;
+import model.trainee.Trainee;
+import model.trainee.TraineeDao;
+import model.trainee.TraineeDaoImpl;
 
 import java.io.IOException;
 import java.net.URL;
@@ -211,6 +214,7 @@ public class ControllerCourseView implements Initializable {
 
         coursesTable.getColumns().add(colBtn);
     }
+
 
     @FXML
     public void manageCourse(ActionEvent actionEvent) throws IOException {
