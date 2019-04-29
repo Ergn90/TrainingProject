@@ -1,0 +1,33 @@
+.background {
+    -fx-background-color: #d3d3d3;
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #696969;
+    -fx-opacity: 0.6;
+}
+
+.text-field{
+    -fx-font-size: 9pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: bold;
+     -fx-fill: #696969;
+}
+.combo-box.list-cell{
+-fx-font-size: 9pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: bold;
+     -fx-fill: #696969;
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+
