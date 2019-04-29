@@ -261,6 +261,30 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
+    public List<EnrolledTrainees> getEnrolledTrainesByCourseID(int courseID) {
+//        Connection connection = ConnectionFactory.getConnection();
+//
+//        try {
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery(SELECTCOURSESBYSKALAID + skala.getSkalaId());
+//            List<EnrolledTrainees> enrolledTraineesList = new ArrayList<>();
+//            while (resultSet.next()) {
+//                Course course = extractCourseFromResult(resultSet);
+//                coursesList.add(course);
+//            }
+//            return coursesList;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+        return null;
+    }
+
+    @Override
+    public List<EnrolledTrainees> getEnrolledTrainesByTraineeID(int traineeID) {
+        return null;
+    }
+
+    @Override
     public boolean insertEnrolledTraines(Course course, Skala skala, Trainee trainee) {
 
 

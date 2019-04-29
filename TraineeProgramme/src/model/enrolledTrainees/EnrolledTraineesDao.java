@@ -16,6 +16,8 @@ public interface EnrolledTraineesDao {
     Skala getSkala(int traineeID,int coursesID);
     Course getCourse(int traineeID, int skalaID);
     Trainee getTrainee(int coursesID,int skalaID);
+    List<EnrolledTrainees> getEnrolledTrainesByCourseID(int courseID );
+    List<EnrolledTrainees> getEnrolledTrainesByTraineeID(int traineeID );
     boolean insertEnrolledTraines(Course course, Skala skala, Trainee trainee);
     boolean deletEnrolledTraines(int traineeID,int skalaID,int coursesID);
     boolean deletEnrolledTrainesByTrainee(int traineeID);
