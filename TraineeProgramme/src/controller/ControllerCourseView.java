@@ -1,26 +1,24 @@
 package controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import model.course.Course;
 import model.course.CourseDao;
 import model.course.CourseDaoImpl;
-import model.trainee.Trainee;
-import model.trainee.TraineeDao;
-import model.trainee.TraineeDaoImpl;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -57,15 +55,48 @@ public class ControllerCourseView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //     onBtnClick(backFromCourseViewToTraineeView);
-
         getCourseInfo();
+        searchForCourse();
+    }
+
+    private void searchForCourse() {
+        CourseDao courseDaoo = new CourseDaoImpl();
+        Set<Course> courses = courseDaoo.getAllCourses();
+        ObservableList<Course> coursesList = FXCollections.observableArrayList(courses);
+        FilteredList<Course> filteredData = new FilteredList<>(coursesList, c -> true);
+
+        searchFielCourses.textProperty().addListener((observable, oldValue, newValue) -> {
+             filteredData.setPredicate(course -> {
+                 // If filter text is empty, display all persons.
+                 if (newValue == null || newValue.isEmpty()) {
+                     return true;
+                 }
+
+                 // Compare first name and last name of every person with filter text.
+                 String lowerCaseFilter = newValue.toLowerCase();
+
+                 if (course.getCourseRoom().toLowerCase().contains(lowerCaseFilter)) {
+                     return true;
+                 } /*else if (course..toLowerCase().contains(lowerCaseFilter)) {
+                     return true;*/
+                 //}
+                 return false; // Does not match.
+             });
+         });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Course> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(coursesTable.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        coursesTable.setItems(sortedData);
     }
 
 
     public void getCourseInfo() {
-       CourseDao courseDao = refreshCourseInfo();
+        CourseDao courseDao = refreshCourseInfo();
     }
 
     public CourseDao refreshCourseInfo() {
@@ -81,18 +112,15 @@ public class ControllerCourseView implements Initializable {
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         endDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
 
-        return  courseDao;
+        return courseDao;
     }
-
 
     @FXML
     public void backToTrainee(ActionEvent actionEvent) throws IOException {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineesView.fxml"));
-
             backFromCourseViewToTraineeView.getScene().setRoot(loader);
-        }
-        catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
         }
     }
@@ -101,10 +129,8 @@ public class ControllerCourseView implements Initializable {
     public void manageCourse(ActionEvent actionEvent) throws IOException {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseManager.fxml"));
-
             courseManage.getScene().setRoot(loader);
-        }
-        catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
         }
     }
@@ -113,10 +139,8 @@ public class ControllerCourseView implements Initializable {
     public void addCourse(ActionEvent actionEvent) throws IOException {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseForm.fxml"));
-
             addCourseC.getScene().setRoot(loader);
-        }
-        catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
         }
     }
