@@ -2,13 +2,8 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import model.location.Location;
 import model.location.LocationDao;
@@ -17,10 +12,11 @@ import model.trainee.Trainee;
 import model.trainee.TraineeDao;
 import model.trainee.TraineeDaoImpl;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -76,6 +72,23 @@ public class ControlleTraineeForm implements Initializable {
     Button cancelTrainee;
 
 
+    public void setTrainee(Trainee trainee){
+
+        lastNameTrainee.setText(trainee.getLastName());
+        firstNameTrainee.setText(trainee.getFirstName());
+        Date birthday=trainee.getBirthday();
+        long localDate = birthday.getTime();
+        //birthdayTrainee.setValue(LocalDate.(localDate));
+        //birthdayTrainee.setValue(LocalDate.from(trainee.getBirthday().toInstant()));
+        addressTrainee.setText(trainee.getAddress());
+        schoolTrainee.setText(trainee.getSchool());
+        emailTrainee.setText(trainee.getEmail());
+
+        LocationDao loc = new LocationDaoImpl();
+        //locationTraineeCombo.setSelectionModel((SingleSelectionModel<Location>) loc.getAllLocation());
+        locationTraineeCombo.getSelectionModel().select(trainee.getLocation());
+
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getLocationComboBox();
@@ -113,18 +126,18 @@ public class ControlleTraineeForm implements Initializable {
         }
 
     @FXML
-    public void updateTrainee(Trainee trainee) {
+    public void updateTrainee() {
 
-        lastNameTrainee.setText(trainee.getLastName());
-        firstNameTrainee.setText(trainee.getFirstName());
-        birthdayTrainee.setValue(LocalDate.from(trainee.getBirthday().toInstant()));
-        addressTrainee.setText(trainee.getAddress());
-        schoolTrainee.setText(trainee.getSchool());
-        emailTrainee.setText(trainee.getEmail());
-
-        LocationDao loc = new LocationDaoImpl();
-        locationTraineeCombo.setSelectionModel((SingleSelectionModel<Location>) loc.getAllLocation());
-        locationTraineeCombo.getSelectionModel().select(trainee.getLocation());
+//        lastNameTrainee.setText(trainee.getLastName());
+//        firstNameTrainee.setText(trainee.getFirstName());
+//        birthdayTrainee.setValue(LocalDate.from(trainee.getBirthday().toInstant()));
+//        addressTrainee.setText(trainee.getAddress());
+//        schoolTrainee.setText(trainee.getSchool());
+//        emailTrainee.setText(trainee.getEmail());
+//
+//        LocationDao loc = new LocationDaoImpl();
+//        locationTraineeCombo.setSelectionModel((SingleSelectionModel<Location>) loc.getAllLocation());
+//        locationTraineeCombo.getSelectionModel().select(trainee.getLocation());
 
 
         TraineeDao updatedTrainee = new TraineeDaoImpl();
@@ -137,7 +150,10 @@ public class ControlleTraineeForm implements Initializable {
         tr.setAddress(addressTrainee.getText());
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
-        tr.setLocation(loc.getLocation(locationTraineeCombo.getSelectionModel().getSelectedItem().getLocationId()));
+        Location location=new Location();
+        location.setLocationId((locationTraineeCombo.getSelectionModel().getSelectedItem().getLocationId()));
+        location.setLocationName((locationTraineeCombo.getSelectionModel().getSelectedItem().getLocationName()));
+        tr.setLocation(location);
 
         updatedTrainee.updateTrainee(tr);
         Platform.exit();
