@@ -65,7 +65,7 @@ public class ControlleTraineeForm implements Initializable {
     TextField emailTrainee;
 
     @FXML
-    ComboBox<Location> locationTraineeCombo;
+    ComboBox<Location> locationTraineeComboBox;
 
     @FXML
     Button addNewTrainee;
@@ -74,42 +74,9 @@ public class ControlleTraineeForm implements Initializable {
     Button cancelTrainee;
     private int currentTraineeID;
 
-
-    public void setTrainee(Trainee trainee) {
-        currentTraineeID = trainee.getTraineeID();
-        lastNameTrainee.setText(trainee.getLastName());
-        firstNameTrainee.setText(trainee.getFirstName());
-
-        birthdayTrainee.setValue(convertToLocalDateViaMilisecond(trainee.getBirthday()));
-        addressTrainee.setText(trainee.getAddress());
-        schoolTrainee.setText(trainee.getSchool());
-        emailTrainee.setText(trainee.getEmail());
-        locationTraineeCombo.getSelectionModel().select(trainee.getLocation());
-
-    }
-
-    public LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
-        return Instant.ofEpochMilli(dateToConvert.getTime())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-    }
-
-    public Date convertToDateViaInstant(LocalDate dateToConvert) {
-        return java.util.Date.from(dateToConvert.atStartOfDay()
-                .atZone(ZoneId.systemDefault())
-                .toInstant());
-    }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getLocationComboBox();
-    }
-
-    public void getLocationComboBox() {
-        LocationDao locationDao = new LocationDaoImpl();
-        Set<Location> loc = locationDao.getAllLocation();
-        locationTraineeCombo.setItems(FXCollections.observableArrayList(loc));
+        setLocationComboBox();
     }
 
     @FXML
@@ -126,10 +93,17 @@ public class ControlleTraineeForm implements Initializable {
         tr.setAddress(addressTrainee.getText());
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
-        tr.setLocation(loc.getLocation(locationTraineeCombo.getSelectionModel().getSelectedItem().getLocationId()));
+        tr.setLocation(loc.getLocation(locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationId()));
 
-        trainee.insertTrainee(tr);
-        backToTrainee();
+        if (checkInputOfNull(tr)) {
+            trainee.insertTrainee(tr);
+            backToTrainee();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please fill all required fields ");
+            alert.showAndWait();
+        }
 
     }
 
@@ -152,13 +126,19 @@ public class ControlleTraineeForm implements Initializable {
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
         Location location = new Location();
-        location.setLocationId((locationTraineeCombo.getSelectionModel().getSelectedItem().getLocationId()));
-        location.setLocationName((locationTraineeCombo.getSelectionModel().getSelectedItem().getLocationName()));
+        location.setLocationId((locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationId()));
+        location.setLocationName((locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationName()));
         tr.setLocation(location);
 
         updatedTrainee.updateTrainee(tr);
         backToTrainee();
 
+    }
+    public void setLocationComboBox() {
+
+        LocationDao locationDao = new LocationDaoImpl();
+        Set<Location> loc = locationDao.getAllLocation();
+        locationTraineeComboBox.setItems(FXCollections.observableArrayList(loc));
     }
 
     public void backToTrainee() {
@@ -171,6 +151,39 @@ public class ControlleTraineeForm implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void setTrainee(Trainee trainee) {
+
+        currentTraineeID = trainee.getTraineeID();
+        lastNameTrainee.setText(trainee.getLastName());
+        firstNameTrainee.setText(trainee.getFirstName());
+        birthdayTrainee.setValue(convertToLocalDateViaMilisecond(trainee.getBirthday()));
+        addressTrainee.setText(trainee.getAddress());
+        schoolTrainee.setText(trainee.getSchool());
+        emailTrainee.setText(trainee.getEmail());
+        locationTraineeComboBox.getSelectionModel().select(trainee.getLocation());
+
+    }
+
+    public LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
+        return Instant.ofEpochMilli(dateToConvert.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+
+    public Date convertToDateViaInstant(LocalDate dateToConvert) {
+        return java.util.Date.from(dateToConvert.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+    }
+    public boolean checkInputOfNull(Trainee trainee){
+        if(trainee.getFirstName() != null && trainee.getLastName()!=null && trainee.getBirthday() != null &&
+        trainee.getAddress() != null && trainee.getLocation() != null && trainee.getSchool() != null && trainee.getEmail() !=null){
+            return true;
+        }
+        return false;
+    }
+
 
 }
 

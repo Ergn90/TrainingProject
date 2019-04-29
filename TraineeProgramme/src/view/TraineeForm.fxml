@@ -21,13 +21,13 @@
    <left>
       <VBox alignment="TOP_RIGHT" prefHeight="300.0" prefWidth="150.0" spacing="23.0" BorderPane.alignment="BASELINE_RIGHT">
          <children>
-            <Label fx:id="firstNameTraineeForm" text="First name" />
-            <Label fx:id="lastNameTraineeForm" text="Last name" />
-            <Label fx:id="birthdayTraineeForm" text="Birthday" />
-            <Label fx:id="addressTraineeForm" text="Address" />
-            <Label fx:id="schoolTraineeForm" text="School" />
-            <Label fx:id="emailTraineeForm" text="Email" />
-            <Label fx:id="locationTraineeForm" text="Location" />
+            <Label fx:id="firstNameTraineeForm" text="First name *" />
+            <Label fx:id="lastNameTraineeForm" text="Last name *" />
+            <Label fx:id="birthdayTraineeForm" text="Birthday *" />
+            <Label fx:id="addressTraineeForm" text="Address *" />
+            <Label fx:id="schoolTraineeForm" text="School *" />
+            <Label fx:id="emailTraineeForm" text="Email *" />
+            <Label fx:id="locationTraineeForm" text="Location *" />
          </children>
       </VBox>
    </left>
@@ -36,11 +36,11 @@
          <children>
             <TextField fx:id="firstNameTrainee" promptText="First name" />
             <TextField fx:id="lastNameTrainee" promptText="Last name" />
-            <DatePicker fx:id="birthdayTrainee" />
+            <DatePicker fx:id="birthdayTrainee"/>
             <TextField fx:id="addressTrainee" promptText="Address" />
             <TextField fx:id="schoolTrainee" promptText="School" />
             <TextField fx:id="emailTrainee" promptText="Email" />
-            <ComboBox fx:id="locationTraineeCombo" promptText="choose location" />
+            <ComboBox fx:id="locationTraineeComboBox" promptText="choose location" />
          </children>
       </VBox>
    </center>

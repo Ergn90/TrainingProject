@@ -1,5 +1,6 @@
 package model.course;
 
+import java.util.List;
 import java.util.Set;
 
 public interface CourseDao {
@@ -9,4 +10,5 @@ public interface CourseDao {
     boolean insertCourse(Course course);
     boolean updateCourse(Course course);
     boolean deleteCourse(int id);
+    List<String> getAllRoomsValues();
 }
