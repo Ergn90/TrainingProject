@@ -78,15 +78,16 @@ public class ControllerTraineeManager implements Initializable {
 
     //    @Override
     public void initialize(URL location, ResourceBundle resources) {//
-        setLabels();
-        setComboboxCourseList();
-        setComboboxSkalaList();
-        handletraineeAddToCourse();
+
     }
 
     //TODO Muss in haupt controller übergeben werden
     public void setTrainee(Trainee trainee) {
         this.trainee = trainee;
+        setLabels();
+        setComboboxCourseList();
+        setComboboxSkalaList();
+        handletraineeAddToCourse();
     }
 
     @FXML

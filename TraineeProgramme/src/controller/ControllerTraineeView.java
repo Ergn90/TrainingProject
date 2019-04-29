@@ -258,14 +258,29 @@ public class ControllerTraineeView implements Initializable {
     @FXML
     public void showManageTrainee(ActionEvent actionEvent) throws IOException {
         try {
-            Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineeManager.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/TraineeManager.fxml"));
 
-            // tableTrainees.getSelectionModel()
-            manaageTrainee.getScene().setRoot(loader);
+            Parent root = (Parent) fxmlLoader.load();
+
+            ControllerTraineeManager controller = fxmlLoader.getController();
+            if(isTraineeSelected()){
+                Trainee trainee= tableTrainees.getSelectionModel().getSelectedItem();
+                controller.setTrainee(trainee);
+                manaageTrainee.getScene().setRoot(root);
+            }else{
+                Alert alert=new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setContentText("Please select a trainee in the list ");
+                alert.show();
+            }
 
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
         }
+    }
+
+    private boolean isTraineeSelected() {
+       return tableTrainees.getSelectionModel().getSelectedItem()!=null;
     }
 
     @FXML
