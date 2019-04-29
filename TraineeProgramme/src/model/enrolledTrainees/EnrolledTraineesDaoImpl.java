@@ -32,6 +32,15 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     private static final String SELECTCOURSESBYSKALAID = "SELECT courses.CourseID,CourseName,CourseStartDate,CourseEndDate,CourseRoom,CourseDescription from courses " +
             "inner join enrolled_trainees on  enrolled_trainees.CourseID=courses.CourseID " +
             "where enrolled_trainees.SkalaID=";
+    private static final String SELECTALLINFO = "SELECT trainee.TraineeID,LastName,FirstName,Birthday,Address,School,Email,trainee.LocationId,LocationName," +
+            "skala.SkalaId,SkalaName," +
+            "courses.CourseID,CourseName,CourseStartDate,CourseEndDate,CourseRoom,CourseDescription FROM trainee_programm_db.enrolled_trainees " +
+            "inner join trainee on trainee.TraineeID=enrolled_trainees.TraineeID" +
+            "inner join location on location.LocationId=trainee.TraineeID" +
+            "inner join skala on skala.SkalaId=enrolled_trainees.SkalaID" +
+            "inner join courses on courses.CourseID=enrolled_trainees.CourseID";
+    private static final String WHERECOURSEID = " where enrolled_trainees.CourseID=";
+    private static final String WHERETRAINEEID = " where enrolled_trainees.TraineeID=";
     private static final String ANDTRAINEEID = " and enrolled_trainees.TraineeID=";
     private static final String ANDCOURSEID = " and enrolled_trainees.CourseID=";
     private static final String ANDSKALAEID = " and enrolled_trainees.SkalaID=";
@@ -261,31 +270,41 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public List<EnrolledTrainees> getEnrolledTrainesByCourseID(int courseID) {
-//        Connection connection = ConnectionFactory.getConnection();
-//
-//        try {
-//            Statement statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery(SELECTCOURSESBYSKALAID + skala.getSkalaId());
-//            List<EnrolledTrainees> enrolledTraineesList = new ArrayList<>();
-//            while (resultSet.next()) {
-//                Course course = extractCourseFromResult(resultSet);
-//                coursesList.add(course);
-//            }
-//            return coursesList;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+    public List<EnrolledTrainees> getEnrolledTraineesByCourseID(int courseID) {
+        return getEnrolledTrainees(WHERECOURSEID, courseID);
+    }
+
+    private List<EnrolledTrainees> getEnrolledTrainees(String where, int id) {
+        Connection connection = ConnectionFactory.getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SELECTALLINFO + where + id);
+            List<EnrolledTrainees> enrolledTraineesList = new ArrayList<>();
+            while (resultSet.next()) {
+                extractEnrolledTrainees(resultSet, enrolledTraineesList);
+            }
+            return enrolledTraineesList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
-    public List<EnrolledTrainees> getEnrolledTrainesByTraineeID(int traineeID) {
-        return null;
+    public List<EnrolledTrainees> getEnrolledTraineesByTraineeID(int traineeID) {
+        return getEnrolledTrainees(WHERETRAINEEID, traineeID);
+    }
+
+    private void extractEnrolledTrainees(ResultSet resultSet, List<EnrolledTrainees> enrolledTraineesList) throws SQLException {
+        Course course = extractCourseFromResult(resultSet);
+        Trainee trainee = extractTraineeFromResult(resultSet);
+        Skala skala = extractSkalaFromResult(resultSet);
+        EnrolledTrainees enrolledTrainees = new EnrolledTrainees(course, trainee, skala);
+        enrolledTraineesList.add(enrolledTrainees);
     }
 
     @Override
-    public boolean insertEnrolledTraines(Course course, Skala skala, Trainee trainee) {
+    public boolean insertEnrolledTrainees(Course course, Skala skala, Trainee trainee) {
 
 
         Connection connection = ConnectionFactory.getConnection();
@@ -319,7 +338,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public boolean deletEnrolledTraines(int traineeID, int skalaID, int coursesID) {
+    public boolean deleteEnrolledTrainees(int traineeID, int skalaID, int coursesID) {
 
         Connection connection = ConnectionFactory.getConnection();
 
@@ -348,7 +367,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public boolean deletEnrolledTrainesByTrainee(int traineeID) {
+    public boolean deleteEnrolledTraineesByTrainee(int traineeID) {
         Connection connection = ConnectionFactory.getConnection();
 
         try {
@@ -372,7 +391,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public boolean deletEnrolledTrainesByCourse(int coursesID) {
+    public boolean deleteEnrolledTraineesByCourse(int coursesID) {
         Connection connection = ConnectionFactory.getConnection();
 
         try {

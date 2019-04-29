@@ -16,11 +16,11 @@ public interface EnrolledTraineesDao {
     Skala getSkala(int traineeID,int coursesID);
     Course getCourse(int traineeID, int skalaID);
     Trainee getTrainee(int coursesID,int skalaID);
-    List<EnrolledTrainees> getEnrolledTrainesByCourseID(int courseID );
-    List<EnrolledTrainees> getEnrolledTrainesByTraineeID(int traineeID );
-    boolean insertEnrolledTraines(Course course, Skala skala, Trainee trainee);
-    boolean deletEnrolledTraines(int traineeID,int skalaID,int coursesID);
-    boolean deletEnrolledTrainesByTrainee(int traineeID);
-    boolean deletEnrolledTrainesByCourse(int  coursesID);
+    List<EnrolledTrainees> getEnrolledTraineesByCourseID(int courseID );
+    List<EnrolledTrainees> getEnrolledTraineesByTraineeID(int traineeID );
+    boolean insertEnrolledTrainees(Course course, Skala skala, Trainee trainee);
+    boolean deleteEnrolledTrainees(int traineeID, int skalaID, int coursesID);
+    boolean deleteEnrolledTraineesByTrainee(int traineeID);
+    boolean deleteEnrolledTraineesByCourse(int  coursesID);
 
 }
