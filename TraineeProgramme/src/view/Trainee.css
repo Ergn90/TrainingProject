@@ -9,17 +9,18 @@
     -fx-opacity: 0.6;
 }
 
-.text-field{
+.text-field {
     -fx-font-size: 9pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-weight: bold;
-     -fx-fill: #696969;
+    -fx-fill: #696969;
 }
-.combo-box.list-cell{
--fx-font-size: 9pt;
+
+.combo-box.list-cell {
+    -fx-font-size: 9pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-weight: bold;
-     -fx-fill: #696969;
+    -fx-fill: #696969;
 }
 
 .button {
@@ -27,7 +28,7 @@
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
 
