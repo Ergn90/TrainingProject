@@ -47,6 +47,8 @@
             <TableColumn fx:id="courseyear" minWidth="8.0" prefWidth="84.0" text="Course Year" />
             <TableColumn fx:id="courseRoom" prefWidth="117.0" text="Course Room" />
             <TableColumn fx:id="courseDescriptionC" minWidth="3.0" prefWidth="121.0" text="Course Description" />
+            <TableColumn fx:id="startDate" prefWidth="75.0" text="Start Date" />
+            <TableColumn fx:id="endDate" prefWidth="75.0" text="Start Date" />
         </columns>
          <padding>
             <Insets bottom="5.0" />
@@ -62,7 +64,7 @@
     <bottom>
         <HBox prefHeight="52.0" prefWidth="982.0" spacing="18.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="addCourseC" layoutX="45.0" layoutY="19.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="102.0" text="Add Course" onAction="#addCourse">
+                <Button fx:id="addCourseC" layoutX="45.0" layoutY="19.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="33.0" prefWidth="102.0" text="Add Course">
                     <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </padding>

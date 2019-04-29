@@ -40,6 +40,12 @@ public class ControllerCourseView implements Initializable {
     TableColumn courseRoom;
     @FXML
     TableColumn courseDescriptionC;
+
+    @FXML
+    TableColumn startDate;
+
+    @FXML
+    TableColumn endDate;
     @FXML
     Button addCourseC;
     @FXML
@@ -67,13 +73,13 @@ public class ControllerCourseView implements Initializable {
         CourseDao courseDao = new CourseDaoImpl();
         Set<Course> courses = courseDao.getAllCourses();
         coursesTable.setItems(FXCollections.observableArrayList(courses));
-
-
         courseID.setCellValueFactory(new PropertyValueFactory<>("CourseID"));
         courseName.setCellValueFactory(new PropertyValueFactory<>("CourseName"));
         courseyear.setCellValueFactory(new PropertyValueFactory<>("CourseDate"));
         courseRoom.setCellValueFactory(new PropertyValueFactory<>("CourseRoom"));
         courseDescriptionC.setCellValueFactory(new PropertyValueFactory<>("CourseDescription"));
+        startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        endDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
 
         return  courseDao;
     }
@@ -82,7 +88,7 @@ public class ControllerCourseView implements Initializable {
     @FXML
     public void backToTrainee(ActionEvent actionEvent) throws IOException {
         try {
-            Parent loader = FXMLLoader.load(getClass().getResource(".../view/TraineeView.fxml"));
+            Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineesView.fxml"));
 
             backFromCourseViewToTraineeView.getScene().setRoot(loader);
         }
