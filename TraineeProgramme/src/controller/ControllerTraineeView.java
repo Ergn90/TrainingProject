@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ import model.trainee.TraineeDaoImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -49,20 +51,14 @@ public class ControllerTraineeView implements Initializable {
     @FXML
     TableColumn email;
 
+
     @FXML
     TableColumn locationTrainees;
 
-    @FXML
-    TableColumn updateTrainee1;
-
-    @FXML
-    TableColumn deleteTrainee1;
 
     @FXML
     Button addTrainee;
 
-    @FXML
-    Button deleteTrainee;
 
     @FXML
     Button manaageTrainee;
@@ -84,7 +80,9 @@ public class ControllerTraineeView implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         getTraineeInfo();
 
-//       listManageTraineeProgram.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);      //nur eine Zeile selektieren
+        tableTrainees.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+       // FilteredList<Trainee> filteredListTrainee = new FilteredList<>(trainees, e-> true);
     }
 
 
@@ -164,11 +162,12 @@ public class ControllerTraineeView implements Initializable {
                     {
                         //TODO call DIna forumlar
                         btn.setOnAction((ActionEvent event) -> {
-//                            EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
-//                            Trainee trainee = tableTrainees.getItems().get(getIndex());
-//                            boolean updateTrainee = traineeDao.updateTrainee(trainee);
-//                            System.out.println("update Trainee " + updateTrainee);
-//                            refreshTraineeInfo();
+                            EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
+                            Trainee trainee = tableTrainees.getItems().get(getIndex());
+                            boolean updateTrainee = traineeDao.updateTrainee(trainee);
+                            System.out.println("update Trainee " + updateTrainee);
+                            refreshTraineeInfo();
+
                         });
                     }
 
@@ -197,8 +196,7 @@ public class ControllerTraineeView implements Initializable {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseView.fxml"));
 
             courseView.getScene().setRoot(loader);
-        }
-        catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
         }
     }
@@ -208,23 +206,47 @@ public class ControllerTraineeView implements Initializable {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineeManager.fxml"));
 
+            // tableTrainees.getSelectionModel()
             manaageTrainee.getScene().setRoot(loader);
-        }
-        catch (NullPointerException npe){
+
+        } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
         }
     }
 
-
-    @FXML
+       @FXML
     public void showTraineeForm(ActionEvent actionEvent) throws IOException {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineeForm.fxml"));
 
             addTrainee.getScene().setRoot(loader);
-        }
-        catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
+        }
+    }
+
+    @FXML
+    public void showTraineeManager() {
+        Trainee selectedTrainee = tableTrainees.getSelectionModel().getSelectedItem();
+        if(selectedTrainee == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Trainee Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select the trainee you want to manage.");
+            alert.showAndWait();
+            return;
+        }
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../view/TraineeManager.fxml"));
+        try {
+            Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineeManager.fxml"));
+
+            manaageTrainee.getScene().setRoot(loader);
+        } catch (IOException e) {
+            System.out.println("Couldn't load");
+            e.printStackTrace();
+            return;
         }
     }
 }
