@@ -1,6 +1,12 @@
 package model.course;
 
+import controller.Controller;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Course {
     private int courseID;
@@ -74,13 +80,11 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Course{" +
-                "courseID=" + courseID +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", courseName='" + courseName + '\'' +
-                ", courseRoom='" + courseRoom + '\'' +
-                ", courseDescription='" + courseDescription + '\'' +
-                '}';
+        return courseName + "-"+getYearCourse();
+    }
+
+    private String getYearCourse() {
+        LocalDate localDate = Controller.convertToLocalDateViaMilisecond(startDate);
+        return String.valueOf(localDate.getYear());
     }
 }

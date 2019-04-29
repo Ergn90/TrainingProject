@@ -344,7 +344,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
 
         try {
 
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM enrolled_trainees WHERE traineeID=?, CourseID=?, SkalaId=?");
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM enrolled_trainees WHERE traineeID=? and  CourseID=? and  SkalaId=?");
 
             ps.setInt(1, traineeID);
             ps.setInt(2, coursesID);

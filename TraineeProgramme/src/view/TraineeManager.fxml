@@ -37,7 +37,6 @@
                     <columns>
                         <TableColumn fx:id="courseEntered" prefWidth="160.0" text="Course" />
                         <TableColumn fx:id="skalaInCorrespondingCourse" prefWidth="248.0" text="Skala" />
-                        <TableColumn fx:id="deleteTraineeFromCourseBTN" prefWidth="432.0" text="Delete" />
                     </columns>
                 </TableView>
                 <Label alignment="CENTER" text="Trainee Manager" textAlignment="CENTER">

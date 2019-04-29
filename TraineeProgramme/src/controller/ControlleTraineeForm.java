@@ -80,7 +80,7 @@ public class ControlleTraineeForm implements Initializable {
         lastNameTrainee.setText(trainee.getLastName());
         firstNameTrainee.setText(trainee.getFirstName());
 
-        birthdayTrainee.setValue(convertToLocalDateViaMilisecond(trainee.getBirthday()));
+        birthdayTrainee.setValue(Controller.convertToLocalDateViaMilisecond(trainee.getBirthday()));
         addressTrainee.setText(trainee.getAddress());
         schoolTrainee.setText(trainee.getSchool());
         emailTrainee.setText(trainee.getEmail());
@@ -88,17 +88,7 @@ public class ControlleTraineeForm implements Initializable {
 
     }
 
-    public LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
-        return Instant.ofEpochMilli(dateToConvert.getTime())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-    }
 
-    public Date convertToDateViaInstant(LocalDate dateToConvert) {
-        return java.util.Date.from(dateToConvert.atStartOfDay()
-                .atZone(ZoneId.systemDefault())
-                .toInstant());
-    }
 
 
     @Override
@@ -122,7 +112,7 @@ public class ControlleTraineeForm implements Initializable {
 
         tr.setLastName(lastNameTrainee.getText());
         tr.setFirstName(firstNameTrainee.getText());
-        tr.setBirthday(convertToDateViaInstant(birthdayTrainee.getValue()));
+        tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
         tr.setAddress(addressTrainee.getText());
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
@@ -147,7 +137,7 @@ public class ControlleTraineeForm implements Initializable {
         tr.setTraineeID(currentTraineeID);
         tr.setLastName(lastNameTrainee.getText());
         tr.setFirstName(firstNameTrainee.getText());
-        tr.setBirthday(convertToDateViaInstant(birthdayTrainee.getValue()));
+        tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
         tr.setAddress(addressTrainee.getText());
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
