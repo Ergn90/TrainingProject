@@ -1,27 +1,30 @@
 package controller;
 
-import com.sun.org.omg.CORBA.Initializer;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import model.course.Course;
-import model.enrolledTrainees.EnrolledTraineesDao;
+import model.course.CourseDaoImpl;
 import model.enrolledTrainees.EnrolledTraineesDaoImpl;
 import model.skala.Skala;
+import model.skala.SkalaDaoImpl;
 import model.trainee.Trainee;
-import model.trainee.TraineeDao;
-import model.trainee.TraineeDaoImpl;
 
+import java.beans.EventHandler;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 
 public class ControllerTraineeManager implements Initializable {
 
-//TODO Controller registrieren und auch noch den Trainee in Controller übergeben
+    //TODO Controller registrieren und auch noch den Trainee in Controller übergeben
     @FXML
     Label lastNameTraineeForm;
 
@@ -72,9 +75,11 @@ public class ControllerTraineeManager implements Initializable {
     private Trainee trainee;
     // TODO The same
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    //    @Override
+    public void initialize(URL location, ResourceBundle resources) {//
         setLabels();
+        setComboboxCourseList();
+        setComboboxSkalaList();
     }
 
     //TODO Muss in haupt controller übergeben werden
@@ -82,8 +87,7 @@ public class ControllerTraineeManager implements Initializable {
         this.trainee = trainee;
     }
 
-    public void setLabels()
-    {
+    public void setLabels() {
         traineeID.setText("TraineeID : " + trainee.getTraineeID());
         firstNameTraineeForm.setText("Firstname: " + trainee.getFirstName());
         lastNameTraineeForm.setText("Lastname: " + trainee.getLastName());
@@ -93,13 +97,84 @@ public class ControllerTraineeManager implements Initializable {
         locationTraineeForm.setText("Location: " + trainee.getLocation());
     }
 
-    public void setCourseTableView(){
+//TODO Überarbeiten mit Guillomes Methoden
+
+    public void setCourseTableView() {
         EnrolledTraineesDaoImpl enrolledTrainee = new EnrolledTraineesDaoImpl();
-        List<Course> coursesForTrainee= enrolledTrainee.getAllCoursesByTrainee(trainee);
-        List<Skala> scaleForCourses =  enrolledTrainee.getAllSkalaByTrainee(trainee);
-        coursesEntered.setItems(FXCollections.observableArrayList(coursesForTrainee));
-        courseEntered.setCellValueFactory(new PropertyValueFactory<>("CourseName"));
+        List<Course> coursesForTrainee = enrolledTrainee.getAllCoursesByTrainee(trainee);
+        List<Skala> scaleForCourses = enrolledTrainee.getAllSkalaByTrainee(trainee);
+        //coursesEntered.setItems(FXCollections.observableArrayList(coursesForTrainee));
+
+        courseEntered.setCellValueFactory(new Callback<TableColumn.CellDataFeatures, ObservableValue>() {
+            @Override
+            public ObservableValue call(TableColumn.CellDataFeatures param) {
+                return null;
+            }
+        });
         skalaInCorrespondingCourse.setCellValueFactory(new PropertyValueFactory<>("SkalaName"));
 
     }
+
+
+    private void setComboboxCourseList() {
+        CourseDaoImpl courses = new CourseDaoImpl();
+        Set<Course> courseSet = courses.getAllCourses();
+        courseList.setItems(FXCollections.observableArrayList(courseSet));
+        courseList.setCellFactory(new Callback<ListView<Course>, ListCell<Course>>() {
+            @Override
+            public ListCell<Course> call(ListView<Course> p) {
+
+                ListCell<Course> cell = new ListCell<Course>() {
+                    protected void updateItem(Course c, boolean b) {
+                        super.updateItem(c, b);
+
+                        if (c != null) {
+                            setText(c.getCourseName());
+                        }
+                    }
+
+                };
+
+                return cell;
+            }
+        });
+    }
+
+    private void setComboboxSkalaList() {
+        SkalaDaoImpl skala = new SkalaDaoImpl();
+        Set<Skala> skalaSet = skala.getAllSkala();
+        skalaList.setItems(FXCollections.observableArrayList(skalaSet));
+        skalaList.setCellFactory(new Callback<ListView<Skala>, ListCell<Skala>>() {
+            @Override
+            public ListCell<Skala> call(ListView<Skala> p) {
+
+                ListCell<Skala> cell = new ListCell<Skala>() {
+                    protected void updateItem(Skala s, boolean b) {
+                        super.updateItem(s, b);
+
+                        if (s != null) {
+                            setText(s.getSkalaName());
+                        }
+                    }
+
+                };
+
+                return cell;
+            }
+        });
+    }
+
+
+    @FXML
+    protected void handletraineeAddToCourse() {
+        traineeAddToCourse.setOnAction(new javafx.event.EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                EnrolledTraineesDaoImpl enr = new EnrolledTraineesDaoImpl();
+                enr.insertEnrolledTraines((Course) courseList.getValue(), (Skala) skalaList.getValue(), trainee);
+            }
+        });
+
+    }
+
 }
