@@ -68,10 +68,11 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     private Trainee extractTraineeFromResult(ResultSet resultSet) throws SQLException {
         Trainee trainee = new Trainee();
         trainee.setTraineeID(resultSet.getInt("TraineeID"));
-        trainee.setAddress(resultSet.getString("LastName"));
+        trainee.setLastName(resultSet.getString("LastName"));
         trainee.setFirstName(resultSet.getString("FirstName"));
         trainee.setBirthday(resultSet.getDate("Birthday").toLocalDate());
         trainee.setAddress(resultSet.getString("Address"));
+        trainee.setSchool(resultSet.getString("School"));
         trainee.setEmail(resultSet.getString("Email"));
         Location location = new Location();
         location.setLocationId(resultSet.getInt("LocationID"));
