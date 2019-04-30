@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class ControlleCourseForm implements Initializable {
+public class ControllerCourseForm implements Initializable {
     @FXML
     Label lastNameTraineeForm;
 
