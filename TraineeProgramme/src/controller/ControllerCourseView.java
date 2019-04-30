@@ -23,6 +23,7 @@ import model.trainee.Trainee;
 import model.trainee.TraineeDao;
 import model.trainee.TraineeDaoImpl;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -171,7 +172,13 @@ public class ControllerCourseView implements Initializable {
     public void backToTrainee(ActionEvent actionEvent) throws IOException {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineesView.fxml"));
-            backFromCourseViewToTraineeView.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/back.png"))));
+         //   backFromCourseViewToTraineeView.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/index.jpg"))));
+
+/*          FileInputStream input = new FileInputStream("/src/view/back.png");
+            Image image = new Image(input);
+            ImageView imageView = new ImageView(image);
+            Button button = new Button("Back", imageView);
+            backFromCourseViewToTraineeView = button;*/
             backFromCourseViewToTraineeView.getScene().setRoot(loader);
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());

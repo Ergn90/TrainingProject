@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import model.course.CourseDao;
+import model.course.CourseDaoImpl;
 import model.location.Location;
 import model.location.LocationDao;
 import model.location.LocationDaoImpl;
@@ -23,26 +25,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 public class ControllerCourseForm implements Initializable {
-    @FXML
-    Label lastNameTraineeForm;
 
-    @FXML
-    Label firstNameTraineeForm;
-
-    @FXML
-    Label birthdayTraineeForm;
-
-    @FXML
-    Label addressTraineeForm;
-
-    @FXML
-    Label schoolTraineeForm;
-
-    @FXML
-    Label emailTraineeForm;
-
-    @FXML
-    Label locationTraineeForm;
 
     @FXML
     TextField firstNameTrainee;
@@ -79,9 +62,9 @@ public class ControllerCourseForm implements Initializable {
 
 
     @FXML
-    public void addNewTrainee() {
+    public void addNewCourse() {
 
-        TraineeDao trainee = new TraineeDaoImpl();
+        CourseDao  courseDao = new CourseDaoImpl();
 
         Trainee tr = new Trainee();
         LocationDao loc = new LocationDaoImpl();
@@ -94,7 +77,7 @@ public class ControllerCourseForm implements Initializable {
         tr.setEmail(emailTrainee.getText());
         tr.setLocation(loc.getLocation(locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationId()));
 
-        if (checkInputOfNull(tr)) {
+ /*       if (checkInputOfNull(tr)) {
             trainee.insertTrainee(tr);
             backToTrainee();
         } else {
@@ -102,7 +85,7 @@ public class ControllerCourseForm implements Initializable {
             alert.setTitle("Warning Dialog");
             alert.setContentText("Please fill all required fields ");
             alert.showAndWait();
-        }
+        }*/
 
     }
 
@@ -137,9 +120,7 @@ public class ControllerCourseForm implements Initializable {
 
         updatedTrainee.updateTrainee(tr);
         backToTrainee();
-
     }
-
     public void setLocationComboBox() {
 
         LocationDao locationDao = new LocationDaoImpl();
@@ -157,7 +138,6 @@ public class ControllerCourseForm implements Initializable {
             e.printStackTrace();
         }
     }
-
     public void setTrainee(Trainee trainee) {
 
         currentTraineeID = trainee.getTraineeID();
@@ -171,8 +151,6 @@ public class ControllerCourseForm implements Initializable {
 
     }
 
-
-
     public boolean checkInputOfNull(Trainee trainee) {
         if (trainee.getFirstName() != null && trainee.getLastName() != null && trainee.getBirthday() != null &&
                 trainee.getAddress() != null && trainee.getLocation() != null && trainee.getSchool() != null && trainee.getEmail() != null) {
@@ -180,7 +158,6 @@ public class ControllerCourseForm implements Initializable {
         }
         return false;
     }
-
 
 }
 
