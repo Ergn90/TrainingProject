@@ -76,7 +76,8 @@ public class ControllerTraineeManager implements Initializable {
 
 
     //    @Override
-    public void initialize(URL location, ResourceBundle resources) {//
+    public void initialize(URL location, ResourceBundle resources) {
+        coursesEntered.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
     }
 
@@ -202,7 +203,8 @@ public class ControllerTraineeManager implements Initializable {
     protected void handletraineeAddToCourse() {
 
         EnrolledTraineesDaoImpl enr = new EnrolledTraineesDaoImpl();
-        enr.insertEnrolledTrainees(courseList.getValue(), skalaList.getValue(), trainee); //TODO if null
+        enr.insertEnrolledTrainees(courseList.getValue(), skalaList.getValue(), trainee);
+        refreshCourseTrainee();//TODO if null
     }
 
     @FXML
