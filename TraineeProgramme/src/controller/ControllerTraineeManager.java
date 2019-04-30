@@ -86,7 +86,6 @@ public class ControllerTraineeManager implements Initializable {
         setLabels();
         setComboboxCourseList();
         setComboboxSkalaList();
-        handletraineeAddToCourse();
         EnrolledTraineesDaoImpl enrolledTraineesDao = refreshCourseTrainee();
         addDeleteCourseTrainee(enrolledTraineesDao);
     }
