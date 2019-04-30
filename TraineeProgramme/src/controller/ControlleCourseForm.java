@@ -6,9 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import model.course.Course;
-import model.course.CourseDao;
-import model.course.CourseDaoImpl;
 import model.location.Location;
 import model.location.LocationDao;
 import model.location.LocationDaoImpl;
@@ -22,107 +19,137 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
 public class ControlleCourseForm implements Initializable {
+    @FXML
+    Label lastNameTraineeForm;
 
     @FXML
-    Label startDate;
+    Label firstNameTraineeForm;
 
     @FXML
-    Label endDate;
+    Label birthdayTraineeForm;
 
     @FXML
-    Label name;
+    Label addressTraineeForm;
 
     @FXML
-    Label room;
+    Label schoolTraineeForm;
 
     @FXML
-    Label description;
+    Label emailTraineeForm;
 
     @FXML
-    DatePicker courseStartDate;
+    Label locationTraineeForm;
 
     @FXML
-    DatePicker courseEndDate;
+    TextField firstNameTrainee;
 
     @FXML
-    TextField courseName;
+    TextField lastNameTrainee;
 
     @FXML
-    ComboBox courseRoomComboBox;
+    DatePicker birthdayTrainee;
 
     @FXML
-   TextField courseDescription;
+    TextField addressTrainee;
+
+    @FXML
+    TextField schoolTrainee;
+
+    @FXML
+    TextField emailTrainee;
+
+    @FXML
+    ComboBox<Location> locationTraineeComboBox;
 
     @FXML
     Button addNewTrainee;
 
     @FXML
-    Button cancelCourse;
-
-
-    private int currentCourseId;
+    Button cancelTrainee;
+    private int currentTraineeID;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setCourseRoomComboBox();
-
+        setLocationComboBox();
     }
 
+
     @FXML
-    public void addNewCourse() {
+    public void addNewTrainee() {
 
-        CourseDao course = new CourseDaoImpl();
-        Course cr = new Course();
+        TraineeDao trainee = new TraineeDaoImpl();
 
-        cr.setStartDate(convertToDateViaInstant(courseStartDate.getValue()));
-        cr.setEndDate(convertToDateViaInstant(courseEndDate.getValue()));
-        courseName.setText(getCourseName(courseStartDate.getValue()));
-        cr.setCourseName(courseName.getText());
-        cr.setCourseRoom(courseRoomComboBox.getSelectionModel().getSelectedItem().toString());
-        cr.setCourseDescription(courseDescription.getText());
+        Trainee tr = new Trainee();
+        LocationDao loc = new LocationDaoImpl();
 
-        course.insertCourse(cr);
-        backToCourse();
+        tr.setLastName(lastNameTrainee.getText());
+        tr.setFirstName(firstNameTrainee.getText());
+        tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
+        tr.setAddress(addressTrainee.getText());
+        tr.setSchool(schoolTrainee.getText());
+        tr.setEmail(emailTrainee.getText());
+        tr.setLocation(loc.getLocation(locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationId()));
+
+        if (checkInputOfNull(tr)) {
+            trainee.insertTrainee(tr);
+            backToTrainee();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please fill all required fields ");
+            alert.showAndWait();
+        }
+
     }
 
     @FXML
     public void cancelCourse() {
-        backToCourse();
+        backToTrainee();
+    }
+
+
+    @FXML
+    public void cancelTrainee() {
+        backToTrainee();
     }
 
     @FXML
-    public void updateCourse() {
+    public void updateTrainee() {
 
-        CourseDao updatedCourse = new CourseDaoImpl();
-        Course cr = new Course();
+        TraineeDao updatedTrainee = new TraineeDaoImpl();
+        Trainee tr = new Trainee();
 
-        cr.setCourseID(currentCourseId);
-        cr.setStartDate(convertToDateViaInstant(courseStartDate.getValue()));
-        cr.setEndDate(convertToDateViaInstant(courseEndDate.getValue()));
-        cr.setCourseName(courseName.getText());
-        cr.setCourseRoom(courseRoomComboBox.getSelectionModel().getSelectedItem().toString());
-        cr.setCourseDescription(courseDescription.getText());
+        tr.setTraineeID(currentTraineeID);
+        tr.setLastName(lastNameTrainee.getText());
+        tr.setFirstName(firstNameTrainee.getText());
+        tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
+        tr.setAddress(addressTrainee.getText());
+        tr.setSchool(schoolTrainee.getText());
+        tr.setEmail(emailTrainee.getText());
+        Location location = new Location();
+        location.setLocationId((locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationId()));
+        location.setLocationName((locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationName()));
+        tr.setLocation(location);
 
-        updatedCourse.updateCourse(cr);
-        backToCourse();
+        updatedTrainee.updateTrainee(tr);
+        backToTrainee();
 
     }
 
-    public void setCourseRoomComboBox() {
+    public void setLocationComboBox() {
 
-        CourseDao course = new CourseDaoImpl();
-        List<String> crs = course.getAllRoomsValues();
-        courseRoomComboBox.setItems(FXCollections.observableArrayList(crs));
+        LocationDao locationDao = new LocationDaoImpl();
+        Set<Location> loc = locationDao.getAllLocation();
+        locationTraineeComboBox.setItems(FXCollections.observableArrayList(loc));
     }
 
-    public void backToCourse() {
+    public void backToTrainee() {
         try {
-            Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseView.fxml"));
+            Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineesView.fxml"));
             addNewTrainee.getScene().setRoot(loader);
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
@@ -130,36 +157,32 @@ public class ControlleCourseForm implements Initializable {
             e.printStackTrace();
         }
     }
-    public String getCourseName(LocalDate startDate){
-        byte ending;
-        if (startDate.getMonthValue() < 5){
-            ending = 1;
-        }else{
-            ending = 2;
+
+    public void setTrainee(Trainee trainee) {
+
+        currentTraineeID = trainee.getTraineeID();
+        lastNameTrainee.setText(trainee.getLastName());
+        firstNameTrainee.setText(trainee.getFirstName());
+        birthdayTrainee.setValue(Controller.convertToLocalDateViaMilisecond(trainee.getBirthday()));
+        addressTrainee.setText(trainee.getAddress());
+        schoolTrainee.setText(trainee.getSchool());
+        emailTrainee.setText(trainee.getEmail());
+        locationTraineeComboBox.getSelectionModel().select(trainee.getLocation());
+
+    }
+
+
+
+    public boolean checkInputOfNull(Trainee trainee) {
+        if (trainee.getFirstName() != null && trainee.getLastName() != null && trainee.getBirthday() != null &&
+                trainee.getAddress() != null && trainee.getLocation() != null && trainee.getSchool() != null && trainee.getEmail() != null) {
+            return true;
         }
-        return "Java Trainee "+ startDate.getYear()+"." + ending;
-    }
-    public void setCourse(Course course) {
-
-        currentCourseId= course.getCourseID();
-        courseStartDate.setValue(convertToLocalDateViaMilisecond(course.getStartDate()));
-        courseEndDate.setValue(convertToLocalDateViaMilisecond(course.getEndDate()));
-        courseName.setText(getCourseName(courseStartDate.getValue()));
-        courseRoomComboBox.getSelectionModel().select(course.getCourseRoom());
-        courseDescription.setText(course.getCourseDescription());
-
+        return false;
     }
 
-    public LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
-        return Instant.ofEpochMilli(dateToConvert.getTime())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-    }
-
-    public Date convertToDateViaInstant(LocalDate dateToConvert) {
-        return Date.from(dateToConvert.atStartOfDay()
-                .atZone(ZoneId.systemDefault())
-                .toInstant());
-    }
 
 }
+
+
+

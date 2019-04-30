@@ -53,10 +53,10 @@
     </center>
     <bottom>
         <HBox prefHeight="19.0" prefWidth="421.0" BorderPane.alignment="CENTER">
-        <children>
-            <Button fx:id="addNewCourse" text="Ok" onAction="#addNewCourse"/>
-            <Button fx:id="cancelCourse" text="Cancel" onAction="#cancelCourse"/>
-        </children>
+            <children>
+                <Button fx:id="addNewCourse" text="Ok" onAction="#addNewCourse"/>
+                <Button fx:id="cancelCourse" text="Cancel" onAction="#cancelCourse"/>
+            </children>
         </HBox>
     </bottom>
 </BorderPane>

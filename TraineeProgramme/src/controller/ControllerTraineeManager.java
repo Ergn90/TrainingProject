@@ -3,10 +3,9 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import model.course.Course;
 import model.course.CourseDaoImpl;
@@ -15,6 +14,7 @@ import model.enrolledTrainees.EnrolledTraineesDaoImpl;
 import model.skala.Skala;
 import model.skala.SkalaDaoImpl;
 import model.trainee.Trainee;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -63,7 +63,7 @@ public class ControllerTraineeManager implements Initializable {
     ComboBox skalaList;
 
     @FXML
-    TableView coursesEntered;
+    TableView<EnrolledTrainees> coursesEntered;
 
     @FXML
     TableColumn skalaInCorrespondingCourse;
@@ -88,7 +88,49 @@ public class ControllerTraineeManager implements Initializable {
         setComboboxCourseList();
         setComboboxSkalaList();
         handletraineeAddToCourse();
+        EnrolledTraineesDaoImpl enrolledTraineesDao = refreshCourseTrainee();
+        addDeleteCourseTrainee(enrolledTraineesDao);
     }
+
+    private void addDeleteCourseTrainee(EnrolledTraineesDaoImpl enrolledTraineesDao) {
+        TableColumn<EnrolledTrainees, Void> colBtn = new TableColumn("Delete Trainee");
+
+        Callback<TableColumn<EnrolledTrainees, Void>, TableCell<EnrolledTrainees, Void>> cellFactory = new Callback<TableColumn<EnrolledTrainees, Void>, TableCell<EnrolledTrainees, Void>>() {
+            @Override
+            public TableCell<EnrolledTrainees, Void> call(final TableColumn<EnrolledTrainees, Void> param) {
+                final TableCell<EnrolledTrainees, Void> cell = new TableCell<EnrolledTrainees, Void>() {
+
+                    private final Button btn = new Button("Delete");
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            Trainee trainee = coursesEntered.getItems().get(getIndex()).getTrainee();
+                            Course course = coursesEntered.getItems().get(getIndex()).getCourse();
+                            Skala skala = coursesEntered.getItems().get(getIndex()).getSkala();
+                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(),course.getCourseID(),skala.getSkalaId());
+                            refreshCourseTrainee();
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        colBtn.setCellFactory(cellFactory);
+
+        courseEntered.getColumns().add(colBtn);
+    }
+
 
     @FXML
     public void setLabels() {
@@ -101,28 +143,14 @@ public class ControllerTraineeManager implements Initializable {
         locationTraineeForm.setText("Location: " + trainee.getLocation());
     }
 
-    @FXML
-    public void setCourseTableView() {
+    public EnrolledTraineesDaoImpl refreshCourseTrainee() {
         EnrolledTraineesDaoImpl enrolledTrainees = new EnrolledTraineesDaoImpl();
         List<EnrolledTrainees> enrolledTraineeList = enrolledTrainees.getEnrolledTraineesByTraineeID(trainee.getTraineeID());
+        coursesEntered.setItems(FXCollections.observableArrayList(enrolledTraineeList));
 
-        //TODO Lambdas verwenden wenn funktioniert!
-
-        courseEntered.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<EnrolledTrainees, String>, String>() {
-            @Override
-            public String call(TableColumn.CellDataFeatures<EnrolledTrainees, String> enrolledTraineeList) {
-                return (enrolledTraineeList.getValue().getCourse().getCourseName());
-            }
-        });
-
-
-        skalaInCorrespondingCourse.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<EnrolledTrainees, String>, String>() {
-            @Override
-            public String call(TableColumn.CellDataFeatures<EnrolledTrainees, String> enrolledTraineeList) {
-                return enrolledTraineeList.getValue().getSkala().getSkalaName();
-            }
-        });
-
+        courseEntered.setCellValueFactory(new PropertyValueFactory<>("course"));
+        skalaInCorrespondingCourse.setCellValueFactory(new PropertyValueFactory<>("skala"));
+        return enrolledTrainees;
     }
 
     @FXML

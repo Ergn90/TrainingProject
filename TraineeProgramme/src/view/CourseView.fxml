@@ -9,53 +9,55 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCourseView">
-   <top>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <HBox spacing="18.0">
-               <children>
-                  <TextField fx:id="searchFielCourses" prefHeight="39.0" prefWidth="177.0" promptText="Search for Course">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets left="23.0" />
-                     </HBox.margin></TextField>
-                  <Button fx:id="backFromCourseViewToTraineeView" mnemonicParsing="false" onAction="#backToTrainee" prefHeight="39.0" prefWidth="45.0" text="Back">
-                     <HBox.margin>
-                        <Insets left="510.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
-   </top>
-   <center>
-      <TableView fx:id="coursesTable" prefHeight="396.0" prefWidth="833.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="courseID" prefWidth="43.0" text="ID" />
-          <TableColumn fx:id="courseName" prefWidth="104.0" text="Course Name" />
-            <TableColumn fx:id="courseRoom" prefWidth="117.0" text="Course Room" />
-            <TableColumn fx:id="courseDescriptionC" minWidth="3.0" prefWidth="121.0" text="Course Description" />
-            <TableColumn fx:id="startDate" prefWidth="75.0" text="Start Date" />
-            <TableColumn fx:id="endDate" prefWidth="75.0" text="Start Date" />
-        </columns>
-         <padding>
-            <Insets bottom="5.0" />
-         </padding>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <BorderPane.margin>
-            <Insets left="30.0" />
-         </BorderPane.margin>
-      </TableView>
-   </center>
+    <top>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <HBox spacing="18.0">
+                    <children>
+                        <TextField fx:id="searchFielCourses" prefHeight="39.0" prefWidth="177.0" promptText="Search for Course">
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <HBox.margin>
+                                <Insets left="23.0" />
+                            </HBox.margin></TextField>
+                        <Button fx:id="backFromCourseViewToTraineeView" mnemonicParsing="false" onAction="#backToTrainee" prefHeight="39.0" prefWidth="45.0" textOverrun="CLIP">
+                            <HBox.margin>
+                                <Insets left="510.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <TableView fx:id="coursesTable" prefHeight="396.0" prefWidth="833.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="courseID" prefWidth="43.0" text="ID" />
+                <TableColumn fx:id="courseName" prefWidth="104.0" text="Course Name" />
+                <TableColumn fx:id="courseRoom" prefWidth="117.0" text="Course Room" />
+                <TableColumn fx:id="courseDescriptionC" minWidth="3.0" prefWidth="121.0" text="Course Description" />
+                <TableColumn fx:id="startDate" prefWidth="75.0" text="Start Date" />
+                <TableColumn fx:id="endDate" prefWidth="75.0" text="Start Date" />
+            </columns>
+            <padding>
+                <Insets bottom="5.0" />
+            </padding>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <BorderPane.margin>
+                <Insets left="30.0" />
+            </BorderPane.margin>
+        </TableView>
+    </center>
     <bottom>
         <HBox prefHeight="52.0" prefWidth="982.0" spacing="18.0" BorderPane.alignment="CENTER">
             <children>
@@ -76,11 +78,11 @@
                     </HBox.margin>
                 </Button>
             </children>
-         <padding>
-            <Insets left="325.0" />
-         </padding></HBox>
+            <padding>
+                <Insets left="325.0" />
+            </padding></HBox>
     </bottom>
-   <right>
-      <VBox prefHeight="556.0" prefWidth="42.0" BorderPane.alignment="CENTER" />
-   </right>
+    <right>
+        <VBox prefHeight="556.0" prefWidth="42.0" BorderPane.alignment="CENTER" />
+    </right>
 </BorderPane>

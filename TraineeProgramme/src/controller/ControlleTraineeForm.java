@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +15,6 @@ import model.trainee.TraineeDaoImpl;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -89,7 +84,7 @@ public class ControlleTraineeForm implements Initializable {
 
         tr.setLastName(lastNameTrainee.getText());
         tr.setFirstName(firstNameTrainee.getText());
-        tr.setBirthday(convertToDateViaInstant(birthdayTrainee.getValue()));
+        tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
         tr.setAddress(addressTrainee.getText());
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
@@ -121,7 +116,7 @@ public class ControlleTraineeForm implements Initializable {
         tr.setTraineeID(currentTraineeID);
         tr.setLastName(lastNameTrainee.getText());
         tr.setFirstName(firstNameTrainee.getText());
-        tr.setBirthday(convertToDateViaInstant(birthdayTrainee.getValue()));
+        tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
         tr.setAddress(addressTrainee.getText());
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
@@ -157,7 +152,7 @@ public class ControlleTraineeForm implements Initializable {
         currentTraineeID = trainee.getTraineeID();
         lastNameTrainee.setText(trainee.getLastName());
         firstNameTrainee.setText(trainee.getFirstName());
-        birthdayTrainee.setValue(convertToLocalDateViaMilisecond(trainee.getBirthday()));
+        birthdayTrainee.setValue(Controller.convertToLocalDateViaMilisecond(trainee.getBirthday()));
         addressTrainee.setText(trainee.getAddress());
         schoolTrainee.setText(trainee.getSchool());
         emailTrainee.setText(trainee.getEmail());
@@ -165,17 +160,7 @@ public class ControlleTraineeForm implements Initializable {
 
     }
 
-    public LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
-        return Instant.ofEpochMilli(dateToConvert.getTime())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-    }
 
-    public Date convertToDateViaInstant(LocalDate dateToConvert) {
-        return java.util.Date.from(dateToConvert.atStartOfDay()
-                .atZone(ZoneId.systemDefault())
-                .toInstant());
-    }
     public boolean checkInputOfNull(Trainee trainee){
         if(trainee.getFirstName() != null && trainee.getLastName()!=null && trainee.getBirthday() != null &&
         trainee.getAddress() != null && trainee.getLocation() != null && trainee.getSchool() != null && trainee.getEmail() !=null){

@@ -37,7 +37,6 @@
                     <columns>
                         <TableColumn fx:id="courseEntered" prefWidth="160.0" text="Course" />
                         <TableColumn fx:id="skalaInCorrespondingCourse" prefWidth="248.0" text="Skala" />
-                        <TableColumn fx:id="deleteTraineeFromCourseBTN" prefWidth="432.0" text="Delete" />
                     </columns>
                 </TableView>
                 <Label alignment="CENTER" text="Trainee Manager" textAlignment="CENTER">
@@ -45,32 +44,32 @@
                         <Font size="37.0" />
                     </font>
                 </Label>
-                  <VBox prefHeight="237.0" prefWidth="599.0" spacing="10.0" GridPane.rowIndex="1">
-                      <children>
-                          <Label fx:id="traineeID" text="TraineeID: " />
-                          <Label fx:id="lastNameTraineeForm" text="Last Name" />
-                          <Label fx:id="firstNameTraineeForm" text="First Name:" />
-                          <Label fx:id="birthdayTraineeForm" text="Birthday:" />
-                          <Label fx:id="addressTraineeForm" text="Address:" />
-                          <Label fx:id="emailTraineeForm" text="Email:" />
-                          <Label fx:id="locationTraineeForm" text="Location:" />
-                      </children>
-                      <padding>
-                          <Insets bottom="70.0" left="15.0" right="50.0" top="35.0" />
-                      </padding>
-                  </VBox>
+                <VBox prefHeight="237.0" prefWidth="599.0" spacing="10.0" GridPane.rowIndex="1">
+                    <children>
+                        <Label fx:id="traineeID" text="TraineeID: " />
+                        <Label fx:id="lastNameTraineeForm" text="Last Name" />
+                        <Label fx:id="firstNameTraineeForm" text="First Name:" />
+                        <Label fx:id="birthdayTraineeForm" text="Birthday:" />
+                        <Label fx:id="addressTraineeForm" text="Address:" />
+                        <Label fx:id="emailTraineeForm" text="Email:" />
+                        <Label fx:id="locationTraineeForm" text="Location:" />
+                    </children>
+                    <padding>
+                        <Insets bottom="70.0" left="15.0" right="50.0" top="35.0" />
+                    </padding>
+                </VBox>
 
                 <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="599.0" GridPane.rowIndex="3">
                     <Button fx:id="traineeAddToCourse" text="Add to Course" />
-               <ComboBox fx:id="courseList" prefWidth="150.0">
-                  <HBox.margin>
-                     <Insets />
-                  </HBox.margin></ComboBox>
+                    <ComboBox fx:id="courseList" prefWidth="150.0">
+                        <HBox.margin>
+                            <Insets />
+                        </HBox.margin></ComboBox>
                     <Label text="with" />
-               <ComboBox fx:id="skalaList" layoutX="103.0" layoutY="10.0" prefWidth="150.0" />
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
+                    <ComboBox fx:id="skalaList" layoutX="103.0" layoutY="10.0" prefWidth="150.0" />
+                    <padding>
+                        <Insets top="20.0" />
+                    </padding>
                 </HBox>
 
             </children>
