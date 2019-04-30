@@ -128,7 +128,7 @@ public class ControllerTraineeManager implements Initializable {
 
         colBtn.setCellFactory(cellFactory);
 
-        courseEntered.getColumns().add(colBtn);
+        coursesEntered.getColumns().add(colBtn);
     }
 
 
@@ -167,7 +167,7 @@ public class ControllerTraineeManager implements Initializable {
                         super.updateItem(c, b);
 
                         if (c != null) {
-                            setText(c.getCourseName());
+                            setText(c.toString());
                         }
                     }
 

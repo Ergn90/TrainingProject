@@ -33,17 +33,6 @@
             </children>
 
             <children>
-                <TableView fx:id="coursesEntered" minHeight="-Infinity" minWidth="-Infinity" prefHeight="193.0" prefWidth="591.0" GridPane.rowIndex="2">
-                    <columns>
-                        <TableColumn fx:id="courseEntered" prefWidth="160.0" text="Course" />
-                        <TableColumn fx:id="skalaInCorrespondingCourse" prefWidth="248.0" text="Skala" />
-                    </columns>
-                </TableView>
-                <Label alignment="CENTER" text="Trainee Manager" textAlignment="CENTER">
-                    <font>
-                        <Font size="37.0" />
-                    </font>
-                </Label>
                 <VBox prefHeight="237.0" prefWidth="599.0" spacing="10.0" GridPane.rowIndex="1">
                     <children>
                         <Label fx:id="traineeID" text="TraineeID: " />
@@ -58,6 +47,18 @@
                         <Insets bottom="70.0" left="15.0" right="50.0" top="35.0" />
                     </padding>
                 </VBox>
+                <TableView fx:id="coursesEntered" minHeight="-Infinity" minWidth="-Infinity" prefHeight="193.0" prefWidth="591.0" GridPane.rowIndex="2">
+                    <columns>
+                        <TableColumn fx:id="courseEntered" prefWidth="160.0" text="Course" />
+                        <TableColumn fx:id="skalaInCorrespondingCourse" prefWidth="248.0" text="Skala" />
+                    </columns>
+                </TableView>
+                <Label alignment="CENTER" text="Trainee Manager" textAlignment="CENTER">
+                    <font>
+                        <Font size="37.0" />
+                    </font>
+                </Label>
+
 
                 <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="599.0" GridPane.rowIndex="3">
                     <Button fx:id="traineeAddToCourse" text="Add to Course" />
