@@ -7,9 +7,7 @@ import model.enrolledTrainees.EnrolledTraineesDaoImpl;
 import model.location.Location;
 import model.skala.Skala;
 import model.trainee.Trainee;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -231,21 +229,32 @@ public class EnrolledTraineesDaoImplTest {
     @Test
     public void getEnrolledTrainees() {
         EnrolledTrainees attend = enrolledTraineesDao.getEnrolledTrainees(1, 1, 1);
-        EnrolledTrainees excepted=new EnrolledTrainees(course0,trainee0,skala0);
-        checkEnrolledTrainee(attend,excepted);
+        EnrolledTrainees excepted = new EnrolledTrainees(course0, trainee0, skala0);
+        checkEnrolledTrainee(attend, excepted);
 
     }
+
     @Test
     public void insertEnrolledTrainees() {
         boolean isInserted = enrolledTraineesDao.insertEnrolledTrainees(course1, skala0, trainee1);
         Assert.assertTrue(isInserted);
-        EnrolledTrainees excepted=new EnrolledTrainees(course1,trainee1,skala0);
+        EnrolledTrainees excepted = new EnrolledTrainees(course1, trainee1, skala0);
         EnrolledTrainees attend = enrolledTraineesDao.getEnrolledTrainees(2, 1, 2);
-        checkEnrolledTrainee(attend,excepted);
+        checkEnrolledTrainee(attend, excepted);
+        resetInsert();
+    }
+
+
+    public  void resetInsert() {
+        EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
+
+        Course course1 = new Course(2, LocalDate.of(2018, 10, 01), LocalDate.of(2019, 04, 01), "Java Trainee", "EG02", "");
+        Skala skala0 = new Skala(1, "Beginner");
+        Trainee trainee1 = new Trainee(2, "LastName2", "FirstName2", LocalDate.of(1991, 02, 02), "address2", "Info", "firstName2.lLastName2@mail.com", new Location(2, "Stadt"));
+
+        enrolledTraineesDao.deleteEnrolledTrainees(course1.getCourseID(), skala0.getSkalaId(), trainee1.getTraineeID());
 
     }
-       
-
 
 
 }
