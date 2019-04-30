@@ -87,8 +87,7 @@ public class ControllerCourseManager  implements Initializable {
         List<EnrolledTrainees> enrolledTraineeList = enrolledTrainees.getEnrolledTraineesByTraineeID(course.getCourseID());
         tableTraineesInCourse.setItems(FXCollections.observableArrayList(enrolledTraineeList));
 
-        columnTraineeName.setCellValueFactory(new PropertyValueFactory<>("traineeName"));
-        columnTraineeID.setCellValueFactory(new PropertyValueFactory<>("traineeID"));
+        columnTraineeName.setCellValueFactory(new PropertyValueFactory<>("trainee"));
         columnSkala.setCellValueFactory(new PropertyValueFactory<>("skala"));
         return enrolledTrainees;
     }

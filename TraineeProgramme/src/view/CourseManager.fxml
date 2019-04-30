@@ -49,9 +49,8 @@
                 </VBox>
                 <TableView fx:id="tableTraineesInCourse" minHeight="30" prefHeight="172.0" prefWidth="599.0" GridPane.rowIndex="2">
                     <columns>
-                        <TableColumn fx:id="columnTraineeID" prefWidth="426.00001525878906" text="TraineeID" />
-                        <TableColumn fx:id="columnTraineeName" prefWidth="262.99998474121094" text="TraineeName" />
-                        <TableColumn fx:id="columnSkala" prefWidth="150" text="Skala" />
+                        <TableColumn fx:id="columnTraineeName"  text="Trainee" />
+                        <TableColumn fx:id="columnSkala"  text="Skala" />
                     </columns>
                 </TableView>
                 <Label alignment="CENTER" text="Course Manager" textAlignment="CENTER">
