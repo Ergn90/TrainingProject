@@ -18,7 +18,7 @@ public class ConnectionFactory {
             DriverManager.registerDriver(new Driver());
 
             return DriverManager.getConnection(URL
-                    + "userUnicode=true&useJDBCCompliantTimezoneShift=true"
+                    + "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin"
                     + "&user=" + USER + "&password=" + PWD + "&userSSL=false&allowPublicKeyRetrieval=true");
         } catch (SQLException e) {
             throw new RuntimeException("Error connection to the db", e);
