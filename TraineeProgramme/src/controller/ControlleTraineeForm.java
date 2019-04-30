@@ -15,6 +15,7 @@ import model.trainee.TraineeDaoImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -74,9 +75,51 @@ public class ControlleTraineeForm implements Initializable {
         setLocationComboBox();
     }
 
+    private boolean isBirthdayDateValide() {
+        if (!isAgeRequirement(birthdayTrainee.getValue(), 18)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please insert a date to have 18 years old.");
+            alert.show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean isAgeRequirement(LocalDate localDate, int minAge) {
+        int yearMin = LocalDate.now().getYear() - minAge;
+        if (localDate.getYear() == yearMin) {
+            if (localDate.getMonth().getValue() >= LocalDate.now().getMonth().getValue()) {
+                if (localDate.getDayOfMonth() >= LocalDate.now().getDayOfMonth()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else if (localDate.getYear() < yearMin) {
+            return false;
+
+        } else {
+            return true;
+        }
+
+    }
+
     @FXML
     public void addNewTrainee() {
 
+        if (isInputValide()) {
+            if (isBirthdayDateValide()) {
+                getTraineeFromView();
+            }
+        }
+
+    }
+
+    private void getTraineeFromView() {
         TraineeDao trainee = new TraineeDaoImpl();
 
         Trainee tr = new Trainee();
@@ -89,16 +132,8 @@ public class ControlleTraineeForm implements Initializable {
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
         tr.setLocation(loc.getLocation(locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationId()));
-
-        if (checkInputOfNull(tr)) {
-            trainee.insertTrainee(tr);
-            backToTrainee();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setContentText("Please fill all required fields ");
-            alert.showAndWait();
-        }
+        trainee.insertTrainee(tr);
+        backToTrainee();
 
     }
 
@@ -109,26 +144,34 @@ public class ControlleTraineeForm implements Initializable {
 
     @FXML
     public void updateTrainee() {
+        if (isBirthdayDateValide() && isInputValide()) {
 
-        TraineeDao updatedTrainee = new TraineeDaoImpl();
-        Trainee tr = new Trainee();
+            TraineeDao updatedTrainee = new TraineeDaoImpl();
+            Trainee tr = new Trainee();
 
-        tr.setTraineeID(currentTraineeID);
-        tr.setLastName(lastNameTrainee.getText());
-        tr.setFirstName(firstNameTrainee.getText());
-        tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
-        tr.setAddress(addressTrainee.getText());
-        tr.setSchool(schoolTrainee.getText());
-        tr.setEmail(emailTrainee.getText());
-        Location location = new Location();
-        location.setLocationId((locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationId()));
-        location.setLocationName((locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationName()));
-        tr.setLocation(location);
+            tr.setTraineeID(currentTraineeID);
+            tr.setLastName(lastNameTrainee.getText());
+            tr.setFirstName(firstNameTrainee.getText());
+            tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
+            tr.setAddress(addressTrainee.getText());
+            tr.setSchool(schoolTrainee.getText());
+            tr.setEmail(emailTrainee.getText());
+            Location location = new Location();
+            location.setLocationId((locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationId()));
+            location.setLocationName((locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationName()));
+            tr.setLocation(location);
 
-        updatedTrainee.updateTrainee(tr);
-        backToTrainee();
+            updatedTrainee.updateTrainee(tr);
+            backToTrainee();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please insert a date to have 18 years old.");
+            alert.show();
+        }
 
     }
+
     public void setLocationComboBox() {
 
         LocationDao locationDao = new LocationDaoImpl();
@@ -161,11 +204,42 @@ public class ControlleTraineeForm implements Initializable {
     }
 
 
-    public boolean checkInputOfNull(Trainee trainee){
-        if(trainee.getFirstName() != null && trainee.getLastName()!=null && trainee.getBirthday() != null &&
-        trainee.getAddress() != null && trainee.getLocation() != null && trainee.getSchool() != null && trainee.getEmail() !=null){
-            return true;
+    public boolean isInputValide() {
+        String error = "Please fill all required fields ";
+        if (!locationTraineeComboBox.getSelectionModel().isEmpty()) {
+            error += "location not selected ";
         }
+        if (!lastNameTrainee.getText().trim().isEmpty()) {
+            error += "lastName empty ";
+        }
+        if (!firstNameTrainee.getText().trim().isEmpty()) {
+            error += "first name empty ";
+
+        }
+        if (!addressTrainee.getText().trim().isEmpty()) {
+            error += "adress empty ";
+
+        }
+        if (!emailTrainee.getText().trim().isEmpty()) {
+            error += "email empty ";
+
+        }
+        if (!schoolTrainee.getText().trim().isEmpty()) {
+            error += "school empty ";
+
+        }
+        if (birthdayTrainee.getValue() != null) {
+            return true;
+        }else{
+            error += "birthday not selected empty ";
+
+        }
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setContentText(error);
+
+        alert.show();
         return false;
     }
 

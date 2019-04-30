@@ -6,6 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import model.course.Course;
+import model.course.CourseDao;
+import model.course.CourseDaoImpl;
 import model.location.Location;
 import model.location.LocationDao;
 import model.location.LocationDaoImpl;
@@ -19,137 +22,107 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
 public class ControllerCourseForm implements Initializable {
-    @FXML
-    Label lastNameTraineeForm;
 
     @FXML
-    Label firstNameTraineeForm;
+    Label startDate;
 
     @FXML
-    Label birthdayTraineeForm;
+    Label endDate;
 
     @FXML
-    Label addressTraineeForm;
+    Label name;
 
     @FXML
-    Label schoolTraineeForm;
+    Label room;
 
     @FXML
-    Label emailTraineeForm;
+    Label description;
 
     @FXML
-    Label locationTraineeForm;
+    DatePicker courseStartDate;
 
     @FXML
-    TextField firstNameTrainee;
+    DatePicker courseEndDate;
 
     @FXML
-    TextField lastNameTrainee;
+    TextField courseName;
 
     @FXML
-    DatePicker birthdayTrainee;
+    ComboBox courseRoomComboBox;
 
     @FXML
-    TextField addressTrainee;
-
-    @FXML
-    TextField schoolTrainee;
-
-    @FXML
-    TextField emailTrainee;
-
-    @FXML
-    ComboBox<Location> locationTraineeComboBox;
+    TextField courseDescription;
 
     @FXML
     Button addNewTrainee;
 
     @FXML
-    Button cancelTrainee;
-    private int currentTraineeID;
+    Button cancelCourse;
+
+
+    private int currentCourseId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setLocationComboBox();
+        setCourseRoomComboBox();
+
     }
 
-
     @FXML
-    public void addNewTrainee() {
+    public void addNewCourse() {
 
-        TraineeDao trainee = new TraineeDaoImpl();
+        CourseDao course = new CourseDaoImpl();
+        Course cr = new Course();
 
-        Trainee tr = new Trainee();
-        LocationDao loc = new LocationDaoImpl();
+        cr.setStartDate(Controller.convertToDateViaInstant(courseStartDate.getValue()));
+        cr.setEndDate(Controller.convertToDateViaInstant(courseEndDate.getValue()));
+        courseName.setText(getCourseName(courseStartDate.getValue()));
+        cr.setCourseName(courseName.getText());
+        cr.setCourseRoom(courseRoomComboBox.getSelectionModel().getSelectedItem().toString());
+        cr.setCourseDescription(courseDescription.getText());
 
-        tr.setLastName(lastNameTrainee.getText());
-        tr.setFirstName(firstNameTrainee.getText());
-        tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
-        tr.setAddress(addressTrainee.getText());
-        tr.setSchool(schoolTrainee.getText());
-        tr.setEmail(emailTrainee.getText());
-        tr.setLocation(loc.getLocation(locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationId()));
-
-        if (checkInputOfNull(tr)) {
-            trainee.insertTrainee(tr);
-            backToTrainee();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setContentText("Please fill all required fields ");
-            alert.showAndWait();
-        }
-
+        course.insertCourse(cr);
+        backToCourse();
     }
 
     @FXML
     public void cancelCourse() {
-        backToTrainee();
-    }
-
-
-    @FXML
-    public void cancelTrainee() {
-        backToTrainee();
+        backToCourse();
     }
 
     @FXML
-    public void updateTrainee() {
+    public void updateCourse() {
 
-        TraineeDao updatedTrainee = new TraineeDaoImpl();
-        Trainee tr = new Trainee();
+        CourseDao updatedCourse = new CourseDaoImpl();
+        Course cr = new Course();
 
-        tr.setTraineeID(currentTraineeID);
-        tr.setLastName(lastNameTrainee.getText());
-        tr.setFirstName(firstNameTrainee.getText());
-        tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
-        tr.setAddress(addressTrainee.getText());
-        tr.setSchool(schoolTrainee.getText());
-        tr.setEmail(emailTrainee.getText());
-        Location location = new Location();
-        location.setLocationId((locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationId()));
-        location.setLocationName((locationTraineeComboBox.getSelectionModel().getSelectedItem().getLocationName()));
-        tr.setLocation(location);
+        cr.setCourseID(currentCourseId);
+        cr.setStartDate(Controller.convertToDateViaInstant(courseStartDate.getValue()));
+        cr.setEndDate(Controller.convertToDateViaInstant(courseEndDate.getValue()));
+        cr.setCourseName(courseName.getText());
+        cr.setCourseRoom(courseRoomComboBox.getSelectionModel().getSelectedItem().toString());
+        cr.setCourseDescription(courseDescription.getText());
 
-        updatedTrainee.updateTrainee(tr);
-        backToTrainee();
+        updatedCourse.updateCourse(cr);
+        backToCourse();
 
     }
 
-    public void setLocationComboBox() {
+    public void setCourseRoomComboBox() {
 
-        LocationDao locationDao = new LocationDaoImpl();
-        Set<Location> loc = locationDao.getAllLocation();
-        locationTraineeComboBox.setItems(FXCollections.observableArrayList(loc));
+        CourseDao course = new CourseDaoImpl();
+        List<String> crs = course.getAllRoomsValues();
+        courseRoomComboBox.setItems(FXCollections.observableArrayList(crs));
     }
 
-    public void backToTrainee() {
+    public void backToCourse() {
         try {
-            Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineesView.fxml"));
+            Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseView.fxml"));
             addNewTrainee.getScene().setRoot(loader);
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
@@ -157,32 +130,25 @@ public class ControllerCourseForm implements Initializable {
             e.printStackTrace();
         }
     }
-
-    public void setTrainee(Trainee trainee) {
-
-        currentTraineeID = trainee.getTraineeID();
-        lastNameTrainee.setText(trainee.getLastName());
-        firstNameTrainee.setText(trainee.getFirstName());
-        birthdayTrainee.setValue(Controller.convertToLocalDateViaMilisecond(trainee.getBirthday()));
-        addressTrainee.setText(trainee.getAddress());
-        schoolTrainee.setText(trainee.getSchool());
-        emailTrainee.setText(trainee.getEmail());
-        locationTraineeComboBox.getSelectionModel().select(trainee.getLocation());
-
-    }
-
-
-
-    public boolean checkInputOfNull(Trainee trainee) {
-        if (trainee.getFirstName() != null && trainee.getLastName() != null && trainee.getBirthday() != null &&
-                trainee.getAddress() != null && trainee.getLocation() != null && trainee.getSchool() != null && trainee.getEmail() != null) {
-            return true;
+    public String getCourseName(LocalDate startDate){
+        byte ending;
+        if (startDate.getMonthValue() < 5){
+            ending = 1;
+        }else{
+            ending = 2;
         }
-        return false;
+        return "Java Trainee "+ startDate.getYear()+"." + ending;
+    }
+    public void setCourse(Course course) {
+
+        currentCourseId= course.getCourseID();
+        courseStartDate.setValue(Controller.convertToLocalDateViaMilisecond(course.getStartDate()));
+        courseEndDate.setValue(Controller.convertToLocalDateViaMilisecond(course.getEndDate()));
+        courseName.setText(getCourseName(courseStartDate.getValue()));
+        courseRoomComboBox.getSelectionModel().select(course.getCourseRoom());
+        courseDescription.setText(course.getCourseDescription());
+
     }
 
 
 }
-
-
-
