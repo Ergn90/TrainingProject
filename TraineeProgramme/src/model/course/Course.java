@@ -76,10 +76,16 @@ public class Course {
 
     @Override
     public String toString() {
-        return courseName + "-"+getYearCourse();
+        return getPeriodeOfYear();
     }
 
-    private String getYearCourse() {
-        return String.valueOf(startDate.getYear());
+    public String getPeriodeOfYear(){
+        byte ending;
+        if (startDate.getMonthValue() < 5){
+            ending = 1;
+        }else{
+            ending = 2;
+        }
+        return courseName+ startDate.getYear()+"." + ending;
     }
 }

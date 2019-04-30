@@ -45,7 +45,8 @@
             <children>
                 <DatePicker fx:id="courseStartDate"/>
                 <DatePicker fx:id="courseEndDate" />
-                <TextField fx:id="courseName" promptText="Course name" editable="false"/>
+                <Label fx:id="courseNameLabel"  />
+                <TextField fx:id="courseName" promptText="Course name" />
                 <ComboBox fx:id="courseRoomComboBox" promptText="Choose course room" />
                 <TextField fx:id="courseDescription" promptText="Course description" />
             </children>

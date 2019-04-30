@@ -51,6 +51,8 @@ public class ControllerCourseForm implements Initializable {
 
     @FXML
     TextField courseName;
+    @FXML
+    Label courseNameLabel;
 
     @FXML
     ComboBox courseRoomComboBox;
@@ -59,7 +61,7 @@ public class ControllerCourseForm implements Initializable {
     TextField courseDescription;
 
     @FXML
-    Button addNewTrainee;
+    Button addNewCourse;
 
     @FXML
     Button cancelCourse;
@@ -75,19 +77,19 @@ public class ControllerCourseForm implements Initializable {
 
     @FXML
     public void addNewCourse() {
+        if (isInputValide() && isDateValid(courseStartDate.getValue(), courseEndDate.getValue())) {
+            CourseDao course = new CourseDaoImpl();
+            Course cr = new Course();
+            cr.setStartDate(courseStartDate.getValue());
+            cr.setEndDate(courseEndDate.getValue());
+            cr.setCourseName(courseName.getText());
+            cr.setCourseRoom(courseRoomComboBox.getSelectionModel().getSelectedItem().toString());
+            cr.setCourseDescription(courseDescription.getText());
 
-        CourseDao course = new CourseDaoImpl();
-        Course cr = new Course();
+            course.insertCourse(cr);
+            backToCourse();
+        }
 
-        cr.setStartDate(courseStartDate.getValue());
-        cr.setEndDate(courseEndDate.getValue());
-        courseName.setText(getCourseName(courseStartDate.getValue()));
-        cr.setCourseName(courseName.getText());
-        cr.setCourseRoom(courseRoomComboBox.getSelectionModel().getSelectedItem().toString());
-        cr.setCourseDescription(courseDescription.getText());
-
-        course.insertCourse(cr);
-        backToCourse();
     }
 
     @FXML
@@ -97,19 +99,21 @@ public class ControllerCourseForm implements Initializable {
 
     @FXML
     public void updateCourse() {
+        if (isInputValide() && isDateValid(courseStartDate.getValue(), courseEndDate.getValue())) {
 
-        CourseDao updatedCourse = new CourseDaoImpl();
-        Course cr = new Course();
+            CourseDao updatedCourse = new CourseDaoImpl();
+            Course cr = new Course();
+            cr.setCourseID(currentCourseId);
+            cr.setStartDate(courseStartDate.getValue());
+            cr.setEndDate(courseEndDate.getValue());
+            cr.setCourseName(courseName.getText());
+            cr.setCourseRoom(courseRoomComboBox.getSelectionModel().getSelectedItem().toString());
+            cr.setCourseDescription(courseDescription.getText());
 
-        cr.setCourseID(currentCourseId);
-        cr.setStartDate(courseStartDate.getValue());
-        cr.setEndDate(courseEndDate.getValue());
-        cr.setCourseName(courseName.getText());
-        cr.setCourseRoom(courseRoomComboBox.getSelectionModel().getSelectedItem().toString());
-        cr.setCourseDescription(courseDescription.getText());
-
-        updatedCourse.updateCourse(cr);
-        backToCourse();
+            courseNameLabel.setText(cr.toString());
+            updatedCourse.updateCourse(cr);
+            backToCourse();
+        }
 
     }
 
@@ -123,31 +127,62 @@ public class ControllerCourseForm implements Initializable {
     public void backToCourse() {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseView.fxml"));
-            addNewTrainee.getScene().setRoot(loader);
+            addNewCourse.getScene().setRoot(loader);
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public String getCourseName(LocalDate startDate){
-        byte ending;
-        if (startDate.getMonthValue() < 5){
-            ending = 1;
-        }else{
-            ending = 2;
-        }
-        return "Java Trainee "+ startDate.getYear()+"." + ending;
-    }
-    public void setCourse(Course course) {
 
-        currentCourseId= course.getCourseID();
+    public void setCourse(Course course) {
+        currentCourseId = course.getCourseID();
         courseStartDate.setValue(course.getStartDate());
         courseEndDate.setValue(course.getEndDate());
-        courseName.setText(getCourseName(courseStartDate.getValue()));
+        courseName.setText(course.getCourseName());
+        courseNameLabel.setText(course.toString());
         courseRoomComboBox.getSelectionModel().select(course.getCourseRoom());
         courseDescription.setText(course.getCourseDescription());
 
+    }
+
+    private boolean isDateValid(LocalDate start, LocalDate end) {
+        if (end.compareTo(start) < 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please insert a start date who is smaller than end date");
+            alert.show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean isInputValide() {
+        String error = "Please fill all required fields ";
+        if (!courseRoomComboBox.getSelectionModel().isEmpty()) {
+            error += "Room not selected ";
+        }
+        if (!courseName.getText().trim().isEmpty()) {
+            error += "courseName empty ";
+        }
+        if (courseEndDate.getValue() != null) {
+            error += "courseEndDate not selected empty ";
+
+        }
+        if (courseStartDate.getValue() != null) {
+            return true;
+        } else {
+            error += "courseStartDate not selected empty ";
+
+        }
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setContentText(error);
+
+        alert.show();
+        return false;
     }
 
 

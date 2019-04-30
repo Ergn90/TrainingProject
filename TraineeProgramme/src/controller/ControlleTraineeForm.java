@@ -199,7 +199,7 @@ public class ControlleTraineeForm implements Initializable {
     }
 
 
-    public boolean isInputValide() {
+    private boolean isInputValide() {
         String error = "Please fill all required fields ";
         if (!locationTraineeComboBox.getSelectionModel().isEmpty()) {
             error += "location not selected ";

@@ -196,10 +196,10 @@ public class ControllerCourseView implements Initializable {
 //                            loader = FXMLLoader.load(getClass().getResource("../view/TraineeForm.fxml"));
                                 Parent root = (Parent) fxmlLoader.load();
 
-                           /*     ControllerCourseForm controller = fxmlLoader.getController();
+                                ControllerCourseForm controller = fxmlLoader.getController();
                                 controller.setCourse(coursesTable.getItems().get(getIndex()));
                                 controller.addNewCourse.setOnAction(event1 -> controller.updateCourse());
-                                btn.getScene().setRoot(root);*/
+                                btn.getScene().setRoot(root);
 
                             } catch (IOException e) {
                                 e.printStackTrace();

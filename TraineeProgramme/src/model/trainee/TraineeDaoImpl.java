@@ -97,7 +97,6 @@ public class TraineeDaoImpl implements TraineeDao {
 
             ps.setString(1, trainee.getLastName());
             ps.setString(2, trainee.getFirstName());
-            System.out.println(Date.valueOf(trainee.getBirthday()));
             ps.setDate(3, Date.valueOf(trainee.getBirthday()));
             ps.setString(4, trainee.getAddress());
             ps.setString(5, trainee.getSchool());
