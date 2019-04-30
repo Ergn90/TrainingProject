@@ -3,9 +3,13 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import model.course.Course;
 import model.course.CourseDaoImpl;
@@ -15,6 +19,7 @@ import model.skala.Skala;
 import model.skala.SkalaDaoImpl;
 import model.trainee.Trainee;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,8 +28,6 @@ import java.util.Set;
 
 public class ControllerTraineeManager implements Initializable {
 
-
-    //TODO Controller registrieren und auch noch den Trainee in Controller übergeben
     @FXML
     Label lastNameTraineeForm;
 
@@ -38,9 +41,6 @@ public class ControllerTraineeManager implements Initializable {
     Label addressTraineeForm;
 
     @FXML
-    Label schoolTraineeForm;
-
-    @FXML
     Label traineeID;
 
     @FXML
@@ -48,9 +48,6 @@ public class ControllerTraineeManager implements Initializable {
 
     @FXML
     Label locationTraineeForm;
-
-    @FXML
-    Label scaleTraineeId;
 
     @FXML
     Button traineeAddToCourse;
@@ -70,17 +67,20 @@ public class ControllerTraineeManager implements Initializable {
     @FXML
     TableColumn courseEntered;
 
-    //TODO macht hier die Trainee ID so sinn? oder soll evtl im Construktor mit übergeben werden?
+    @FXML
+    Button backBTN;
+
+
 
     private Trainee trainee;
-    // TODO The same
+
 
     //    @Override
     public void initialize(URL location, ResourceBundle resources) {//
 
     }
 
-    //TODO Muss in haupt controller übergeben werden
+
     public void setTrainee(Trainee trainee) {
         this.trainee = trainee;
         setLabels();
@@ -130,7 +130,6 @@ public class ControllerTraineeManager implements Initializable {
     }
 
 
-    @FXML
     public void setLabels() {
         traineeID.setText("TraineeID : " + trainee.getTraineeID());
         firstNameTraineeForm.setText("Firstname: " + trainee.getFirstName());
@@ -151,7 +150,6 @@ public class ControllerTraineeManager implements Initializable {
         return enrolledTrainees;
     }
 
-    @FXML
     private void setComboboxCourseList() {
         CourseDaoImpl courses = new CourseDaoImpl();
         Set<Course> courseSet = courses.getAllCourses();
@@ -176,7 +174,6 @@ public class ControllerTraineeManager implements Initializable {
         });
     }
 
-    @FXML
     private void setComboboxSkalaList() {
         SkalaDaoImpl skala = new SkalaDaoImpl();
         Set<Skala> skalaSet = skala.getAllSkala();
@@ -201,13 +198,22 @@ public class ControllerTraineeManager implements Initializable {
         });
     }
 
-
     @FXML
     protected void handletraineeAddToCourse() {
 
         EnrolledTraineesDaoImpl enr = new EnrolledTraineesDaoImpl();
-        enr.insertEnrolledTrainees(courseList.getValue(), skalaList.getValue(), trainee);
+        enr.insertEnrolledTrainees(courseList.getValue(), skalaList.getValue(), trainee); //TODO if null
+    }
 
+    @FXML
+    public void backToTrainee(ActionEvent actionEvent) throws IOException {
+        try {
+            Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineesView.fxml"));
+            backBTN.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/back.png"))));
+            backBTN.getScene().setRoot(loader);
+        } catch (NullPointerException npe) {
+            System.out.println(npe.getMessage());
+        }
     }
 
 }
