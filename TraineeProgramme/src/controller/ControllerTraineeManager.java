@@ -24,7 +24,6 @@ import java.util.Set;
 public class ControllerTraineeManager implements Initializable {
 
 
-
     //TODO Controller registrieren und auch noch den Trainee in Controller übergeben
     @FXML
     Label lastNameTraineeForm;
@@ -57,10 +56,10 @@ public class ControllerTraineeManager implements Initializable {
     Button traineeAddToCourse;
 
     @FXML
-    ComboBox courseList;
+    ComboBox<Course> courseList;
 
     @FXML
-    ComboBox skalaList;
+    ComboBox<Skala> skalaList;
 
     @FXML
     TableView<EnrolledTrainees> coursesEntered;
@@ -107,7 +106,7 @@ public class ControllerTraineeManager implements Initializable {
                             Trainee trainee = coursesEntered.getItems().get(getIndex()).getTrainee();
                             Course course = coursesEntered.getItems().get(getIndex()).getCourse();
                             Skala skala = coursesEntered.getItems().get(getIndex()).getSkala();
-                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(),course.getCourseID(),skala.getSkalaId());
+                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(), course.getCourseID(), skala.getSkalaId());
                             refreshCourseTrainee();
                         });
                     }
@@ -206,13 +205,9 @@ public class ControllerTraineeManager implements Initializable {
 
     @FXML
     protected void handletraineeAddToCourse() {
-        traineeAddToCourse.setOnAction(new javafx.event.EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                EnrolledTraineesDaoImpl enr = new EnrolledTraineesDaoImpl();
-                enr.insertEnrolledTrainees((Course) courseList.getValue(), (Skala) skalaList.getValue(), trainee); //TODO Funktion überprüfen. Casten ist hier sehr ungünstig
-            }
-        });
+
+        EnrolledTraineesDaoImpl enr = new EnrolledTraineesDaoImpl();
+        enr.insertEnrolledTrainees(courseList.getValue(), skalaList.getValue(), trainee);
 
     }
 

@@ -61,7 +61,7 @@
 
 
                 <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="599.0" GridPane.rowIndex="3">
-                    <Button fx:id="traineeAddToCourse" text="Add to Course" />
+                    <Button fx:id="traineeAddToCourse" text="Add to Course" onAction="#handletraineeAddToCourse" />
                     <ComboBox fx:id="courseList" prefWidth="150.0">
                         <HBox.margin>
                             <Insets />
