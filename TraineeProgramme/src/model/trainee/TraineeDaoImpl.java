@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TraineeDaoImpl implements TraineeDao {
+public class TrainexeDaoImpl implements TraineeDao {
 
     private Trainee extractTraineeFromResultSet(ResultSet rs) throws SQLException {
         Trainee trainee = new Trainee();
