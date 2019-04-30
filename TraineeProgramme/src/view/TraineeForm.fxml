@@ -10,90 +10,69 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="469.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControlleTraineeForm">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="566.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControlleTraineeForm">
    <top>
-      <HBox prefHeight="90.0" prefWidth="792.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="420.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="62.0" prefWidth="732.0" text="Trainee Form">
-               <padding>
-                  <Insets left="210.0" />
-               </padding></Label>
+            <Label prefHeight="112.0" prefWidth="566.0" text="Trainee Form">
+               <HBox.margin>
+                  <Insets left="200.0" />
+               </HBox.margin></Label>
          </children>
       </HBox>
    </top>
    <left>
-      <VBox alignment="TOP_RIGHT" prefHeight="337.0" prefWidth="153.0" spacing="29.0" BorderPane.alignment="BASELINE_RIGHT">
+      <VBox alignment="TOP_RIGHT" prefHeight="300.0" prefWidth="150.0" spacing="30.0" BorderPane.alignment="BASELINE_RIGHT">
          <children>
-            <Label fx:id="firstNameTraineeForm" prefHeight="21.0" prefWidth="111.0" text="First name">
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets></Label>
-            <Label fx:id="lastNameTraineeForm" prefHeight="21.0" prefWidth="108.0" text="Last name" />
-            <Label fx:id="birthdayTraineeForm" prefHeight="21.0" prefWidth="108.0" text="Birthday" />
-            <Label fx:id="addressTraineeForm" prefHeight="21.0" prefWidth="106.0" text="Address" />
-            <Label fx:id="schoolTraineeForm" prefHeight="21.0" prefWidth="106.0" text="School">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets></Label>
-            <Label fx:id="emailTraineeForm" prefHeight="21.0" prefWidth="105.0" text="Email" />
-            <Label fx:id="locationTraineeForm" prefHeight="21.0" prefWidth="106.0" text="Location" />
+            <Label fx:id="firstNameTraineeForm" prefHeight="21.0" prefWidth="104.0" text="First name *" />
+            <Label fx:id="lastNameTraineeForm" prefHeight="21.0" prefWidth="102.0" text="Last name *" />
+            <Label fx:id="birthdayTraineeForm" prefHeight="21.0" prefWidth="96.0" text="Birthday *" />
+            <Label fx:id="addressTraineeForm" prefHeight="21.0" prefWidth="100.0" text="Address *" />
+            <Label fx:id="schoolTraineeForm" prefHeight="21.0" prefWidth="100.0" text="School *" />
+            <Label fx:id="emailTraineeForm" prefHeight="21.0" prefWidth="102.0" text="Email *" />
+            <Label fx:id="locationTraineeForm" prefHeight="21.0" prefWidth="102.0" text="Location *" />
          </children>
-         <BorderPane.margin>
-            <Insets right="25.0" />
-         </BorderPane.margin>
-         <opaqueInsets>
-            <Insets bottom="15.0" />
-         </opaqueInsets>
-         <padding>
-            <Insets bottom="60.0" top="60.0" />
-         </padding>
       </VBox>
    </left>
    <center>
-      <VBox prefHeight="362.0" prefWidth="360.0" spacing="23.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="300.0" prefWidth="300.0" spacing="23.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="firstNameTrainee" prefHeight="25.0" prefWidth="535.0" promptText="First name">
+            <TextField fx:id="firstNameTrainee" prefHeight="25.0" prefWidth="245.0" promptText="First name">
                <VBox.margin>
                   <Insets right="150.0" />
                </VBox.margin></TextField>
             <TextField fx:id="lastNameTrainee" promptText="Last name">
                <VBox.margin>
-                  <Insets left="5.0" right="150.0" />
+                  <Insets right="150.0" />
                </VBox.margin></TextField>
-            <DatePicker fx:id="birthdayTrainee">
-               <VBox.margin>
-                  <Insets left="5.0" right="150.0" />
-               </VBox.margin></DatePicker>
+            <DatePicker fx:id="birthdayTrainee" />
             <TextField fx:id="addressTrainee" promptText="Address">
                <VBox.margin>
-                  <Insets left="5.0" right="150.0" />
+                  <Insets right="150.0" />
                </VBox.margin></TextField>
             <TextField fx:id="schoolTrainee" promptText="School">
                <VBox.margin>
-                  <Insets left="5.0" right="150.0" />
+                  <Insets right="150.0" />
                </VBox.margin></TextField>
-            <TextField fx:id="emailTrainee" prefHeight="25.0" prefWidth="266.0" promptText="Email">
+            <TextField fx:id="emailTrainee" promptText="Email">
                <VBox.margin>
-                  <Insets left="5.0" right="150.0" />
+                  <Insets right="150.0" />
                </VBox.margin></TextField>
-            <ComboBox fx:id="locationTraineeCombo" promptText="choose location">
-               <VBox.margin>
-                  <Insets left="5.0" right="150.0" />
-               </VBox.margin></ComboBox>
+            <ComboBox fx:id="locationTraineeComboBox" promptText="choose location" />
          </children>
       </VBox>
    </center>
    <bottom>
-      <HBox prefHeight="50.0" prefWidth="551.0" spacing="50.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="45.0" prefWidth="516.0" spacing="50.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addNewTrainee" onAction="#addNewTrainee" text="Ok" />
+            <Button fx:id="addNewTrainee" onAction="#addNewTrainee" text="Ok">
+               <HBox.margin>
+                  <Insets left="180.0" />
+               </HBox.margin></Button>
             <Button fx:id="cancel" onAction="#cancelTrainee" text="Cancel" />
          </children>
          <BorderPane.margin>
-            <Insets left="150.0" />
+            <Insets right="80.0" />
          </BorderPane.margin>
       </HBox>
    </bottom>
