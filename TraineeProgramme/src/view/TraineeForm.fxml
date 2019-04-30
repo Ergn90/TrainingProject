@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="566.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControlleTraineeForm">
+<BorderPane maxHeight="-Infinity"  minHeight="500.0" minWidth="500.0" prefHeight="529.0" prefWidth="517.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControlleTraineeForm">
    <top>
       <HBox prefHeight="100.0" prefWidth="420.0" BorderPane.alignment="CENTER">
          <children>
@@ -22,11 +22,11 @@
       </HBox>
    </top>
    <left>
-      <VBox alignment="TOP_RIGHT" prefHeight="300.0" prefWidth="150.0" spacing="30.0" BorderPane.alignment="BASELINE_RIGHT">
+      <VBox alignment="TOP_RIGHT" prefWidth="139.0" spacing="34.0">
          <children>
             <Label fx:id="firstNameTraineeForm" prefHeight="21.0" prefWidth="104.0" text="First name *" />
             <Label fx:id="lastNameTraineeForm" prefHeight="21.0" prefWidth="102.0" text="Last name *" />
-            <Label fx:id="birthdayTraineeForm" prefHeight="21.0" prefWidth="96.0" text="Birthday *" />
+            <Label fx:id="birthdayTraineeForm" prefHeight="21.0" prefWidth="105.0" text="Birthday *" />
             <Label fx:id="addressTraineeForm" prefHeight="21.0" prefWidth="100.0" text="Address *" />
             <Label fx:id="schoolTraineeForm" prefHeight="21.0" prefWidth="100.0" text="School *" />
             <Label fx:id="emailTraineeForm" prefHeight="21.0" prefWidth="102.0" text="Email *" />
@@ -35,7 +35,7 @@
       </VBox>
    </left>
    <center>
-      <VBox prefHeight="300.0" prefWidth="300.0" spacing="23.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="384.0" prefWidth="325.0" spacing="30.0" BorderPane.alignment="TOP_LEFT">
          <children>
             <TextField fx:id="firstNameTrainee" prefHeight="25.0" prefWidth="245.0" promptText="First name">
                <VBox.margin>

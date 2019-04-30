@@ -23,6 +23,8 @@ import model.trainee.TraineeDaoImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -224,10 +226,26 @@ public class ControllerTraineeView implements Initializable {
 
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
+                LocalDate dateBirthday=Controller.convertToLocalDateViaMilisecond(trainee.getBirthday());
 
                 if (trainee.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 } else if (trainee.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if (trainee.getAddress().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if (trainee.getSchool().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if (trainee.getEmail().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if (trainee.getLocation().getLocationName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else if (dateBirthday.toString().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
                 return false; // Does not match.
