@@ -25,6 +25,7 @@ import model.trainee.TraineeDaoImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -139,12 +140,19 @@ public class ControllerCourseView implements Initializable {
 
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
-
+                LocalDate startDate=Controller.convertToLocalDateViaMilisecond(course.getStartDate());
+                LocalDate endDate=Controller.convertToLocalDateViaMilisecond(course.getEndDate());
                 if (course.getCourseRoom().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                } /*else if (course..toLowerCase().contains(lowerCaseFilter)) {
-                     return true;*/
-                //}
+                } else if (course.getCourseDescription().toLowerCase().contains(lowerCaseFilter)) {
+                     return true;
+                }else if (course.getCourseName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }else if(startDate.toString().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }else if(endDate.toString().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
                 return false; // Does not match.
             });
         });
