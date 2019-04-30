@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity"  minHeight="500.0" minWidth="500.0" prefHeight="529.0" prefWidth="517.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControlleTraineeForm">
+<BorderPane fx:id="borderPaneTraineeForm" maxHeight="-Infinity"  minHeight="500.0" minWidth="500.0" prefHeight="529.0" prefWidth="517.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControlleTraineeForm">
    <top>
       <HBox prefHeight="100.0" prefWidth="420.0" BorderPane.alignment="CENTER">
          <children>
