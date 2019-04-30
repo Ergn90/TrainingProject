@@ -94,16 +94,8 @@ public class Trainee {
 
     @Override
     public String toString() {
-        return "Trainee{" +
-                "traineeID=" + traineeID +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", birthday=" + birthday +
-                ", address='" + address + '\'' +
-                ", school='" + school + '\'' +
-                ", email='" + email + '\'' +
-                ", location=" + location +
-                '}';
+        int old=LocalDate.now().getYear()-birthday.getYear();
+        return lastName + "-"+firstName+ " is "+old+ " old and from "+location;
     }
 }
 
