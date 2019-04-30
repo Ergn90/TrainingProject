@@ -198,7 +198,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public Skala getSkala(int traineeID, int coursesID) {
+    public List<Skala> getSkala(int traineeID, int coursesID) {
         Connection connection = ConnectionFactory.getConnection();
 
         try {
@@ -207,10 +207,12 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
 
             ResultSet rs = stmt.executeQuery(SELECTSKALABYCOURSEID + coursesID + ANDTRAINEEID + traineeID);
 
-            if (rs.next()) {
-                return extractSkalaFromResult(rs);
-
+            List<Skala> skalaList = new ArrayList<>();
+            while (rs.next()) {
+                Skala skala = extractSkalaFromResult(rs);
+                skalaList.add(skala);
             }
+            return skalaList;
 
         } catch (SQLException ex) {
 
@@ -223,7 +225,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public Course getCourse(int traineeID, int skalaID) {
+    public List<Course> getCourse(int traineeID, int skalaID) {
         Connection connection = ConnectionFactory.getConnection();
 
         try {
@@ -232,10 +234,12 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
 
             ResultSet rs = stmt.executeQuery(SELECTCOURSESBYTRAINEESID + traineeID + ANDSKALAEID + skalaID);
 
-            if (rs.next()) {
-                return extractCourseFromResult(rs);
-
+            List<Course> coursesList = new ArrayList<>();
+            while (rs.next()) {
+                Course course = extractCourseFromResult(rs);
+                coursesList.add(course);
             }
+            return coursesList;
 
         } catch (SQLException ex) {
 
@@ -247,7 +251,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
     }
 
     @Override
-    public Trainee getTrainee(int coursesID, int skalaID) {
+    public List<Trainee> getTrainee(int coursesID, int skalaID) {
         Connection connection = ConnectionFactory.getConnection();
 
         try {
@@ -255,10 +259,34 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
             Statement stmt = connection.createStatement();
 
             ResultSet rs = stmt.executeQuery(SELECTTRAINEEBYCOURSEID + coursesID + ANDSKALAEID + skalaID);
+            List<Trainee> traineeList = new ArrayList<>();
+            while (rs.next()) {
+                Trainee trainee = extractTraineeFromResult(rs);
+                traineeList.add(trainee);
+            }
+            return traineeList;
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
+        }
+
+        return null;
+    }
+
+    @Override
+    public EnrolledTrainees getEnrolledTrainees(int courseID, int skalaID, int traineeID) {
+        Connection connection = ConnectionFactory.getConnection();
+
+        try {
+
+            Statement stmt = connection.createStatement();
+
+            ResultSet rs = stmt.executeQuery(SELECTALLINFO +WHERECOURSEID+ courseID + ANDSKALAEID + skalaID + ANDTRAINEEID + traineeID);
+
 
             if (rs.next()) {
-                return extractTraineeFromResult(rs);
-
+                return extractEnrolledTrainees(rs);
             }
 
         } catch (SQLException ex) {
@@ -282,7 +310,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
             ResultSet resultSet = statement.executeQuery(SELECTALLINFO + where + id);
             List<EnrolledTrainees> enrolledTraineesList = new ArrayList<>();
             while (resultSet.next()) {
-                extractEnrolledTrainees(resultSet, enrolledTraineesList);
+                enrolledTraineesList.add(extractEnrolledTrainees(resultSet));
             }
             return enrolledTraineesList;
         } catch (SQLException e) {
@@ -296,12 +324,12 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
         return getEnrolledTrainees(WHERETRAINEEID, traineeID);
     }
 
-    private void extractEnrolledTrainees(ResultSet resultSet, List<EnrolledTrainees> enrolledTraineesList) throws SQLException {
+    private EnrolledTrainees extractEnrolledTrainees(ResultSet resultSet) throws SQLException {
         Course course = extractCourseFromResult(resultSet);
         Trainee trainee = extractTraineeFromResult(resultSet);
         Skala skala = extractSkalaFromResult(resultSet);
         EnrolledTrainees enrolledTrainees = new EnrolledTrainees(course, trainee, skala);
-        enrolledTraineesList.add(enrolledTrainees);
+        return enrolledTrainees;
     }
 
     @Override

@@ -13,9 +13,10 @@ public interface EnrolledTraineesDao {
     List<Skala> getAllSkalaByCourse(Course course);
     List<Trainee> getAllTraineesBySkala(Skala skala);
     List<Course> getAllCoursesBySkala(Skala skala);
-    Skala getSkala(int traineeID,int coursesID);
-    Course getCourse(int traineeID, int skalaID);
-    Trainee getTrainee(int coursesID,int skalaID);
+    List<Skala> getSkala(int traineeID,int coursesID);
+    List<Course>  getCourse(int traineeID, int skalaID);
+    List<Trainee> getTrainee(int coursesID,int skalaID);
+    EnrolledTrainees getEnrolledTrainees(int courseID,int skalaID,int traineeID);
     List<EnrolledTrainees> getEnrolledTraineesByCourseID(int courseID );
     List<EnrolledTrainees> getEnrolledTraineesByTraineeID(int traineeID );
     boolean insertEnrolledTrainees(Course course, Skala skala, Trainee trainee);
