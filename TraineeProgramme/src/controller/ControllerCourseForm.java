@@ -79,8 +79,8 @@ public class ControllerCourseForm implements Initializable {
         CourseDao course = new CourseDaoImpl();
         Course cr = new Course();
 
-        cr.setStartDate(Controller.convertToDateViaInstant(courseStartDate.getValue()));
-        cr.setEndDate(Controller.convertToDateViaInstant(courseEndDate.getValue()));
+        cr.setStartDate(courseStartDate.getValue());
+        cr.setEndDate(courseEndDate.getValue());
         courseName.setText(getCourseName(courseStartDate.getValue()));
         cr.setCourseName(courseName.getText());
         cr.setCourseRoom(courseRoomComboBox.getSelectionModel().getSelectedItem().toString());
@@ -102,8 +102,8 @@ public class ControllerCourseForm implements Initializable {
         Course cr = new Course();
 
         cr.setCourseID(currentCourseId);
-        cr.setStartDate(Controller.convertToDateViaInstant(courseStartDate.getValue()));
-        cr.setEndDate(Controller.convertToDateViaInstant(courseEndDate.getValue()));
+        cr.setStartDate(courseStartDate.getValue());
+        cr.setEndDate(courseEndDate.getValue());
         cr.setCourseName(courseName.getText());
         cr.setCourseRoom(courseRoomComboBox.getSelectionModel().getSelectedItem().toString());
         cr.setCourseDescription(courseDescription.getText());
@@ -142,8 +142,8 @@ public class ControllerCourseForm implements Initializable {
     public void setCourse(Course course) {
 
         currentCourseId= course.getCourseID();
-        courseStartDate.setValue(Controller.convertToLocalDateViaMilisecond(course.getStartDate()));
-        courseEndDate.setValue(Controller.convertToLocalDateViaMilisecond(course.getEndDate()));
+        courseStartDate.setValue(course.getStartDate());
+        courseEndDate.setValue(course.getEndDate());
         courseName.setText(getCourseName(courseStartDate.getValue()));
         courseRoomComboBox.getSelectionModel().select(course.getCourseRoom());
         courseDescription.setText(course.getCourseDescription());

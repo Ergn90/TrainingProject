@@ -2,13 +2,13 @@ package model.trainee;
 
 import model.location.Location;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Trainee {
     private int traineeID;
     private String lastName;
     private String firstName;
-    private Date birthday;
+    private LocalDate birthday;
     private String address;
     private String school;
     private String email;
@@ -17,7 +17,7 @@ public class Trainee {
     public Trainee() {
     }
 
-    public Trainee(int traineeID, String lastName, String firstName, Date birthday, String address, String school, String email, Location location) {
+    public Trainee(int traineeID, String lastName, String firstName, LocalDate birthday, String address, String school, String email, Location location) {
         this.traineeID = traineeID;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -52,11 +52,11 @@ public class Trainee {
         this.firstName = firstName;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

@@ -164,17 +164,6 @@ public class Controller implements Initializable {
     @FXML
     TextField scaleTrainee;
 
-    public static LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
-        return Instant.ofEpochMilli(dateToConvert.getTime())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-    }
-
-    public static Date convertToDateViaInstant(LocalDate dateToConvert) {
-        return java.util.Date.from(dateToConvert.atStartOfDay()
-                .atZone(ZoneId.systemDefault())
-                .toInstant());
-    }
 
 
     @Override

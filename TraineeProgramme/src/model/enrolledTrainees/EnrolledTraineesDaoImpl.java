@@ -57,8 +57,8 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
         Course course = new Course();
         course.setCourseID(resultSet.getInt("CourseID"));
         course.setCourseName(resultSet.getString("CourseName"));
-        course.setStartDate(resultSet.getDate("CourseStartDate"));
-        course.setEndDate(resultSet.getDate("CourseEndDate"));
+        course.setStartDate(resultSet.getDate("CourseStartDate").toLocalDate());
+        course.setEndDate(resultSet.getDate("CourseEndDate").toLocalDate());
         course.setCourseRoom(resultSet.getString("CourseRoom"));
         course.setCourseDescription(resultSet.getString("CourseDescription"));
         return course;
@@ -70,7 +70,7 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
         trainee.setTraineeID(resultSet.getInt("TraineeID"));
         trainee.setAddress(resultSet.getString("LastName"));
         trainee.setFirstName(resultSet.getString("FirstName"));
-        trainee.setBirthday(resultSet.getDate("Birthday"));
+        trainee.setBirthday(resultSet.getDate("Birthday").toLocalDate());
         trainee.setAddress(resultSet.getString("Address"));
         trainee.setEmail(resultSet.getString("Email"));
         Location location = new Location();

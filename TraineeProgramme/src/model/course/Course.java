@@ -3,20 +3,16 @@ package model.course;
 import controller.Controller;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 
 public class Course {
     private int courseID;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String courseName;
     private String courseRoom;
     private String courseDescription;
 
-    public Course(int courseID, Date startDate, Date endDate, String courseName, String courseRoom, String courseDescription) {
+    public Course(int courseID, LocalDate startDate, LocalDate endDate, String courseName, String courseRoom, String courseDescription) {
         this.courseID = courseID;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -41,11 +37,11 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
@@ -70,11 +66,11 @@ public class Course {
         return courseID;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -84,7 +80,6 @@ public class Course {
     }
 
     private String getYearCourse() {
-        LocalDate localDate = Controller.convertToLocalDateViaMilisecond(startDate);
-        return String.valueOf(localDate.getYear());
+        return String.valueOf(startDate.getYear());
     }
 }

@@ -14,7 +14,7 @@ public class TraineeDaoImpl implements TraineeDao {
         trainee.setTraineeID(rs.getInt("traineeID"));
         trainee.setLastName(rs.getString("lastName"));
         trainee.setFirstName(rs.getString("firstName"));
-        trainee.setBirthday(rs.getDate("birthday"));
+        trainee.setBirthday(rs.getDate("birthday").toLocalDate());
         trainee.setAddress(rs.getString("address"));
         trainee.setSchool(rs.getString("school"));
         trainee.setEmail(rs.getString("email"));
@@ -69,7 +69,7 @@ public class TraineeDaoImpl implements TraineeDao {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO trainee VALUES (NULL,?,?,?,?,?,?,?)");
             ps.setString(1, trainee.getLastName());
             ps.setString(2, trainee.getFirstName());
-            ps.setDate(3, new java.sql.Date(trainee.getBirthday().getTime()));
+            ps.setDate(3,Date.valueOf(trainee.getBirthday()));
             ps.setString(4, trainee.getAddress());
             ps.setString(5, trainee.getSchool());
             ps.setString(6, trainee.getEmail());
@@ -97,7 +97,8 @@ public class TraineeDaoImpl implements TraineeDao {
 
             ps.setString(1, trainee.getLastName());
             ps.setString(2, trainee.getFirstName());
-            ps.setDate(3, new java.sql.Date(trainee.getBirthday().getTime()));
+            System.out.println(Date.valueOf(trainee.getBirthday()));
+            ps.setDate(3, Date.valueOf(trainee.getBirthday()));
             ps.setString(4, trainee.getAddress());
             ps.setString(5, trainee.getSchool());
             ps.setString(6, trainee.getEmail());

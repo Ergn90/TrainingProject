@@ -91,7 +91,7 @@ public class ControlleTraineeForm implements Initializable {
         int yearMin = LocalDate.now().getYear() - minAge;
         if (localDate.getYear() == yearMin) {
             if (localDate.getMonth().getValue() >= LocalDate.now().getMonth().getValue()) {
-                if (localDate.getDayOfMonth() >= LocalDate.now().getDayOfMonth()) {
+                if (localDate.getDayOfYear() >= LocalDate.now().getDayOfYear()) {
                     return true;
                 } else {
                     return false;
@@ -99,7 +99,7 @@ public class ControlleTraineeForm implements Initializable {
             } else {
                 return false;
             }
-        } else if (localDate.getYear() < yearMin) {
+        } else if (localDate.getYear() > yearMin) {
             return false;
 
         } else {
@@ -113,13 +113,13 @@ public class ControlleTraineeForm implements Initializable {
 
         if (isInputValide()) {
             if (isBirthdayDateValide()) {
-                getTraineeFromView();
+                insertInfoTrainee();
             }
         }
 
     }
 
-    private void getTraineeFromView() {
+    private void insertInfoTrainee() {
         TraineeDao trainee = new TraineeDaoImpl();
 
         Trainee tr = new Trainee();
@@ -127,7 +127,7 @@ public class ControlleTraineeForm implements Initializable {
 
         tr.setLastName(lastNameTrainee.getText());
         tr.setFirstName(firstNameTrainee.getText());
-        tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
+        tr.setBirthday((birthdayTrainee.getValue()));
         tr.setAddress(addressTrainee.getText());
         tr.setSchool(schoolTrainee.getText());
         tr.setEmail(emailTrainee.getText());
@@ -152,7 +152,7 @@ public class ControlleTraineeForm implements Initializable {
             tr.setTraineeID(currentTraineeID);
             tr.setLastName(lastNameTrainee.getText());
             tr.setFirstName(firstNameTrainee.getText());
-            tr.setBirthday(Controller.convertToDateViaInstant(birthdayTrainee.getValue()));
+            tr.setBirthday(birthdayTrainee.getValue());
             tr.setAddress(addressTrainee.getText());
             tr.setSchool(schoolTrainee.getText());
             tr.setEmail(emailTrainee.getText());
@@ -163,11 +163,6 @@ public class ControlleTraineeForm implements Initializable {
 
             updatedTrainee.updateTrainee(tr);
             backToTrainee();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setContentText("Please insert a date to have 18 years old.");
-            alert.show();
         }
 
     }
@@ -195,7 +190,7 @@ public class ControlleTraineeForm implements Initializable {
         currentTraineeID = trainee.getTraineeID();
         lastNameTrainee.setText(trainee.getLastName());
         firstNameTrainee.setText(trainee.getFirstName());
-        birthdayTrainee.setValue(Controller.convertToLocalDateViaMilisecond(trainee.getBirthday()));
+        birthdayTrainee.setValue(trainee.getBirthday());
         addressTrainee.setText(trainee.getAddress());
         schoolTrainee.setText(trainee.getSchool());
         emailTrainee.setText(trainee.getEmail());

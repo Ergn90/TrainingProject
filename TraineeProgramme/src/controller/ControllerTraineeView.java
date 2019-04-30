@@ -226,7 +226,7 @@ public class ControllerTraineeView implements Initializable {
 
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
-                LocalDate dateBirthday=Controller.convertToLocalDateViaMilisecond(trainee.getBirthday());
+                LocalDate dateBirthday= trainee.getBirthday();
 
                 if (trainee.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
                     return true;

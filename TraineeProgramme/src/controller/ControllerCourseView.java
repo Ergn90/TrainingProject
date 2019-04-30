@@ -141,8 +141,8 @@ public class ControllerCourseView implements Initializable {
 
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
-                LocalDate startDate=Controller.convertToLocalDateViaMilisecond(course.getStartDate());
-                LocalDate endDate=Controller.convertToLocalDateViaMilisecond(course.getEndDate());
+                LocalDate startDate= course.getStartDate();
+                LocalDate endDate=course.getEndDate();
                 if (course.getCourseRoom().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 } else if (course.getCourseDescription().toLowerCase().contains(lowerCaseFilter)) {
