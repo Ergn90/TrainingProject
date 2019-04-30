@@ -209,7 +209,7 @@ public class ControllerTraineeManager implements Initializable {
     public void backToTrainee(ActionEvent actionEvent) throws IOException {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineesView.fxml"));
-            backBTN.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/back.png"))));
+          //  backBTN.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/back.png"))));
             backBTN.getScene().setRoot(loader);
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
