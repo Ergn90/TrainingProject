@@ -102,4 +102,21 @@ public class TraineeDaoImplTest {
         traineeDao.deleteTrainee(trainee10.getTraineeID());
     }
 
+    @Test
+    public void updateTrainee() {
+        trainee1.setLastName("test");
+        boolean isUpdaded = traineeDao.updateTrainee(trainee1);
+        Assert.assertTrue(isUpdaded);
+        Trainee excepted = new Trainee(trainee1.getTraineeID(),"test",trainee1.getFirstName(),
+                trainee1.getBirthday(),trainee1.getAddress(),trainee1.getSchool(),trainee1.getEmail(),trainee1.getLocation());
+        checkTrainee(trainee1, excepted);
+        resetUpdate();
+
+    }
+
+    private void resetUpdate() {
+        trainee1.setLastName("LastName2");
+
+    }
+
 }

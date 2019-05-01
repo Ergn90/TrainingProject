@@ -64,8 +64,15 @@ public class CourseDaoImpl implements CourseDao {
     public Set<Course> getCoursesByName(String name) {
         Connection connection = ConnectionFactory.getConnection();
         try {
+
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Courses where CourseName =" + name );
+
+            PreparedStatement ps = connection.prepareStatement("Select * from Courses where CourseName=?");
+
+            ps.setString(1, name);
+
+            ResultSet rs = ps.executeQuery();
+
             Set<Course> coursesSet = new HashSet();
             while (rs.next()) {
                 Course course = extractCoursesFromResult(rs);
