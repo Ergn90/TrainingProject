@@ -1,11 +1,6 @@
 package tests;
 
-import model.course.Course;
-import model.enrolledTrainees.EnrolledTrainees;
-import model.enrolledTrainees.EnrolledTraineesDao;
-import model.enrolledTrainees.EnrolledTraineesDaoImpl;
 import model.location.Location;
-import model.skala.Skala;
 import model.trainee.Trainee;
 import model.trainee.TraineeDao;
 import model.trainee.TraineeDaoImpl;
@@ -14,11 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import java.util.*;
 
 public class TraineeDaoImplTest {
 
@@ -26,7 +17,7 @@ public class TraineeDaoImplTest {
     TraineeDao traineeDao;
     private Trainee trainee0;
     private Trainee trainee1;
-    private Trainee trainee2;
+    private Trainee trainee10;
 
     @Before
     public void preparedTest() {
@@ -41,22 +32,26 @@ public class TraineeDaoImplTest {
         trainee0.setLastName("LastName1");
         trainee0.setBirthday(LocalDate.of(1990, 01, 01));
         trainee1 = new Trainee(2, "LastName2", "FirstName2", LocalDate.of(1991, 02, 02), "address2", "Info", "firstName2.lLastName2@mail.com", new Location(2, "Stadt"));
-        trainee2 = new Trainee(3, "LastName3", "FirstName3", LocalDate.of(1992, 03, 10), "address3", "Info", "firstName3.lLastName3@mail.com", new Location(3, "Ville"));
+        trainee10 = new Trainee(10, "LastName3", "FirstName3", LocalDate.of(1992, 03, 10), "address3", "Info", "firstName3.lLastName3@mail.com", new Location(3, "Ville"));
 
     }
     @Test
     public void getTrainee() {
-        List<Trainee> attend = (List<Trainee>) traineeDao.getTrainee(2);
-        checkTraineeList(Collections.singletonList(trainee2), attend);
+        Trainee attend =traineeDao.getTrainee(2);
+        checkTrainee(trainee1, attend);
     }
 
-    private void checkTraineeList(List<Trainee> allTraineesByID, List<Trainee> traineeList) {
+    private void checkTraineeList(List<Trainee> allTraineesByID, Set<Trainee> traineeList) {
         Assert.assertEquals(traineeList.size(), allTraineesByID.size());
-        for (int i = 0; i < traineeList.size(); i++) {
-            Trainee excepted = traineeList.get(i);
-            Trainee attend = allTraineesByID.get(i);
-            checkTrainee(excepted, attend);
+
+
+        for (Iterator<Trainee> it = traineeList.iterator(); it.hasNext(); ) {
+            Trainee f = it.next();
+
+                checkTrainee(allTraineesByID.get(f.getTraineeID()-1), f);
+
         }
+
     }
 
     private void checkTrainee(Trainee excepted, Trainee attend) {
@@ -77,18 +72,26 @@ public class TraineeDaoImplTest {
         List<Trainee> traineeList = new ArrayList<>();
         traineeList.add(trainee0);
         traineeList.add(trainee1);
-        List<Trainee> allTrainee = (List<Trainee>) traineeDao.getTrainee(trainee1.getTraineeID());
+        traineeList.add(new Trainee(3, "LastName3", "FirstName3",LocalDate.of(1992,3,10),"address3","Info","firstName3.lLastName3@mail.com",new Location(3,"Ville")));
+        traineeList.add(new Trainee(4, "LastName4", "FirstName4",LocalDate.of(1993,4,10),"address4","Info","firstName4.lLastName4@mail.com",new Location(4,"Ciudad")));
+        traineeList.add(new Trainee(5, "LastName5", "FirstName5",LocalDate.of(1993,4,10),"address5","Info","firstName5.lLastName5@mail.com",new Location(5,"Città")));
+        traineeList.add(new Trainee(6, "LastName6", "FirstName6",LocalDate.of(1994,5,5),"address5","Info","firstName6.lLastName6@mail.com",new Location(6,"Cidade")));
+        traineeList.add(new Trainee(7, "LastName7", "FirstName7",LocalDate.of(1995,7,7),"address6","Info","firstName7.lLastName7@mail.com",new Location(7,"Extern")));
+        traineeList.add(new Trainee(8, "LastName8", "FirstName8",LocalDate.of(1996,8,8),"address7","Info","firstName8.lLastName8.@mail.com",new Location(2,"Stadt")));
+        traineeList.add(new Trainee(9, "LastName9", "FirstName9",LocalDate.of(1997,9,9),"address8","Info","firstName9.lLastName9.@mail.com",new Location(3,"Ville")));
+
+        Set<Trainee> allTrainee =traineeDao.getAllTrainee();
         checkTraineeList(traineeList, allTrainee);
     }
 
 
     @Test
     public void insertTrainee() {
-        boolean isInserted = traineeDao.insertTrainee(trainee1);
+        boolean isInserted = traineeDao.insertTrainee(trainee10);
         Assert.assertTrue(isInserted);
-        Trainee excepted = new Trainee(trainee1.getTraineeID(),trainee1.getLastName(),trainee1.getFirstName(),
-                 trainee1.getBirthday(),trainee1.getAddress(),trainee1.getSchool(),trainee1.getEmail(),trainee1.getLocation());
-        Trainee attend = traineeDao.getTrainee(1);
+        Trainee excepted = new Trainee(trainee10.getTraineeID(),trainee10.getLastName(),trainee10.getFirstName(),
+                trainee10.getBirthday(),trainee10.getAddress(),trainee10.getSchool(),trainee10.getEmail(),trainee10.getLocation());
+        Trainee attend = traineeDao.getTrainee(10);
         checkTrainee(attend, excepted);
         resetInsert();
     }
@@ -96,8 +99,7 @@ public class TraineeDaoImplTest {
 
     public  void resetInsert() {
         TraineeDao traineeDao = new TraineeDaoImpl();
-        Trainee trainee1 = new Trainee(2, "LastName2", "FirstName2", LocalDate.of(1991, 02, 02), "address2", "Info", "firstName2.lLastName2@mail.com", new Location(2, "Stadt"));
-        traineeDao.deleteTrainee(trainee1.getTraineeID());
+        traineeDao.deleteTrainee(trainee10.getTraineeID());
     }
 
 }

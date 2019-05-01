@@ -30,7 +30,7 @@ public class TraineeDaoImpl implements TraineeDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * from trainee inner join location on trainee.LocationId=location.LocationIdWHERE traineeID=" + id);
+            ResultSet rs = stmt.executeQuery("SELECT * from trainee inner join location on trainee.LocationId=location.LocationId WHERE traineeID=" + id);
 
             if (rs.next()) {
                 return extractTraineeFromResultSet(rs);
