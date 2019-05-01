@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPaneTraineeForm" maxHeight="-Infinity"  minHeight="500.0" minWidth="500.0" prefHeight="529.0" prefWidth="517.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControlleTraineeForm">
+<BorderPane fx:id="borderPaneTraineeForm" maxHeight="-Infinity" minHeight="500.0" minWidth="500.0" prefHeight="529.0" prefWidth="951.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControlleTraineeForm">
    <top>
       <HBox prefHeight="100.0" prefWidth="420.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="112.0" prefWidth="566.0" text="Trainee Form">
+            <Label prefHeight="100.0" prefWidth="518.0" text="Trainee Form">
                <HBox.margin>
-                  <Insets left="200.0" />
+                  <Insets left="400.0" />
                </HBox.margin></Label>
          </children>
       </HBox>
@@ -63,7 +63,7 @@
       </VBox>
    </center>
    <bottom>
-      <HBox prefHeight="45.0" prefWidth="516.0" spacing="50.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="45.0" prefWidth="688.0" spacing="50.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addNewTrainee" onAction="#addNewTrainee" text="Ok">
                <HBox.margin>
@@ -74,6 +74,12 @@
          <BorderPane.margin>
             <Insets right="80.0" />
          </BorderPane.margin>
+         <opaqueInsets>
+            <Insets left="50.0" right="50.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets left="250.0" />
+         </padding>
       </HBox>
    </bottom>
 </BorderPane>
