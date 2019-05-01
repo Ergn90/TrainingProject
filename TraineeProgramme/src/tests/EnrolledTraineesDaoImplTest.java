@@ -9,6 +9,9 @@ import model.skala.Skala;
 import model.trainee.Trainee;
 import org.junit.*;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -245,15 +248,63 @@ public class EnrolledTraineesDaoImplTest {
     }
 
 
-    public  void resetInsert() {
+    public void resetInsert() {
         EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
-
-        Course course1 = new Course(2, LocalDate.of(2018, 10, 01), LocalDate.of(2019, 04, 01), "Java Trainee", "EG02", "");
-        Skala skala0 = new Skala(1, "Beginner");
-        Trainee trainee1 = new Trainee(2, "LastName2", "FirstName2", LocalDate.of(1991, 02, 02), "address2", "Info", "firstName2.lLastName2@mail.com", new Location(2, "Stadt"));
-
         enrolledTraineesDao.deleteEnrolledTrainees(course1.getCourseID(), skala0.getSkalaId(), trainee1.getTraineeID());
 
+    }
+
+
+    @Test
+    public void deleteEnrolledTrainees() {
+        boolean isDeleted = enrolledTraineesDao.deleteEnrolledTrainees(course0.getCourseID(), skala0.getSkalaId(), trainee0.getTraineeID());
+        Assert.assertTrue(isDeleted);
+        EnrolledTrainees attend = enrolledTraineesDao.getEnrolledTrainees(1, 1, 1);
+        Assert.assertEquals(null, attend);
+        resetDeleted();
+    }
+
+    private void resetDeleted() {
+        enrolledTraineesDao.insertEnrolledTrainees(course0, skala0, trainee0);
+    }
+
+    @Test
+    public void deleteEnrolledTraineesByTrainee() {
+        boolean isDeleted = enrolledTraineesDao.deleteEnrolledTraineesByTrainee(1);
+        Assert.assertTrue(isDeleted);
+        EnrolledTrainees attend = enrolledTraineesDao.getEnrolledTrainees(1, 1, 1);
+        EnrolledTrainees attend1 = enrolledTraineesDao.getEnrolledTrainees(2, 1, 1);
+        Assert.assertEquals(null, attend);
+        Assert.assertEquals(null, attend1);
+        resetDeletedTrainee();
+
+    }
+
+    private void resetDeletedTrainee() {
+        enrolledTraineesDao.insertEnrolledTrainees(course0, skala0, trainee0);
+        enrolledTraineesDao.insertEnrolledTrainees(course1, skala0, trainee0);
+    }
+
+    @Test
+    public void deleteEnrolledTraineesByCourse() {
+        boolean isDeleted = enrolledTraineesDao.deleteEnrolledTraineesByCourse(1);
+        Assert.assertTrue(isDeleted);
+        EnrolledTrainees attend = enrolledTraineesDao.getEnrolledTrainees(1, 1, 1);
+        EnrolledTrainees attend1 = enrolledTraineesDao.getEnrolledTrainees(1, 3, 2);
+        EnrolledTrainees attend2 = enrolledTraineesDao.getEnrolledTrainees(1, 3, 3);
+        Assert.assertEquals(null, attend);
+        Assert.assertEquals(null, attend1);
+        Assert.assertEquals(null, attend2);
+
+        resetDeleteCourse();
+
+
+    }
+
+    private void resetDeleteCourse() {
+        enrolledTraineesDao.insertEnrolledTrainees(course0, skala0, trainee0);
+        enrolledTraineesDao.insertEnrolledTrainees(course0, skala3, trainee1);
+        enrolledTraineesDao.insertEnrolledTrainees(course0, skala3, trainee2);
     }
 
 

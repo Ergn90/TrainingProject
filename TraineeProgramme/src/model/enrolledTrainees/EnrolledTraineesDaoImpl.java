@@ -404,9 +404,8 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM enrolled_trainees WHERE traineeID=?");
 
             ps.setInt(1, traineeID);
-
             int i = ps.executeUpdate();
-            if (i == 1) {
+            if (i >= 1) {
                 return true;
             }
 
@@ -425,12 +424,12 @@ public class EnrolledTraineesDaoImpl implements EnrolledTraineesDao {
 
         try {
 
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM enrolled_trainees WHERE CourseID=?");
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM enrolled_trainees WHERE  CourseID=?");
 
             ps.setInt(1, coursesID);
 
             int i = ps.executeUpdate();
-            if (i == 1) {
+            if (i >= 1) {
                 return true;
             }
 
