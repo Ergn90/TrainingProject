@@ -106,7 +106,7 @@ public class ControllerTraineeManager implements Initializable {
                             Trainee trainee = coursesEntered.getItems().get(getIndex()).getTrainee();
                             Course course = coursesEntered.getItems().get(getIndex()).getCourse();
                             Skala skala = coursesEntered.getItems().get(getIndex()).getSkala();
-                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(), course.getCourseID(), skala.getSkalaId());
+                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(), skala.getSkalaId(),course.getCourseID());
                             refreshCourseTrainee();
                         });
                     }
