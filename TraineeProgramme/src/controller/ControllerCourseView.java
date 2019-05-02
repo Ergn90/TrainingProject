@@ -11,19 +11,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import model.course.Course;
 import model.course.CourseDao;
 import model.course.CourseDaoImpl;
 import model.enrolledTrainees.EnrolledTraineesDao;
 import model.enrolledTrainees.EnrolledTraineesDaoImpl;
-import model.trainee.Trainee;
-import model.trainee.TraineeDao;
-import model.trainee.TraineeDaoImpl;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -35,21 +29,15 @@ public class ControllerCourseView implements Initializable {
     @FXML
     TextField searchFielCourses;
     @FXML
-    Button searchButtonCourses;
-    @FXML
     TableColumn courseID;
     @FXML
     TableColumn courseName;
     @FXML
-    TableColumn courseyear;
-    @FXML
     TableColumn courseRoom;
     @FXML
     TableColumn courseDescriptionC;
-
     @FXML
     TableColumn startDate;
-
     @FXML
     TableColumn endDate;
     @FXML
@@ -63,7 +51,6 @@ public class ControllerCourseView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         CourseDao courseDao = refreshCourseInfo();
         searchForCourse();
         addDeleteButtonToTable(courseDao);
@@ -141,17 +128,17 @@ public class ControllerCourseView implements Initializable {
 
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
-                LocalDate startDate= course.getStartDate();
-                LocalDate endDate=course.getEndDate();
+                LocalDate startDate = course.getStartDate();
+                LocalDate endDate = course.getEndDate();
                 if (course.getCourseRoom().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 } else if (course.getCourseDescription().toLowerCase().contains(lowerCaseFilter)) {
-                     return true;
-                }else if (course.getCourseName().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                }else if(startDate.toString().toLowerCase().contains(lowerCaseFilter)){
+                } else if (course.getCourseName().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                }else if(endDate.toString().toLowerCase().contains(lowerCaseFilter)){
+                } else if (startDate.toString().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (endDate.toString().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
                 return false; // Does not match.
@@ -193,7 +180,6 @@ public class ControllerCourseView implements Initializable {
 
                             try {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CourseForm.fxml"));
-//                            loader = FXMLLoader.load(getClass().getResource("../view/TraineeForm.fxml"));
                                 Parent root = (Parent) fxmlLoader.load();
 
                                 ControllerCourseForm controller = fxmlLoader.getController();
@@ -220,9 +206,7 @@ public class ControllerCourseView implements Initializable {
                 return cell;
             }
         };
-
         colBtn.setCellFactory(cellFactory);
-
         coursesTable.getColumns().add(colBtn);
     }
 
@@ -264,8 +248,6 @@ public class ControllerCourseView implements Initializable {
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
         }
-
-
     }
 }
 
