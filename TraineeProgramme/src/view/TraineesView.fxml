@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTraineeView">
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="1099.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTraineeView">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -62,7 +62,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
                <HBox.margin>
-                  <Insets bottom="5.0" left="375.0" right="5.0" top="9.0" />
+                  <Insets bottom="5.0" left="350.0" right="5.0" top="9.0" />
                </HBox.margin>
             </Button>
             <Button fx:id="manaageTrainee" layoutX="608.0" layoutY="19.0" mnemonicParsing="false" onAction="#showManageTrainee" prefHeight="33.0" prefWidth="110.0" text=" Manage Trainee">
@@ -70,7 +70,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
                <HBox.margin>
-                  <Insets top="9.0" />
+                  <Insets left="20.0" top="9.0" />
                </HBox.margin>
             </Button>
             <Button fx:id="courseView" layoutX="502.0" layoutY="19.0" mnemonicParsing="false" onAction="#showCoursesDialog" prefHeight="33.0" prefWidth="110.0" text="Course View">
@@ -78,7 +78,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
                <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" top="9.0" />
+                  <Insets bottom="5.0" left="20.0" top="9.0" />
                </HBox.margin>
             </Button>
          </children></HBox>

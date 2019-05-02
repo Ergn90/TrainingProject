@@ -1,39 +1,47 @@
+.root {
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI Semibold";
+}
 .background {
     -fx-background-color: #d3d3d3;
 }
 
 .label {
+    -fx-width:100px;
+    -fx-height:30px;
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #696969;
-    -fx-opacity: 0.6;
 }
-
+.label#header{
+    -fx-font-weight: bold;
+    -fx-font-size: 15pt;
+}
 .text-field {
     -fx-font-size: 9pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-weight: bold;
     -fx-fill: #696969;
 }
-
 .combo-box.list-cell {
     -fx-font-size: 9pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-weight: bold;
     -fx-fill: #696969;
 }
-
 .button {
+    -fx-width:110px;
+    -fx-height:30px;
     -fx-text-fill: white;
-    -fx-font-family: "Arial Narrow";
+    -fx-font-family: "Segoe UI Semibold";
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-background-color:#C0C0C0;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
-.button #backFromCourseViewToTraineeView{
-        -fx-border-style: none;
-        -fx-border-width: 2px;
-        -fx-border-insets: 0;
-        -fx-font-size:4px;
-        -fx-background-image: url('image.jpg');
+.button#backFromCourseViewToTraineeView,
+.button#backBTN{
+    -fx-background-image: url("back-icon.png");
+-fx-background-position: left top, center;
+-fx-background-repeat: no-repeat;
+-fx-background-size: cover, auto;
         }

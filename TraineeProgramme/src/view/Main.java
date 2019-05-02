@@ -17,7 +17,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1100, 700 ));
         primaryStage.show();
 
-
     }
 
     //TODO Verbindung allen Controllers hier

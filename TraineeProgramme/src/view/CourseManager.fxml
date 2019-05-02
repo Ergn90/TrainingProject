@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="102.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCourseManager">
+<AnchorPane prefHeight="102.0" prefWidth="599.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCourseManager">
     <children>
 
         <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -23,8 +23,8 @@
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="276.0" minHeight="230.0" prefHeight="264.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="189.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
             <RowConstraints minHeight="-Infinity" />
             </rowConstraints>
@@ -34,39 +34,63 @@
             </children>
 
             <children>
-                <VBox prefHeight="291.0" prefWidth="288.0" spacing="10.0" GridPane.rowIndex="1">
+                <VBox prefHeight="250.0" prefWidth="579.0" spacing="10.0" GridPane.rowIndex="1">
                     <children>
-                        <Label fx:id="courseID" text="CourseID" />
-                        <Label fx:id="courseName" text="CourseName" />
-                        <Label fx:id="courseRoom" text="CourseRoom" />
-                        <Label fx:id="courseDescription" text="CourseDescription" />
-                        <Label fx:id="courseStartDate" text="CourseStartDate" />
-                        <Label fx:id="courseEndDate" text="CourseEndDate" />
+                        <Label fx:id="courseID" prefHeight="25.0" prefWidth="300.0" text="CourseID : " />
+                        <Label fx:id="courseName" prefHeight="21.0" prefWidth="300.0" text="CourseName : " />
+                        <Label fx:id="courseRoom" prefHeight="21.0" prefWidth="300.0" text="CourseRoom : " />
+                        <Label fx:id="courseDescription" prefHeight="21.0" prefWidth="301.0" text="CourseDescription : " />
+                        <Label fx:id="courseStartDate" prefHeight="21.0" prefWidth="301.0" text="CourseStartDate : " />
+                        <Label fx:id="courseEndDate" prefWidth="300.0" text="CourseEndDate : " />
                     </children>
                     <padding>
                         <Insets bottom="70.0" left="15.0" right="50.0" top="35.0" />
                     </padding>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
                 </VBox>
                 <TableView fx:id="tableTraineesInCourse" minHeight="30" prefHeight="172.0" prefWidth="599.0" GridPane.rowIndex="2">
                     <columns>
-                        <TableColumn fx:id="columnTraineeName"  text="Trainee" />
-                        <TableColumn fx:id="columnSkala"  text="Skala" />
+                        <TableColumn fx:id="columnTraineeName" prefWidth="306.0" text="Trainee" />
+                        <TableColumn fx:id="columnSkala" prefWidth="143.0" text="Skala" />
                     </columns>
                 </TableView>
-                <Label alignment="CENTER" text="Course Manager" textAlignment="CENTER">
+                <Label fx:id="header" text="Course Manager" textAlignment="CENTER">
                     <font>
                         <Font size="37.0" />
                     </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
                 </Label>
 
 
                 <HBox prefHeight="45.0" prefWidth="599.0" GridPane.rowIndex="3">
-                    <Button fx:id="addTraineeToCourse" onAction="#handletraineeAddToCourse" text="Add Trainee" />
-                    <ComboBox fx:id="traineeBox" prefWidth="150.0" />
-                    <Label text="with" />
-                    <ComboBox fx:id="skalaList" layoutX="103.0" layoutY="10.0" prefWidth="150.0" />
+                    <Button fx:id="addTraineeToCourse" onAction="#handletraineeAddToCourse" prefHeight="30.0" prefWidth="110.0" text="Add Trainee">
+                  <HBox.margin>
+                     <Insets left="20.0" />
+                  </HBox.margin></Button>
+                    <ComboBox fx:id="traineeBox" prefHeight="30.0" prefWidth="290.0">
+                  <HBox.margin>
+                     <Insets left="20.0" />
+                  </HBox.margin></ComboBox>
+                    <Label text="with">
+                  <HBox.margin>
+                     <Insets left="20.0" />
+                  </HBox.margin></Label>
+                    <ComboBox fx:id="skalaList" layoutX="103.0" layoutY="10.0" prefHeight="30.0" prefWidth="80.0">
+                  <HBox.margin>
+                     <Insets left="20.0" />
+                  </HBox.margin></ComboBox>
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
                 </HBox>
-                <Button fx:id="backBTN" text="&lt;- Back" GridPane.rowIndex="4" onAction="#backToTrainee"/>
+                <Button fx:id="backBTN" onAction="#backToTrainee" prefHeight="40.0" prefWidth="45.0" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="20.0" />
+               </GridPane.margin></Button>
 
             </children>
         </GridPane>

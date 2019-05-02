@@ -14,19 +14,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="102.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTraineeManager">
+<AnchorPane prefHeight="102.0" prefWidth="599.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTraineeManager">
     <children>
 
-        <GridPane prefHeight="614.0" prefWidth="599.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <GridPane prefHeight="498.0" prefWidth="599.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints vgrow="SOMETIMES" />
-            <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="307.0" minHeight="250.0" prefHeight="250.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="255.0" minHeight="113.0" prefHeight="113.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="113.0" minHeight="65.0" prefHeight="97.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
 
@@ -34,46 +34,67 @@
             </children>
 
             <children>
-                <VBox prefHeight="237.0" prefWidth="599.0" spacing="10.0" GridPane.rowIndex="1">
+                <VBox prefHeight="269.0" prefWidth="599.0" spacing="10.0" GridPane.rowIndex="1">
                     <children>
-                        <Label fx:id="traineeID" text="TraineeID: " />
-                        <Label fx:id="lastNameTraineeForm" text="Last Name" />
-                        <Label fx:id="firstNameTraineeForm" text="First Name:" />
-                        <Label fx:id="birthdayTraineeForm" text="Birthday:" />
-                        <Label fx:id="addressTraineeForm" text="Address:" />
-                        <Label fx:id="emailTraineeForm" text="Email:" />
-                        <Label fx:id="locationTraineeForm" text="Location:" />
+                        <Label fx:id="traineeID" prefHeight="21.0" prefWidth="300.0" text="TraineeID :" />
+                        <Label fx:id="lastNameTraineeForm" prefHeight="25.0" prefWidth="300.0" text="Last Name :" />
+                        <Label fx:id="firstNameTraineeForm" prefHeight="25.0" prefWidth="300.0" text="First Name :" />
+                        <Label fx:id="birthdayTraineeForm" prefHeight="25.0" prefWidth="300.0" text="Birthday :" />
+                        <Label fx:id="addressTraineeForm" prefHeight="25.0" prefWidth="300.0" text="Address :" />
+                        <Label fx:id="emailTraineeForm" prefHeight="25.0" prefWidth="300.0" text="Email :" />
+                        <Label fx:id="locationTraineeForm" prefHeight="25.0" prefWidth="300.0" text="Location :" />
                     </children>
                     <padding>
                         <Insets bottom="70.0" left="15.0" right="50.0" top="35.0" />
                     </padding>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
                 </VBox>
-                <TableView fx:id="coursesEntered" minHeight="-Infinity" minWidth="-Infinity" prefHeight="193.0" prefWidth="591.0" GridPane.rowIndex="2">
+                <TableView fx:id="coursesEntered" minHeight="-Infinity" minWidth="-Infinity" prefHeight="144.0" prefWidth="599.0" GridPane.rowIndex="2">
                     <columns>
-                        <TableColumn fx:id="courseEntered" prefWidth="160.0" text="Course" />
-                        <TableColumn fx:id="skalaInCorrespondingCourse" prefWidth="248.0" text="Skala" />
+                        <TableColumn fx:id="courseEntered" prefWidth="153.0" text="Course" />
+                        <TableColumn fx:id="skalaInCorrespondingCourse" prefWidth="199.0" text="Skala" />
                     </columns>
                 </TableView>
-                <Label alignment="CENTER" text="Trainee Manager" textAlignment="CENTER">
+                <Label fx:id="header" contentDisplay="CENTER" prefHeight="60.0" prefWidth="600.0" text="Trainee Manager">
                     <font>
                         <Font size="37.0" />
                     </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
                 </Label>
 
 
-                <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="599.0" GridPane.rowIndex="3">
-                    <Button fx:id="traineeAddToCourse" onAction="#handletraineeAddToCourse" text="Add to Course" />
-                    <ComboBox fx:id="courseList" prefWidth="150.0">
+                <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="599.0" GridPane.rowIndex="3">
+                    <Button fx:id="traineeAddToCourse" onAction="#handletraineeAddToCourse" prefHeight="30.0" prefWidth="112.0" text="Add to Course">
+                  <HBox.margin>
+                     <Insets left="20.0" />
+                  </HBox.margin></Button>
+                    <ComboBox fx:id="courseList" prefHeight="30.0" prefWidth="200.0">
                         <HBox.margin>
-                            <Insets />
+                            <Insets left="20.0" />
                         </HBox.margin></ComboBox>
-                    <Label text="with" />
-                    <ComboBox fx:id="skalaList" layoutX="103.0" layoutY="10.0" prefWidth="150.0" />
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" text="with">
+                  <HBox.margin>
+                     <Insets left="20.0" right="20.0" />
+                  </HBox.margin></Label>
+                    <ComboBox fx:id="skalaList" layoutX="103.0" layoutY="10.0" prefHeight="30.0" prefWidth="156.0">
+                  <HBox.margin>
+                     <Insets right="20.0" />
+                  </HBox.margin></ComboBox>
                     <padding>
                         <Insets top="20.0" />
                     </padding>
                 </HBox>
-            <Button fx:id="backBTN" text="&lt;- Back" GridPane.rowIndex="4" onAction="#backToTrainee"/>
+            <Button fx:id="backBTN" onAction="#backToTrainee" prefHeight="40.0" prefWidth="45.0" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin></Button>
 
             </children>
         </GridPane>

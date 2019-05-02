@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCourseView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="914.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCourseView">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -22,7 +22,7 @@
                             <HBox.margin>
                                 <Insets left="23.0" />
                             </HBox.margin></TextField>
-                        <Button fx:id="backFromCourseViewToTraineeView" mnemonicParsing="false" onAction="#backToTrainee" prefHeight="39.0" prefWidth="45.0" text="Back" textOverrun="CLIP">
+                        <Button fx:id="backFromCourseViewToTraineeView" alignment="CENTER" mnemonicParsing="false" onAction="#backToTrainee" prefHeight="40.0" prefWidth="45.0">
                             <HBox.margin>
                                 <Insets left="510.0" />
                             </HBox.margin>

@@ -9,64 +9,64 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="822.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCourseForm">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500" minWidth="600" prefHeight="450.0" prefWidth="600.0" stylesheets="@Trainee.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCourseForm">
     <top>
-        <HBox prefHeight="120.0" prefWidth="822.0" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Label prefHeight="60.0" prefWidth="822.0" text="Course Form" textAlignment="CENTER">
+                <Label fx:id="header" alignment="BASELINE_LEFT" prefHeight="60.0" prefWidth="600.0" text="Course Form" textAlignment="CENTER">
                     <padding>
-                        <Insets left="400.0" />
+                        <Insets left="180.0" />
                     </padding>
-                    <font>
-                        <Font size="21.0" />
-                    </font>
                 </Label>
             </children>
-        </HBox>
-    </top>
+        </HBox>    </top>
 
     <left>
-        <VBox alignment="TOP_RIGHT" prefHeight="382.0" prefWidth="150.0" spacing="35.0" BorderPane.alignment="BASELINE_RIGHT">
+        <VBox alignment="TOP_RIGHT" prefHeight="350.0" prefWidth="180.0" spacing="20.0" BorderPane.alignment="TOP_LEFT">
             <children>
-                <Label fx:id="startDate" prefHeight="17.0" prefWidth="102.0" text="Start date *" />
-                <Label fx:id="endDate" prefHeight="17.0" prefWidth="99.0" text="End date *" />
-                <Label fx:id="name" prefHeight="17.0" prefWidth="101.0" text="Course name" />
-                <Label fx:id="room" prefHeight="17.0" prefWidth="101.0" text="Course room * " />
-                <Label fx:id="description" prefHeight="17.0" prefWidth="104.0" text="Description" />
+                <Label fx:id="startDate" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="100.0" text="Start date *" />
+                <Label fx:id="endDate" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="100.0" text="End date *" />
+                <Label fx:id="nameF" prefHeight="25.0" prefWidth="100.0" />
+                <Label fx:id="name" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="100.0" text="Course name">
+                </Label>
+                <Label fx:id="room" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="100.0" text="Course room * " />
+                <Label fx:id="description" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="100.0" text="Description" />
             </children>
         </VBox>
     </left>
     <center>
-        <VBox prefHeight="449.0" prefWidth="672.0" spacing="10.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="350.0" prefWidth="300.0" spacing="20.0" BorderPane.alignment="TOP_LEFT">
             <children>
-                <DatePicker fx:id="courseStartDate" />
-                <DatePicker fx:id="courseEndDate" />
-                <Label fx:id="courseNameLabel" />
-                <TextField fx:id="courseName" prefHeight="33.0" prefWidth="542.0" promptText="Course name">
+                <DatePicker fx:id="courseStartDate" prefHeight="25.0" prefWidth="110.0" />
+                <DatePicker fx:id="courseEndDate" prefHeight="25.0" prefWidth="110.0" />
+                <Label fx:id="courseNameLabel" prefHeight="25.0" prefWidth="150.0" />
+                <TextField fx:id="courseName" prefHeight="25.0" prefWidth="150.0" promptText="Course name">
                <opaqueInsets>
-                  <Insets left="100.0" right="200.0" />
+                  <Insets right="150.0" />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets right="130.0" />
+                  <Insets right="80.0" />
                </VBox.margin></TextField>
-                <ComboBox fx:id="courseRoomComboBox" promptText="Choose course room" />
-                <TextField fx:id="courseDescription" promptText="Course description">
+                <ComboBox fx:id="courseRoomComboBox" prefHeight="25.0" prefWidth="110.0" promptText="Choose course room" />
+                <TextField fx:id="courseDescription" prefHeight="25.0" prefWidth="150.0" promptText="Course description">
                <VBox.margin>
-                  <Insets right="130.0" />
-               </VBox.margin></TextField>
+                  <Insets right="80.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets right="150.0" />
+               </opaqueInsets></TextField>
             </children>
         </VBox>
     </center>
     <bottom>
-        <HBox prefHeight="55.0" prefWidth="762.0" spacing="25.0" BorderPane.alignment="CENTER">
+        <HBox prefHeight="50.0" prefWidth="600.0" spacing="120.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="addNewCourse" onAction="#addNewCourse" prefHeight="32.0" prefWidth="42.0" text="Ok" />
-                <Button fx:id="cancelCourse" onAction="#cancelCourse" prefHeight="30.0" prefWidth="96.0" text="Cancel" />
+                <Button fx:id="addNewCourse" alignment="CENTER" onAction="#addNewCourse" prefHeight="30.0" prefWidth="110.0" text="Ok" textOverrun="CLIP" />
+                <Button fx:id="cancelCourse" onAction="#cancelCourse" prefHeight="30.0" prefWidth="110.0" text="Cancel" textAlignment="RIGHT" />
             </children>
          <padding>
-            <Insets left="330.0" />
+            <Insets left="180.0" />
          </padding>
         </HBox>
     </bottom>
