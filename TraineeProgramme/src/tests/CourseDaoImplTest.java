@@ -21,6 +21,7 @@ public class CourseDaoImplTest {
     private Course course0;
     private Course course1;
     private Course course6;
+    private Course course10;
 
     @Before
     public void preparedTest() {
@@ -108,30 +109,21 @@ public class CourseDaoImplTest {
                 course6.getCourseName(), course6.getCourseRoom(), course6.getCourseDescription());
         Course attend = courseDao.getCourse(6);
         checkCourse(attend, excepted);
-        resetInsert();
-    }
-
-
-    public void resetInsert() {
         courseDao.deleteCourse(course6.getCourseID());
     }
 
+
     @Test
     public void updateCourse() {
-
-        course1.setCourseName("test");
-        boolean isUpdaded = courseDao.updateCourse(course1);
-        Assert.assertTrue(isUpdaded);
         Course excepted = new Course(course1.getCourseID(), course1.getStartDate(), course1.getEndDate(),
+                course1.getCourseName(), course1.getCourseRoom(), course1.getCourseDescription());
+        excepted.setCourseName("test");
+        boolean isUpdaded = courseDao.updateCourse(excepted);
+        Assert.assertTrue(isUpdaded);
+        Course attend = new Course(course1.getCourseID(), course1.getStartDate(), course1.getEndDate(),
                 "test", course1.getCourseRoom(), course1.getCourseDescription());
-        checkCourse(course1, excepted);
-        resetUpdate();
-
+        checkCourse(attend, excepted);
     }
 
-    private void resetUpdate() {
-        course1.setCourseRoom(course0.getCourseRoom());
-
-    }
 
 }
