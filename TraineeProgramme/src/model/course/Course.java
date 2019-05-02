@@ -1,7 +1,5 @@
 package model.course;
 
-import controller.Controller;
-
 import java.time.LocalDate;
 
 public class Course {

@@ -79,13 +79,13 @@ public class ControllerTraineeView implements Initializable {
     }
 
 
-    public void getTraineeInfo() {
+    private void getTraineeInfo() {
         TraineeDao traineeDao = refreshTraineeInfo();
         addDeleteButtonToTable(traineeDao);
         addUpdateButtonToTable(traineeDao);
     }
 
-    public TraineeDao refreshTraineeInfo() {
+    private TraineeDao refreshTraineeInfo() {
         TraineeDao traineeDao = new TraineeDaoImpl();
         Set<Trainee> trainees = traineeDao.getAllTrainee();
         tableTrainees.setItems(FXCollections.observableArrayList(trainees));
@@ -217,17 +217,12 @@ public class ControllerTraineeView implements Initializable {
                 else if (dateBirthday.toString().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
-                return false; // Does not match.
+                return false;
             });
         });
 
-        // 3. Wrap the FilteredList in a SortedList.
         SortedList<Trainee> sortedData = new SortedList<>(filteredData);
-
-        // 4. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(tableTrainees.comparatorProperty());
-
-        // 5. Add sorted (and filtered) data to the table.
         tableTrainees.setItems(sortedData);
     }
 
@@ -280,28 +275,4 @@ public class ControllerTraineeView implements Initializable {
         }
     }
 
-    @FXML
-    public void showTraineeManager() {
-        Trainee selectedTrainee = tableTrainees.getSelectionModel().getSelectedItem();
-        if (selectedTrainee == null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("No Trainee Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select the trainee you want to manage.");
-            alert.showAndWait();
-            return;
-        }
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../view/TraineeManager.fxml"));
-        try {
-            Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineeManager.fxml"));
-
-            manaageTrainee.getScene().setRoot(loader);
-        } catch (IOException e) {
-            System.out.println("Couldn't load");
-            e.printStackTrace();
-            return;
-        }
-    }
 }

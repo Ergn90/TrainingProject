@@ -9,22 +9,12 @@ import javafx.scene.control.*;
 import model.course.Course;
 import model.course.CourseDao;
 import model.course.CourseDaoImpl;
-import model.location.Location;
-import model.location.LocationDao;
-import model.location.LocationDaoImpl;
-import model.trainee.Trainee;
-import model.trainee.TraineeDao;
-import model.trainee.TraineeDaoImpl;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class ControllerCourseForm implements Initializable {
 
@@ -117,14 +107,14 @@ public class ControllerCourseForm implements Initializable {
 
     }
 
-    public void setCourseRoomComboBox() {
+    private void setCourseRoomComboBox() {
 
         CourseDao course = new CourseDaoImpl();
         List<String> crs = course.getAllRoomsValues();
         courseRoomComboBox.setItems(FXCollections.observableArrayList(crs));
     }
 
-    public void backToCourse() {
+    private void backToCourse() {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseView.fxml"));
             addNewCourse.getScene().setRoot(loader);

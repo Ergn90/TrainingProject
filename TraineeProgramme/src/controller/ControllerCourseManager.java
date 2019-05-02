@@ -8,8 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import model.course.Course;
 import model.enrolledTrainees.EnrolledTrainees;
@@ -26,7 +24,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class ControllerCourseManager  implements Initializable {
+public class ControllerCourseManager implements Initializable {
 
     @FXML
     Label courseID;
@@ -42,8 +40,7 @@ public class ControllerCourseManager  implements Initializable {
     Label courseEndDate;
     @FXML
     TableView<EnrolledTrainees> tableTraineesInCourse;
-    @FXML
-    TableColumn columnTraineeID;
+
     @FXML
     TableColumn columnTraineeName;
     @FXML
@@ -60,7 +57,7 @@ public class ControllerCourseManager  implements Initializable {
     private Course course;
 
     public void setCourse(Course course) {
-        this.course=course;
+        this.course = course;
         setLabelsInformation();
         setComboboxSkalaList();
         setComboboxTraineeList();
@@ -73,16 +70,16 @@ public class ControllerCourseManager  implements Initializable {
 
     }
 
-    public void setLabelsInformation() {
+    private void setLabelsInformation() {
         courseID.setText("CourseID : " + course.getCourseID());
-        courseName.setText("Coursename: "+ course.getCourseName());
-        courseStartDate.setText("Course Startdate: "+ course.getStartDate());
-        courseEndDate.setText("Course Enddate: "+course.getEndDate());
-        courseRoom.setText("Courseroom: "+course.getCourseRoom());
+        courseName.setText("Coursename: " + course.getCourseName());
+        courseStartDate.setText("Course Startdate: " + course.getStartDate());
+        courseEndDate.setText("Course Enddate: " + course.getEndDate());
+        courseRoom.setText("Courseroom: " + course.getCourseRoom());
         courseDescription.setText("Course Description: " + course.getCourseDescription());
     }
 
-    public EnrolledTraineesDaoImpl refreshCourseTrainee() {
+    private EnrolledTraineesDaoImpl refreshCourseTrainee() {
         EnrolledTraineesDaoImpl enrolledTrainees = new EnrolledTraineesDaoImpl();
         List<EnrolledTrainees> enrolledTraineeList = enrolledTrainees.getEnrolledTraineesByCourseID(course.getCourseID());
         tableTraineesInCourse.setItems(FXCollections.observableArrayList(enrolledTraineeList));
@@ -107,7 +104,7 @@ public class ControllerCourseManager  implements Initializable {
                             Trainee trainee = tableTraineesInCourse.getItems().get(getIndex()).getTrainee();
                             Course course = tableTraineesInCourse.getItems().get(getIndex()).getCourse();
                             Skala skala = tableTraineesInCourse.getItems().get(getIndex()).getSkala();
-                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(),  skala.getSkalaId(),course.getCourseID());
+                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(), skala.getSkalaId(), course.getCourseID());
                             refreshCourseTrainee();
                         });
                     }
@@ -131,7 +128,7 @@ public class ControllerCourseManager  implements Initializable {
         tableTraineesInCourse.getColumns().add(colBtn);
     }
 
-    private void setComboboxTraineeList(){
+    private void setComboboxTraineeList() {
         TraineeDao traineeDao = new TraineeDaoImpl();
         Set<Trainee> traineeSet = traineeDao.getAllTrainee();
         traineeBox.setItems(FXCollections.observableArrayList(traineeSet));
@@ -156,7 +153,7 @@ public class ControllerCourseManager  implements Initializable {
     }
 
 
-    private void setComboboxSkalaList(){
+    private void setComboboxSkalaList() {
         SkalaDaoImpl skala = new SkalaDaoImpl();
         Set<Skala> skalaSet = skala.getAllSkala();
         skalaList.setItems(FXCollections.observableArrayList(skalaSet));
@@ -182,7 +179,7 @@ public class ControllerCourseManager  implements Initializable {
 
     @FXML
     protected void handletraineeAddToCourse() {
-        EnrolledTraineesDaoImpl enrolledTraineesDao =new EnrolledTraineesDaoImpl();
+        EnrolledTraineesDaoImpl enrolledTraineesDao = new EnrolledTraineesDaoImpl();
         if (skalaList.getValue() != null && traineeBox.getValue() != null) {
             enrolledTraineesDao.insertEnrolledTrainees(course, skalaList.getValue(), traineeBox.getValue());
             refreshCourseTrainee();
@@ -191,8 +188,6 @@ public class ControllerCourseManager  implements Initializable {
             alert.setTitle("Warning");
             alert.setContentText("Please Select a Combination of Trainee and Skala from the Combobox! ");
             alert.show();
-            return;
-
         }
     }
 
@@ -200,7 +195,6 @@ public class ControllerCourseManager  implements Initializable {
     public void backToTrainee(ActionEvent actionEvent) throws IOException {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/CourseView.fxml"));
-         //   backBTN.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/back.png"))));
             backBTN.getScene().setRoot(loader);
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());

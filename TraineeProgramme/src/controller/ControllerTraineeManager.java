@@ -8,8 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import model.course.Course;
 import model.course.CourseDaoImpl;
@@ -71,11 +69,10 @@ public class ControllerTraineeManager implements Initializable {
     Button backBTN;
 
 
-
     private Trainee trainee;
 
 
-    //    @Override
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         coursesEntered.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
@@ -106,7 +103,7 @@ public class ControllerTraineeManager implements Initializable {
                             Trainee trainee = coursesEntered.getItems().get(getIndex()).getTrainee();
                             Course course = coursesEntered.getItems().get(getIndex()).getCourse();
                             Skala skala = coursesEntered.getItems().get(getIndex()).getSkala();
-                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(), skala.getSkalaId(),course.getCourseID());
+                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(), skala.getSkalaId(), course.getCourseID());
                             refreshCourseTrainee();
                         });
                     }
@@ -131,7 +128,7 @@ public class ControllerTraineeManager implements Initializable {
     }
 
 
-    public void setLabels() {
+    private void setLabels() {
         traineeID.setText("TraineeID : " + trainee.getTraineeID());
         firstNameTraineeForm.setText("Firstname: " + trainee.getFirstName());
         lastNameTraineeForm.setText("Lastname: " + trainee.getLastName());
@@ -141,7 +138,7 @@ public class ControllerTraineeManager implements Initializable {
         locationTraineeForm.setText("Location: " + trainee.getLocation());
     }
 
-    public EnrolledTraineesDaoImpl refreshCourseTrainee() {
+    private EnrolledTraineesDaoImpl refreshCourseTrainee() {
         EnrolledTraineesDaoImpl enrolledTrainees = new EnrolledTraineesDaoImpl();
         List<EnrolledTrainees> enrolledTraineeList = enrolledTrainees.getEnrolledTraineesByTraineeID(trainee.getTraineeID());
         coursesEntered.setItems(FXCollections.observableArrayList(enrolledTraineeList));
@@ -201,17 +198,22 @@ public class ControllerTraineeManager implements Initializable {
 
     @FXML
     protected void handletraineeAddToCourse() {
-
-        EnrolledTraineesDaoImpl enr = new EnrolledTraineesDaoImpl();
-        enr.insertEnrolledTrainees(courseList.getValue(), skalaList.getValue(), trainee);
-        refreshCourseTrainee();//TODO if null
+        EnrolledTraineesDaoImpl enrolledTraineesDao = new EnrolledTraineesDaoImpl();
+        if (skalaList.getValue() != null && courseList.getValue() != null) {
+            enrolledTraineesDao.insertEnrolledTrainees(courseList.getValue(), skalaList.getValue(), trainee);
+            refreshCourseTrainee();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Please Select a Combination of Trainee and Skala from the Combobox! ");
+            alert.show();
+        }
     }
 
     @FXML
     public void backToTrainee(ActionEvent actionEvent) throws IOException {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineesView.fxml"));
-          //  backBTN.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/back.png"))));
             backBTN.getScene().setRoot(loader);
         } catch (NullPointerException npe) {
             System.out.println(npe.getMessage());
