@@ -107,7 +107,7 @@ public class ControllerCourseManager  implements Initializable {
                             Trainee trainee = tableTraineesInCourse.getItems().get(getIndex()).getTrainee();
                             Course course = tableTraineesInCourse.getItems().get(getIndex()).getCourse();
                             Skala skala = tableTraineesInCourse.getItems().get(getIndex()).getSkala();
-                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(), course.getCourseID(), skala.getSkalaId());
+                            boolean deleteEnrolled = enrolledTraineesDao.deleteEnrolledTrainees(trainee.getTraineeID(),  skala.getSkalaId(),course.getCourseID());
                             refreshCourseTrainee();
                         });
                     }
