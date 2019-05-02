@@ -84,7 +84,7 @@ public class ControllerCourseManager  implements Initializable {
 
     public EnrolledTraineesDaoImpl refreshCourseTrainee() {
         EnrolledTraineesDaoImpl enrolledTrainees = new EnrolledTraineesDaoImpl();
-        List<EnrolledTrainees> enrolledTraineeList = enrolledTrainees.getEnrolledTraineesByTraineeID(course.getCourseID());
+        List<EnrolledTrainees> enrolledTraineeList = enrolledTrainees.getEnrolledTraineesByCourseID(course.getCourseID());
         tableTraineesInCourse.setItems(FXCollections.observableArrayList(enrolledTraineeList));
 
         columnTraineeName.setCellValueFactory(new PropertyValueFactory<>("trainee"));
@@ -182,10 +182,18 @@ public class ControllerCourseManager  implements Initializable {
 
     @FXML
     protected void handletraineeAddToCourse() {
+        EnrolledTraineesDaoImpl enrolledTraineesDao =new EnrolledTraineesDaoImpl();
+        if (skalaList.getValue() != null && traineeBox.getValue() != null) {
+            enrolledTraineesDao.insertEnrolledTrainees(course, skalaList.getValue(), traineeBox.getValue());
+            refreshCourseTrainee();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Please Select a Combination of Trainee and Skala from the Combobox! ");
+            alert.show();
+            return;
 
-        EnrolledTraineesDaoImpl enr = new EnrolledTraineesDaoImpl();
-        enr.insertEnrolledTrainees(course,  skalaList.getValue(), traineeBox.getValue());
-
+        }
     }
 
     @FXML
