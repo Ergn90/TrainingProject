@@ -14,10 +14,7 @@ import model.trainee.TraineeDao;
 import model.trainee.TraineeDaoImpl;
 
 import java.net.URL;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -51,118 +48,6 @@ public class Controller implements Initializable {
 
     @FXML
     TableColumn locationTrainees;
-
-    @FXML
-    Label lastNameCourseForm;
-
-    @FXML
-    Label birthdayCourseForm;
-
-    @FXML
-    Label addressCourseForm;
-
-    @FXML
-    ChoiceBox courseNameId;
-
-    @FXML
-    ChoiceBox courseYear;
-
-    @FXML
-    ChoiceBox courseRoom;
-
-    @FXML
-    TextArea courseDescription;
-
-
-    @FXML
-    TextField searchFielCourses;
-    @FXML
-    Button searchButtonCourses;
-    @FXML
-    ListView listViewCourses;
-
-    @FXML
-    Label manageTraineesC;
-
-    @FXML
-    Label manageCoursesC;
-
-
-    @FXML
-    TableColumn courseID;
-
-    @FXML
-    TableColumn courseName;
-
-    @FXML
-    TableColumn courseyear;
-
-    @FXML
-    TableColumn courseRoomC;
-
-    @FXML
-    TableColumn courseDescriptionC;
-
-    @FXML
-    TableColumn modifyCourse;
-
-    @FXML
-    Button addTraineeC;
-    @FXML
-    Button addCourseC;
-    @FXML
-    Button enrollTraineeC;
-
-
-    @FXML
-    Label lastNameTraineeForm;
-
-    @FXML
-    Label firstNameTraineeForm;
-
-    @FXML
-    Label birthdayTraineeForm;
-
-    @FXML
-    Label addressTraineeForm;
-
-    @FXML
-    Label schoolTraineeForm;
-
-    @FXML
-    Label emailTraineeForm;
-
-
-    @FXML
-    Label locationTraineeForm;
-
-    @FXML
-    Label scaleTraineeId;
-
-
-    @FXML
-    TextField firstNameTrainee;
-
-    @FXML
-    TextField lastNameTrainee;
-
-    @FXML
-    TextField birthdayTrainee;
-
-    @FXML
-    TextField addressTrainee;
-
-    @FXML
-    TextField schoolTrainee;
-
-    @FXML
-    TextField emailTrainee;
-
-    @FXML
-    TextField locationTrainee;
-
-    @FXML
-    TextField scaleTrainee;
 
 
 
