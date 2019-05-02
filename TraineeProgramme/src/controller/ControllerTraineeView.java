@@ -9,29 +9,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
-import model.course.Course;
 import model.enrolledTrainees.EnrolledTraineesDao;
 import model.enrolledTrainees.EnrolledTraineesDaoImpl;
 import model.trainee.Trainee;
 import model.trainee.TraineeDao;
 import model.trainee.TraineeDaoImpl;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 
 public class ControllerTraineeView implements Initializable {
 
-    ////////TraineesView//////////////////
+
 
     @FXML
     TableView<Trainee> tableTrainees;
@@ -57,23 +52,17 @@ public class ControllerTraineeView implements Initializable {
     @FXML
     TableColumn email;
 
-
     @FXML
     TableColumn locationTrainees;
 
-
     @FXML
     Button addTrainee;
-
 
     @FXML
     Button manaageTrainee;
 
     @FXML
     TextField searchFieldTrainees;
-
-    @FXML
-    Button searchButtonTrainees;
 
     @FXML
     BorderPane mainBorderPane;
@@ -87,19 +76,16 @@ public class ControllerTraineeView implements Initializable {
         getTraineeInfo();
         searchForTrainee();
         tableTrainees.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-        // FilteredList<Trainee> filteredListTrainee = new FilteredList<>(trainees, e-> true);
     }
 
 
-    public void getTraineeInfo() {
+    private void getTraineeInfo() {
         TraineeDao traineeDao = refreshTraineeInfo();
         addDeleteButtonToTable(traineeDao);
         addUpdateButtonToTable(traineeDao);
-
     }
 
-    public TraineeDao refreshTraineeInfo() {
+    private TraineeDao refreshTraineeInfo() {
         TraineeDao traineeDao = new TraineeDaoImpl();
         Set<Trainee> trainees = traineeDao.getAllTrainee();
         tableTrainees.setItems(FXCollections.observableArrayList(trainees));
@@ -135,7 +121,6 @@ public class ControllerTraineeView implements Initializable {
                             refreshTraineeInfo();
                         });
                     }
-
                     @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
@@ -149,15 +134,12 @@ public class ControllerTraineeView implements Initializable {
                 return cell;
             }
         };
-
         colBtn.setCellFactory(cellFactory);
-
         tableTrainees.getColumns().add(colBtn);
     }
 
     private void addUpdateButtonToTable(TraineeDao traineeDao) {
         TableColumn<Trainee, Void> colBtn = new TableColumn("Update Trainee");
-
         Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>> cellFactory = new Callback<TableColumn<Trainee, Void>, TableCell<Trainee, Void>>() {
             @Override
             public TableCell<Trainee, Void> call(final TableColumn<Trainee, Void> param) {
@@ -170,9 +152,7 @@ public class ControllerTraineeView implements Initializable {
 
                             try {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/TraineeForm.fxml"));
-//                            loader = FXMLLoader.load(getClass().getResource("../view/TraineeForm.fxml"));
                                 Parent root = (Parent) fxmlLoader.load();
-
                                 ControlleTraineeForm controller = fxmlLoader.getController();
                                 controller.setTrainee(tableTrainees.getItems().get(getIndex()));
                                 controller.addNewTrainee.setOnAction(event1 -> controller.updateTrainee());
@@ -181,14 +161,6 @@ public class ControllerTraineeView implements Initializable {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
-//
-//                            EnrolledTraineesDao enrolledTraineesDao = new EnrolledTraineesDaoImpl();
-//                            Trainee trainee = tableTrainees.getItems().get(getIndex());
-//                            boolean updateTrainee = traineeDao.updateTrainee(trainee);
-//                            System.out.println("update Trainee " + updateTrainee);
-//                            refreshTraineeInfo();
-
                         });
                     }
 
@@ -205,9 +177,7 @@ public class ControllerTraineeView implements Initializable {
                 return cell;
             }
         };
-
         colBtn.setCellFactory(cellFactory);
-
         tableTrainees.getColumns().add(colBtn);
     }
 
@@ -223,7 +193,6 @@ public class ControllerTraineeView implements Initializable {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
                 LocalDate dateBirthday= trainee.getBirthday();
@@ -248,17 +217,12 @@ public class ControllerTraineeView implements Initializable {
                 else if (dateBirthday.toString().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
-                return false; // Does not match.
+                return false;
             });
         });
 
-        // 3. Wrap the FilteredList in a SortedList.
         SortedList<Trainee> sortedData = new SortedList<>(filteredData);
-
-        // 4. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(tableTrainees.comparatorProperty());
-
-        // 5. Add sorted (and filtered) data to the table.
         tableTrainees.setItems(sortedData);
     }
 
@@ -277,7 +241,6 @@ public class ControllerTraineeView implements Initializable {
     public void showManageTrainee(ActionEvent actionEvent) throws IOException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/TraineeManager.fxml"));
-
             Parent root = (Parent) fxmlLoader.load();
 
             ControllerTraineeManager controller = fxmlLoader.getController();
@@ -312,28 +275,4 @@ public class ControllerTraineeView implements Initializable {
         }
     }
 
-    @FXML
-    public void showTraineeManager() {
-        Trainee selectedTrainee = tableTrainees.getSelectionModel().getSelectedItem();
-        if (selectedTrainee == null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("No Trainee Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select the trainee you want to manage.");
-            alert.showAndWait();
-            return;
-        }
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../view/TraineeManager.fxml"));
-        try {
-            Parent loader = FXMLLoader.load(getClass().getResource("../view/TraineeManager.fxml"));
-
-            manaageTrainee.getScene().setRoot(loader);
-        } catch (IOException e) {
-            System.out.println("Couldn't load");
-            e.printStackTrace();
-            return;
-        }
-    }
 }
