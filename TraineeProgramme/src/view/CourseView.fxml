@@ -59,7 +59,7 @@
     <bottom>
         <HBox prefHeight="52.0" prefWidth="982.0" spacing="18.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="addCourseC" layoutX="45.0" layoutY="19.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="33.0" prefWidth="102.0" text="Add Course">
+                <Button fx:id="addCourseC" layoutX="45.0" layoutY="19.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="36.0" prefWidth="156.0" text="Add Course">
                     <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </padding>
@@ -67,7 +67,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="courseManage" layoutX="150.0" layoutY="18.0" mnemonicParsing="false" onAction="#manageCourse" prefHeight="33.0" prefWidth="106.0" text="Manage Course">
+                <Button fx:id="courseManage" layoutX="150.0" layoutY="18.0" mnemonicParsing="false" onAction="#manageCourse" prefHeight="31.0" prefWidth="150.0" text="Manage Course">
                     <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </padding>

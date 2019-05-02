@@ -57,7 +57,7 @@
     <bottom>
         <HBox prefHeight="52.0" prefWidth="914.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addTrainee" mnemonicParsing="false" onAction="#showTraineeForm" prefHeight="33.0" prefWidth="112.0" text="Add Trainee">
+            <Button fx:id="addTrainee" mnemonicParsing="false" onAction="#showTraineeForm" prefHeight="36.0" prefWidth="147.0" text="Add Trainee">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
@@ -65,15 +65,15 @@
                   <Insets bottom="5.0" left="350.0" right="5.0" top="9.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="manaageTrainee" layoutX="608.0" layoutY="19.0" mnemonicParsing="false" onAction="#showManageTrainee" prefHeight="33.0" prefWidth="110.0" text=" Manage Trainee">
+            <Button fx:id="manaageTrainee" layoutX="608.0" layoutY="19.0" mnemonicParsing="false" onAction="#showManageTrainee" prefHeight="36.0" prefWidth="164.0" text=" Manage Trainee">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
                <HBox.margin>
-                  <Insets left="20.0" top="9.0" />
+                  <Insets left="15.0" top="9.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="courseView" layoutX="502.0" layoutY="19.0" mnemonicParsing="false" onAction="#showCoursesDialog" prefHeight="33.0" prefWidth="110.0" text="Course View">
+            <Button fx:id="courseView" layoutX="502.0" layoutY="19.0" mnemonicParsing="false" onAction="#showCoursesDialog" prefHeight="36.0" prefWidth="151.0" text="Course View">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
